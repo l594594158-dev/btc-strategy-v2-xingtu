@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "name": "BTC永续合约量化策略",
+  "description": "多周期共振+布林带超买超卖策略",
+  "symbol": "BTC/USDT:USDT",
+  "settings": {
+    "scan_interval_seconds": 60,
+    "exchange": "binance",
+    "signal_thresholds": {
+      "strong_long": 5,
+      "strong_short": 5,
+      "moderate_long": 3,
+      "moderate_short": 3
+    },
+    "risk": {
+      "max_loss_per_trade_percent": 2.0,
+      "atr_multiplier_stop_loss": 2.0,
+      "atr_multiplier_take_profit_1": 1.0,
+      "atr_multiplier_take_profit_2": 2.0,
+      "atr_multiplier_take_profit_3": 3.0
+    },
+    "entry_conditions": {
+      "long": {
+        "pctb_5m_max": 0.2,
+        "pctb_15m_max": 0.25,
+        "rsi_1h_min": 35,
+        "rsi_1h_max": 60
+      },
+      "short": {
+        "pctb_5m_min": 0.85,
+        "pctb_1m_min": 1.0,
+        "rsi_1h_min": 65
+      }
+    }
+  }
+}

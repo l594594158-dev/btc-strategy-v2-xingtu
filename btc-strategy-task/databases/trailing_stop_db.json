@@ -1,0 +1,14 @@
+{
+  "in_position": true,
+  "direction": "long",
+  "entry_price": 77420.6,
+  "peak_price": 77488.2,
+  "valley_price": 77433.0,
+  "activation_price": 78194.8,
+  "activated": false,
+  "activated_at": null,
+  "trail_triggered": false,
+  "trail_triggered_at": null,
+  "open_time": 1777302579.1431572,
+  "last_update": 1777309677.0731146
+}

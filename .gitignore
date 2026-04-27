@@ -1,0 +1,19 @@
+# 敏感文件 - 不推送
+.backup/
+*.log
+__pycache__/
+*.pyc
+node_modules/
+*.env
+credentials/
+memory-tdai/
+
+# OpenClaw 运行时文件
+.openclaw/memory-tdai/
+.openclaw/logs/
+.openclaw/canvas/
+.openclaw/media/
+
+# 临时文件
+*.tmp
+*.swp

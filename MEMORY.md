@@ -1,0 +1,55 @@
+# MEMORY.md - 重要记忆
+
+## 币安BTC永续合约自动交易任务
+
+### 基本信息
+- **任务目录:** `/root/.openclaw/workspace/btc-strategy-task/`
+- **脚本:** `auto_trade.py` (主策略), `live_monitor.py` (纯监控), `test_orders.py` (测试)
+- **API Key:** `CUPwmVULosVO24NBKmoaMm0pvga2msasOa4nBhvPvybrGdA2RcXBYA4aRtGMZjWH`
+- **Secret:** `Ozht5MjazUu4JKhSLqx4ASmTBH4wlUMdbABOblxXGyhIuof1jhrzUEr9JkWHpUHM`
+- **余额:** ~15 USDT（不足100，需0.002 BTC才够开仓）
+
+### 策略参数
+- **标的:** BTC/USDT:USDT (币安U本位永续)
+- **杠杆:** 20x
+- **数量:** 0.030 BTC
+- **止损:** 3.0%（20x下仓位损失60%）
+- **止盈:** 5.0%（20x下仓位盈利100%）
+- **监控周期:** 10秒
+- **布林带:** 周期20，2倍标准差
+- **MACD:** 快12慢26信号9
+- **成交量过滤:** >1.5x均值
+- **单方向上限:** 最多3仓
+
+### 开仓信号（6种）
+
+**做多A:** 4h+1d均线空头 + 5m %b<0.15 + RSI<40 + 4h ADX<40
+**做多B:** 4h+1d均线多头 + 5m %b<0.15 + RSI 35~60 + 1h ADX>25
+**做空A:** 4h+1d均线多头 + 5m %b>0.90 + RSI>=82 + 4h ADX<40
+**做空B:** 4h+1d均线空头 + 5m %b>0.90 + RSI>=82 + 4h ADX<40
+**震荡做多:** 1h ADX<25 + 4h+1d均线空头 + %b<0.15 + RSI<=35
+**震荡做空:** 1h ADX<25 + 4h+1d均线多头 + %b>0.90 + RSI>=75
+
+### 关键文件
+- `合约任务汇报.md` - 一字不漏的汇报文件，用户叫"任务汇报"时原样输出此文件
+- `策略文档.md` - 完整策略说明
+- `databases/state.json` - 持仓状态记录
+- `databases/pending_wechat.txt` - 待发送微信通知
+
+### 技术栈
+- pandas, numpy, plotly, ta, ccxt (已安装)
+- ccxt版本: 4.5.46
+
+### 注意事项
+- 余额15U不足100U订单最低要求，0.002 BTC @ $66k = $133，满足
+- 止盈止损用STOP_MARKET/TAKE_PROFIT_MARKET
+- 市价平仓时止盈止损会自动撤销
+- positionSide需要显式指定LONG/SHORT
+
+### Bug修复记录
+- **v2.8（2026-04-28）:** 新增单方向仓位上限3个 | 修正文档中风控过滤说明（1h ADX>25不再是所有信号前置条件）
+- **v2.7（2026-04-19）:** 多仓位独立SL/TP系统重构，每个子仓位独立挂条件单
+- **v2.3（2026-04-16）:** 逆势信号增加4h ADX<40过滤
+- **v2.2.1（2026-04-16）:** 删除TP2/TP3分批止盈，改为一次性全仓
+- **v2.2（2026-04-11）:** 止损止盈从ATR倍数改为固定百分比
+- **当前版本:** v2.8

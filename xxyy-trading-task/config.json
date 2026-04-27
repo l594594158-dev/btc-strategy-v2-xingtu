@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "name": "xxyy自动交易任务",
+  "description": "每3秒扫描数据库2号，流动性>6k时自动买入",
+  "settings": {
+    "scan_interval_seconds": 3,
+    "liquidity_threshold_usd": 6000,
+    "chains": {
+      "bsc": {
+        "enabled": true,
+        "buy_amount": 0.003,
+        "wallet_address": "0xf47d64c93ef6d42b64ad9be78d7c6bc02bd387bd",
+        "wallet_name": "新币安狗",
+        "token": "BNB"
+      },
+      "sol": {
+        "enabled": true,
+        "buy_amount": 0.02,
+        "wallet_address": "7Z84WHmP3misUmPE7WdfUSizgWaqEgtErCWwWNYygXvb",
+        "wallet_name": "新金狗sol",
+        "token": "SOL"
+      }
+    }
+  },
+  "created": "2026-04-02"
+}

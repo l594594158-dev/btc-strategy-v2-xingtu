@@ -1,0 +1,6 @@
+[2026-04-18 20:52:47] ❌ API-账户余额: 无法获取USDT余额
+
+[2026-04-18 22:00] ✅ 修复 #001: API-账户余额获取问题
+   原因: defaultPositionSide='LONG' 导致 fetch_balance() 返回空
+   方案: 使用不带 positionSide 参数的 client 查询余额
+   验证: USDT可用=110.13570307

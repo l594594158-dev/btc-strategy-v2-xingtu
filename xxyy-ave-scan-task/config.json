@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "name": "XXYY+AVE联合扫描任务",
+  "description": "XXYY初筛 + AVE KOL验证联合策略",
+  "settings": {
+    "scan_interval": 5,
+    "xxxy": {
+      "feed_types": ["NEW", "ALMOST"],
+      "chains": ["sol", "bsc"],
+      "filters": {
+        "liquidity_min": 8000,
+        "marketcap_min": 10000,
+        "marketcap_max": 800000,
+        "top10_holder_max": 35,
+        "holder_min": 50,
+        "volume_min": 30000
+      }
+    },
+    "ave": {
+      "cooldown_seconds": 30,
+      "max_verify_rounds": 3,
+      "delay_between_tokens": 1,
+      "filters": {
+        "buy_lt_sell_ratio_5m": true,
+        "kol_buy_count_min": 2,
+        "kol_buy_amount_min": 100,
+        "kol_unrealized_profit_max": 10,
+        "kol_buy_time_max_minutes": 5
+      }
+    }
+  },
+  "created": "2026-04-02"
+}
