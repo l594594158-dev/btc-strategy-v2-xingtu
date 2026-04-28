@@ -2,22 +2,13 @@
   "in_position": true,
   "positions": [
     {
-      "entry_price": 76845.0,
-      "qty": 0.03,
+      "entry_price": 76759.25,
+      "qty": 0.06,
       "direction": "long",
-      "stop_loss": 74539.6,
-      "tp": 80687.2,
-      "reason": "手动开仓-修复后登记",
-      "open_time": "2026-04-28T10:58:00"
-    },
-    {
-      "entry_price": 76673.5,
-      "qty": 0.03,
-      "direction": "long",
-      "stop_loss": 74373.3,
-      "tp": 80507.2,
-      "reason": "历史仓位-修复后登记",
-      "open_time": "2026-04-28T03:08:24"
+      "stop_loss": 74456.5,
+      "tp": 80597.2,
+      "reason": "\u72b6\u6001\u540c\u6b65",
+      "open_time": "2026-04-28T11:55:00"
     }
   ],
   "last_signal_time": {},
