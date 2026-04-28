@@ -4,3 +4,5 @@
    原因: defaultPositionSide='LONG' 导致 fetch_balance() 返回空
    方案: 使用不带 positionSide 参数的 client 查询余额
    验证: USDT可用=110.13570307
+[2026-04-28 04:00:02] ❌ API-网络: 网络错误: binance GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=BTCUSDT
+[2026-04-28 04:00:02] 🔧 修复方案: 检查网络连接
