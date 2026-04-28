@@ -4,7 +4,7 @@ BTC合约 自动交易策略 v2.9
 - 10秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.9: 信号去抖(300s冷却) + 移动止盈集成(统一state管理)
+- v2.9.1: 开仓前交易所持仓检查 + 二次开仓价格间隔>2%硬性指标
 """
 import ccxt
 import pandas as pd
@@ -900,6 +900,18 @@ def main():
                         dir_count = sum(1 for p in actual_positions if p.get('side') == sig)
                         if dir_count >= MAX_POSITIONS_PER_DIR:
                             log(f"⛔ {sig}方向已有{dir_count}仓(交易所实际)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                        elif dir_count > 0:
+                            # 二次开仓价格间隔检查：与现有同向仓位间隔需>2%
+                            existing_entries = [float(p.get('entryPrice', 0)) for p in actual_positions if p.get('side') == sig]
+                            skip_open = False
+                            for e in existing_entries:
+                                spread = abs(price - e) / e * 100
+                                if spread < 2.0:
+                                    log(f"⛔ 新仓价格${price:,.0f}与现有仓${e:,.0f}间隔{spread:.1f}% < 2%，跳过开仓")
+                                    skip_open = True
+                                    break
+                            if skip_open:
+                                continue
                         else:
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                             try:

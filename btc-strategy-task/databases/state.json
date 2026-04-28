@@ -1,1 +1,25 @@
-{"in_position": true, "positions": [{"entry_price": 76845.0, "qty": 0.03, "direction": "long", "stop_loss": 74539.6, "tp": 80687.2, "reason": "\u624b\u52a8\u5f00\u4ed3", "open_time": "2026-04-28T10:59:58.213328"}], "last_signal_time": {"long": 1777345704.2741313}}
+{
+  "in_position": true,
+  "positions": [
+    {
+      "entry_price": 76845.0,
+      "qty": 0.03,
+      "direction": "long",
+      "stop_loss": 74539.6,
+      "tp": 80687.2,
+      "reason": "手动开仓-修复后登记",
+      "open_time": "2026-04-28T10:58:00"
+    },
+    {
+      "entry_price": 76673.5,
+      "qty": 0.03,
+      "direction": "long",
+      "stop_loss": 74373.3,
+      "tp": 80507.2,
+      "reason": "历史仓位-修复后登记",
+      "open_time": "2026-04-28T03:08:24"
+    }
+  ],
+  "last_signal_time": {},
+  "last_close_time": null
+}
