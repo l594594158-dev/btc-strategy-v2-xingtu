@@ -1,67 +1,5 @@
 [
   {
-    "time": "2026-04-26 10:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=2889012, 启动时间=2248"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77483.0"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77417.4"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=550.36994191, 总计=550.36994191"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: 理由: 4h+1d均线多头,价格触及布林上轨偏离-0.5"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=3"
-      },
-      {
-        "time": "2026-04-26 10:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
     "time": "2026-04-26 10:30:02",
     "checks_ok": 9,
     "checks_fail": 0,
@@ -6193,6 +6131,68 @@
       },
       {
         "time": "2026-04-28 11:30:02",
+        "item": "日志大小",
+        "status": "✅ OK",
+        "detail": "14584.4KB"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-28 12:00:01",
+    "checks_ok": 9,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=606991, 启动时间=238936"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76770.6"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "API-当前价格",
+        "status": "✅ OK",
+        "detail": "$76770.6"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "API-账户余额",
+        "status": "✅ OK",
+        "detail": "USDT可用=325.36949104, 总计=554.01880745"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "API-持仓信息",
+        "status": "✅ OK",
+        "detail": "持仓数=1"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-28 12:00:01",
         "item": "日志大小",
         "status": "✅ OK",
         "detail": "14584.4KB"

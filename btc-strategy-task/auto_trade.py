@@ -707,13 +707,35 @@ def main():
             exchange_pos = binance.fetch_positions()
             has_pos = any(p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0 for p in exchange_pos)
 
-            # v2.9.1: 同步state与交易所持仓（去除已不在交易所的仓位，防止幽灵状态）
+            # v2.9.1: 同步state与交易所持仓 + 清理幽灵条件单
             if state.get('positions'):
                 exchange_entries = {float(p.get('entryPrice', 0)) for p in exchange_pos if float(p.get('contracts', 0)) > 0}
                 synced_positions = [p for p in state['positions'] if float(p.get('entry_price', 0)) in exchange_entries]
                 if len(synced_positions) != len(state['positions']):
                     dropped = len(state['positions']) - len(synced_positions)
                     log(f"⚠️ 同步持仓状态：移除{dropped}个幽灵仓位，剩余{len(synced_positions)}个")
+                    # v2.9.1: 取消已移除仓位的幽灵条件单
+                    try:
+                        exchange_algos = binance.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
+                        active_algos = [o for o in exchange_algos if o.get('algoStatus') == 'NEW']
+                        for o in active_algos:
+                            o_qty = float(o.get('quantity', 0))
+                            o_type = o.get('orderType', '')
+                            o_trigger = float(o.get('triggerPrice', 0))
+                            # 如果没有仓位匹配这个algo的数量和价格，就取消
+                            matched = any(
+                                (o_type == 'STOP_MARKET' and o_trigger == p.get('stop_loss') and o_qty >= p.get('qty') * 0.99) or
+                                (o_type == 'TAKE_PROFIT_MARKET' and o_trigger == p.get('tp') and o_qty >= p.get('qty') * 0.99)
+                                for p in synced_positions
+                            )
+                            if not matched:
+                                try:
+                                    binance.fapiPrivateDeleteAlgoOrder({'symbol': 'BTCUSDT', 'algoId': int(o.get('algoId'))})
+                                    log(f"  取消幽灵条件单: algoId={o.get('algoId')} type={o_type} trigger={o_trigger} qty={o_qty}")
+                                except:
+                                    pass
+                    except Exception as e:
+                        log(f"  清理幽灵条件单失败: {e}")
                     state['positions'] = synced_positions
                     if not synced_positions:
                         save_state({'in_position': False, 'positions': [], 'last_close_time': time.time()})
