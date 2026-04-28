@@ -44,7 +44,7 @@ MAX_POSITIONS_PER_DIR = 3     # 单方向最大仓位数量（v2.8）
 
 # ========== v2.9: 移动止盈参数（集成进主策略）==========
 TRAIL_ACTIVATION_PCT = 1.0 / 100   # 激活条件：超出开仓价1.0%
-TRAIL_TRIGGER_PCT = 0.8 / 100      # 执行条件：从峰值回落0.8%
+TRAIL_TRIGGER_PCT = 0.6 / 100      # 执行条件：从峰值回落0.6%
 TRAIL_INTERVAL = 5                  # 移动止盈检查间隔（秒，与轮询同步）
 
 # ========== 工具 ==========
@@ -893,16 +893,17 @@ def main():
                     if last_sig.get(sig, 0) + 300 > time.time():
                         log(f"⏳ {sig}信号冷却中，跳过")
                     else:
-                        # 单方向仓位上限检查
-                        positions = state.get('positions', [])
-                        dir_count = sum(1 for p in positions if p.get('direction') == sig)
+                        # ========== v2.9: 交易所实际持仓检查（防止state不同步）==========
+                        exchange_pos = binance.fetch_positions()
+                        actual_positions = [p for p in exchange_pos
+                                           if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0]
+                        dir_count = sum(1 for p in actual_positions if p.get('side') == sig)
                         if dir_count >= MAX_POSITIONS_PER_DIR:
-                            log(f"⛔ {sig}方向已有{dir_count}仓，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                            log(f"⛔ {sig}方向已有{dir_count}仓(交易所实际)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
                         else:
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                             try:
                                 open_position(sig, price, atr, reason, QTY)
-                                # 记录本次信号时间
                                 state.setdefault('last_signal_time', {})[sig] = time.time()
                                 save_state(state)
                             except Exception as e:
