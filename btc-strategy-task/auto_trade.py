@@ -901,17 +901,17 @@ def main():
                         if dir_count >= MAX_POSITIONS_PER_DIR:
                             log(f"⛔ {sig}方向已有{dir_count}仓(交易所实际)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
                         elif dir_count > 0:
-                            # 二次开仓价格间隔检查：与现有同向仓位间隔需>2%
+                            # 二次开仓价格间隔检查：做多需低于均价1.5%+，做空需高于均价1.5%+
                             existing_entries = [float(p.get('entryPrice', 0)) for p in actual_positions if p.get('side') == sig]
-                            skip_open = False
-                            for e in existing_entries:
-                                spread = abs(price - e) / e * 100
-                                if spread < 2.0:
-                                    log(f"⛔ 新仓价格${price:,.0f}与现有仓${e:,.0f}间隔{spread:.1f}% < 2%，跳过开仓")
-                                    skip_open = True
-                                    break
-                            if skip_open:
-                                continue
+                            avg_entry = sum(existing_entries) / len(existing_entries)
+                            if sig == 'long':
+                                if price >= avg_entry * 0.985:
+                                    log(f"⛔ 做多新仓${price:,.0f}需低于均价${avg_entry:,.0f}的1.5%+，当前仅偏离{(1-price/avg_entry)*100:.1f}%，跳过")
+                                    continue
+                            else:
+                                if price <= avg_entry * 1.015:
+                                    log(f"⛔ 做空新仓${price:,.0f}需高于均价${avg_entry:,.0f}的1.5%+，当前仅偏离{(price/avg_entry-1)*100:.1f}%，跳过")
+                                    continue
                         else:
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                             try:
