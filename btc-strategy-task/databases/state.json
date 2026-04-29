@@ -2,15 +2,14 @@
   "in_position": true,
   "positions": [
     {
-      "entry_price": 76759.25,
-      "qty": 0.06,
+      "entry_price": 77001.2,
+      "qty": 0.03,
       "direction": "long",
-      "stop_loss": 74456.5,
-      "tp": 80597.2,
-      "reason": "\u72b6\u6001\u540c\u6b65",
-      "open_time": "2026-04-28T11:55:00"
+      "stop_loss": 74691.16,
+      "tp": 80851.26,
+      "reason": "\u624b\u52a8\u540c\u6b65",
+      "open_time": "2026-04-29T14:40:00"
     }
   ],
-  "last_signal_time": {},
-  "last_close_time": null
+  "last_signal_time": {}
 }
