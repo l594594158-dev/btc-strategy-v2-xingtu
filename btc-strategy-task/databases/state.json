@@ -2,14 +2,21 @@
   "in_position": true,
   "positions": [
     {
-      "entry_price": 77001.2,
+      "entry_price": 76774.3,
       "qty": 0.03,
       "direction": "long",
-      "stop_loss": 74691.16,
-      "tp": 80851.26,
-      "reason": "\u624b\u52a8\u540c\u6b65",
-      "open_time": "2026-04-29T14:40:00"
+      "stop_loss": 74471.0,
+      "tp": 80613.0,
+      "sl_algo_id": "3000001391585756",
+      "tp_algo_id": "3000001391585764",
+      "reason": "做多A",
+      "atr": 435,
+      "open_time": "2026-04-30T08:00:03"
     }
   ],
-  "last_signal_time": {}
+  "last_close_time": null,
+  "last_signal_time": {
+    "long": 1777507203.026
+  },
+  "peak_76774.3": 76836.0
 }

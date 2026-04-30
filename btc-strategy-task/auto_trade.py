@@ -820,6 +820,7 @@ def main():
                         if price > current_peak:
                             state[peak_key] = price
                             current_peak = price
+                            save_state(state)
                         if current_peak >= activation_price:
                             drawdown = (current_peak - price) / current_peak * 100
                             if drawdown >= TRAIL_TRIGGER_PCT * 100:
@@ -840,6 +841,7 @@ def main():
                         if price < current_peak:
                             state[peak_key] = price
                             current_peak = price
+                            save_state(state)
                         if current_peak <= activation_price:
                             drawdown = (price - current_peak) / current_peak * 100
                             if drawdown >= TRAIL_TRIGGER_PCT * 100:

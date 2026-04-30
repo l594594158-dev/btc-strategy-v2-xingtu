@@ -6,3 +6,10 @@
    验证: USDT可用=110.13570307
 [2026-04-28 04:00:02] ❌ API-网络: 网络错误: binance GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=BTCUSDT
 [2026-04-28 04:00:02] 🔧 修复方案: 检查网络连接
+[2026-04-30 11:02:27] ❌ WorkLog: 最近错误: [2026-04-30 10:48:09] [错误] 'qty'
+[2026-04-30 11:02:27] 🔧 修复: restart
+[2026-04-30 11:02:27] ❌ 通知队列: 'list' object has no attribute 'get'
+[2026-04-30 11:02:27] ✅ 已重启auto_trade.py
+[2026-04-30 11:03:36] ❌ WorkLog: 最近错误: [2026-04-30 10:48:09] [错误] 'qty'
+[2026-04-30 11:03:36] 🔧 修复: restart
+[2026-04-30 11:03:36] ✅ 已重启auto_trade.py
