@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-BTC合约 自动交易策略 v2.9
+BTC合约 自动交易策略 v2.10
 - 10秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.9.1: 开仓前交易所持仓检查 + 二次开仓价格间隔>2%硬性指标
+- v2.10: 补仓后撤销原SL/TP，以新均价重新挂单（合并为统一条件单）
 """
 import ccxt
 import pandas as pd
@@ -392,11 +392,39 @@ def place_sl_tp_for_entry(direction, entry_price, qty, reason, atr):
     return sl_price, tp_price, sl_algo_id, tp_algo_id
 
 
-def open_position(direction, entry_price, atr, reason, qty):
-    """v2.7 开仓 + 挂独立止损止盈（追加不合并，各仓位独立SL/TP）"""
+def cancel_all_sl_tp_for_direction(direction):
+    """撤销指定方向的所有SL/TP条件单"""
     positionSide = 'LONG' if direction == 'long' else 'SHORT'
+    try:
+        # 查询该方向的所有条件单
+        algos = binance.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
+        active_algos = [o for o in algos if o.get('algoStatus') == 'NEW']
+        for o in active_algos:
+            o_ps = o.get('positionSide', '')
+            o_type = o.get('orderType', '')
+            if o_ps == positionSide and o_type in ('STOP_MARKET', 'TAKE_PROFIT_MARKET'):
+                try:
+                    algo_id = int(o.get('algoId'))
+                    binance.fapiPrivateDeleteAlgoOrder({'symbol': 'BTCUSDT', 'algoId': algo_id})
+                    log(f"  🗑️ 撤销旧条件单: algoId={algo_id} {o_type} @ {o.get('triggerPrice')}")
+                except Exception as e:
+                    log(f"  ⚠️ 撤销失败 algoId={o.get('algoId')}: {e}")
+    except Exception as e:
+        log(f"⚠️ 查询条件单失败: {e}")
+
+
+def open_position(direction, entry_price, atr, reason, qty):
+    """v2.10 开仓 + 补仓时撤销旧SL/TP，以新均价重新挂单"""
+    positionSide = 'LONG' if direction == 'long' else 'SHORT'
+    close_side = 'sell' if direction == 'long' else 'buy'
 
     binance.set_leverage(LEVERAGE, SYMBOL)
+
+    # 开仓前检查是否已有同方向持仓（补仓）
+    existing_pos = [p for p in binance.fetch_positions()
+                    if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0
+                    and p.get('side', '').lower() == direction]
+    is_averaging = len(existing_pos) > 0
 
     # 市价开仓
     if direction == 'long':
@@ -406,9 +434,72 @@ def open_position(direction, entry_price, atr, reason, qty):
 
     avg_price = order.get('average', entry_price)
     filled_qty = float(order.get('filled', qty))
-    log(f"✅ 开仓成功: {direction.upper()} +{filled_qty} BTC @ ${avg_price:,.2f}")
+    log(f"✅ 开仓成功: {direction.upper()} +{filled_qty} BTC @ ${avg_price:,.2f}" + (" (补仓)" if is_averaging else " (首仓)"))
 
-    # 挂独立SL/TP（追加模式，不撤销已有的）
+    # ========== v2.10: 补仓时撤销旧SL/TP，以新均价重新挂单 ==========
+    total_qty = filled_qty
+    if is_averaging:
+        # 计算所有仓的平均开仓价
+        existing_entries = [(float(p['contracts']), float(p['entryPrice'])) for p in existing_pos]
+        total_value = sum(q * e for q, e in existing_entries) + filled_qty * avg_price
+        total_qty = sum(q for q, e in existing_entries) + filled_qty
+        new_avg_price = total_value / total_qty
+
+        log(f"📊 补仓后均价: ${new_avg_price:,.2f} | 总数量: {total_qty} BTC")
+
+        # 撤销旧SL/TP
+        log(f"🗑️ 撤销所有旧SL/TP条件单...")
+        cancel_all_sl_tp_for_direction(direction)
+
+        # 以新均价挂SL/TP
+        sl_price = round(new_avg_price * (1 - STOP_LOSS_PCT), 1) if direction == 'long' else round(new_avg_price * (1 + STOP_LOSS_PCT), 1)
+        tp_price = round(new_avg_price * (1 + TAKE_PROFIT_PCT), 1) if direction == 'long' else round(new_avg_price * (1 - TAKE_PROFIT_PCT), 1)
+
+        sl_algo_id = None
+        tp_algo_id = None
+
+        try:
+            sl_order = binance.create_order(
+                SYMBOL, 'STOP_MARKET', close_side, total_qty,
+                params={'stopPrice': sl_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
+            )
+            sl_algo_id = sl_order.get('info', {}).get('algoId') or sl_order.get('id')
+            log(f"✅ 新止损单已挂: SL=${sl_price} x {total_qty} BTC, algoId={sl_algo_id}")
+        except Exception as e:
+            log(f"⚠️ 新止损单挂单失败: {e}")
+
+        try:
+            tp_order = binance.create_order(
+                SYMBOL, 'TAKE_PROFIT_MARKET', close_side, total_qty,
+                params={'stopPrice': tp_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
+            )
+            tp_algo_id = tp_order.get('info', {}).get('algoId') or tp_order.get('id')
+            log(f"✅ 新止盈单已挂: TP=${tp_price} x {total_qty} BTC, algoId={tp_algo_id}")
+        except Exception as e:
+            log(f"⚠️ 新止盈单挂单失败: {e}")
+
+        # 更新state
+        state = load_state()
+        if 'positions' not in state:
+            state['positions'] = []
+        state['positions'] = [{
+            'entry_price': new_avg_price,
+            'qty': total_qty,
+            'direction': direction,
+            'stop_loss': sl_price,
+            'tp': tp_price,
+            'sl_algo_id': sl_algo_id,
+            'tp_algo_id': tp_algo_id,
+            'reason': reason,
+            'atr': atr,
+            'open_time': datetime.now().isoformat(),
+        }]
+        state['in_position'] = True
+        save_state(state)
+        log(f"📊 state已更新: 均价=${new_avg_price:,.2f}, 数量={total_qty} BTC, SL=${sl_price}, TP=${tp_price}")
+        return
+
+    # 非补仓（首仓），挂独立SL/TP
     sl_price, tp_price, sl_algo_id, tp_algo_id = place_sl_tp_for_entry(direction, avg_price, filled_qty, reason, atr)
 
     # 更新state：追加到positions列表
@@ -670,8 +761,8 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 BTC自动交易启动 v2.8 | 10秒周期 | {LEVERAGE}x | {QTY} BTC")
-    log(f"v2.8: 单方向最多3仓 | 多仓位独立SL/TP | 有信号就开仓追加")
+    log(f"🚀 BTC自动交易启动 v2.10 | 10秒周期 | {LEVERAGE}x | {QTY} BTC")
+    log(f"v2.10: 补仓撤销旧SL/TP，以新均价重新挂单 | 有信号就开仓追加")
     stats = load_stats()
     if stats.get('consecutive_losses', 0) > 0:
         log(f"⚠️ 当前连续亏损: {stats['consecutive_losses']}次")

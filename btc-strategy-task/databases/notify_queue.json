@@ -1,1 +1,1 @@
-[{"time": "2026-04-30T11:03:42.875023", "msg": "\ud83d\udd34 \u81ea\u68c0\u53d1\u73b0\u95ee\u9898(1\u9879)\n\u2022 WorkLog: \u6700\u8fd1\u9519\u8bef: [2026-04-30 10:48:09] [\u9519\u8bef] 'qty'\n\n\ud83d\udd27 \u5df2\u4fee\u590d:\n\u2022 \u5df2\u91cd\u542fauto_trade.py\n", "sent": true}]
+[{"time": "2026-04-30T11:03:42.875023", "msg": "🔴 自检发现问题(1项)\n• WorkLog: 最近错误: [2026-04-30 10:48:09] [错误] 'qty'\n\n🔧 已修复:\n• 已重启auto_trade.py\n", "sent": true}]
