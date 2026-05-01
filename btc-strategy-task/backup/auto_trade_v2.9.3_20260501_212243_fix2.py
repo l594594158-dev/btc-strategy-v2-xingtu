@@ -367,8 +367,7 @@ def check_entry(data):
 
 def place_sl_tp_for_entry(direction, entry_price, qty, reason, atr):
     """
-    v2.9.4 为单个仓位挂独立的SL/TP（幂等挂单，不重复）
-    挂单前先查已有订单，同价格+同数量则跳过，避免重复挂单
+    v2.7 为单个仓位挂独立的SL/TP（不撤销已有条件单，各仓位独立共存）
     返回 (sl_price, tp_price, sl_algo_id, tp_algo_id)
     """
     positionSide = 'LONG' if direction == 'long' else 'SHORT'
@@ -377,57 +376,30 @@ def place_sl_tp_for_entry(direction, entry_price, qty, reason, atr):
     sl_price = round(entry_price * (1 - STOP_LOSS_PCT), 1) if direction == 'long' else round(entry_price * (1 + STOP_LOSS_PCT), 1)
     tp_price = round(entry_price * (1 + TAKE_PROFIT_PCT), 1) if direction == 'long' else round(entry_price * (1 - TAKE_PROFIT_PCT), 1)
 
-    # ========== v2.9.4: 幂等挂单——先查已有订单，同价格+同数量则跳过 ==========
-    active_algos = [
-        o for o in binance.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
-        if o.get('algoStatus') not in ('CANCELED', 'FINISHED', 'EXPIRED', None)
-    ]
-
-    # 检查SL是否已存在（同价格±1, 同数量±1%）
-    side_filter = 'SELL' if direction == 'long' else 'BUY'
-    sl_exists = any(
-        abs(float(o.get('triggerPrice', 0)) - sl_price) <= 1 and
-        abs(float(o.get('quantity', 0)) - qty) <= qty * 0.01
-        for o in active_algos
-        if o.get('orderType') == 'STOP_MARKET' and o.get('side') == side_filter
-    )
-    tp_exists = any(
-        abs(float(o.get('triggerPrice', 0)) - tp_price) <= 1 and
-        abs(float(o.get('quantity', 0)) - qty) <= qty * 0.01
-        for o in active_algos
-        if o.get('orderType') == 'TAKE_PROFIT_MARKET' and o.get('side') == side_filter
-    )
-
     sl_algo_id = None
     tp_algo_id = None
 
-    if not sl_exists:
-        try:
-            sl_order = binance.create_order(
-                SYMBOL, 'STOP_MARKET',
-                close_side, qty,
-                params={'stopPrice': sl_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
-            )
-            sl_algo_id = sl_order.get('info', {}).get('algoId') or sl_order.get('id')
-            log(f"✅ 止损单已挂: SL=${sl_price} x {qty} BTC, algoId={sl_algo_id}")
-        except Exception as e:
-            log(f"⚠️ 止损单挂单失败: {e}")
-    else:
-        log(f"⏭️ 止损单已存在 (SL=${sl_price} x {qty} BTC)，跳过")
+    try:
+        sl_order = binance.create_order(
+            SYMBOL, 'STOP_MARKET',
+            close_side, qty,
+            params={'stopPrice': sl_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
+        )
+        sl_algo_id = sl_order.get('info', {}).get('algoId') or sl_order.get('id')
+        log(f"✅ 止损单已挂: SL=${sl_price} x {qty} BTC, algoId={sl_algo_id}")
+    except Exception as e:
+        log(f"⚠️ 止损单挂单失败: {e}")
 
-    if not tp_exists:
-        try:
-            tp_order = binance.create_order(
-                SYMBOL, 'TAKE_PROFIT_MARKET',
-                close_side, qty,
-                params={'stopPrice': tp_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
-            )
-            tp_algo_id = tp_order.get('info', {}).get('algoId') or tp_order.get('id')
-            log(f"✅ 止盈单已挂: TP=${tp_price} x {qty} BTC, algoId={tp_algo_id}")
-        except Exception as e:
-            log(f"⚠️ 止盈单挂单失败: {e}")
-    else:
-        log(f"⏭️ 止盈单已存在 (TP=${tp_price} x {qty} BTC)，跳过")
+    try:
+        tp_order = binance.create_order(
+            SYMBOL, 'TAKE_PROFIT_MARKET',
+            close_side, qty,
+            params={'stopPrice': tp_price, 'positionSide': positionSide, 'newOrderRespType': 'FULL'}
+        )
+        tp_algo_id = tp_order.get('info', {}).get('algoId') or tp_order.get('id')
+        log(f"✅ 止盈单已挂: TP=${tp_price} x {qty} BTC, algoId={tp_algo_id}")
+    except Exception as e:
+        log(f"⚠️ 止盈单挂单失败: {e}")
 
     return sl_price, tp_price, sl_algo_id, tp_algo_id
 

@@ -1,1 +1,1 @@
-{"in_position": true, "positions": [{"entry_price": 78099.5, "qty": 0.01, "direction": "short", "stop_loss": 80442.485, "tp": 74194.525, "sl_algo_id": null, "tp_algo_id": null, "reason": "\u5e7d\u7075\u4ed3\u4f4d\u540c\u6b65", "atr": 0, "open_time": "2026-05-01T21:00:18.661290"}], "last_close_time": null, "last_signal_time": {}, "peak_78099.5": 78003.5}
+{"in_position": false, "positions": [], "last_close_time": 1777641555.9835358}
