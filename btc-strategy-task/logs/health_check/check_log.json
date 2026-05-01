@@ -1,3849 +1,5 @@
 [
   {
-    "time": "2026-04-28 14:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=238980"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76867.4"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76867.3"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=559.47046354"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 14:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 14:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239024"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76862.4"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76862.3"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=560.32246354"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 14:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 15:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76665.0"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76663.6"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=546.89446354"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 15:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 15:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76610.6"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76605.2"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=543.77610224"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 15:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 16:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76840.7"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76828.3"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=558.38215826"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 16:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 16:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76942.0"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76920.8"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=564.01979608"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 16:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 17:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76832.5"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76820.1"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=557.14615826"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 17:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 17:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76746.3"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76740.7"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=551.56646522"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 17:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 18:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76600.0"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76557.2"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=541.11415826"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 18:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 18:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76507.5"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76487.7"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=537.15212176"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 18:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 19:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76584.7"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76583.1"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=543.92215826"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 19:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 19:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76308.1"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76308.0"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=526.51615826"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 19:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 20:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76198.9"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76198.8"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=521.69815826"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 20:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 20:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76200.0"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76193.5"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=518.93610913"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 20:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 21:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239032"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76345.6"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76348.1"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=528.06897392"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 21:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 21:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239036"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76173.5"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76168.8"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=515.44381261"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 21:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 22:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239036"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76163.9"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76160.1"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=515.9555374"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 22:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 22:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239036"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$75904.0"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$75800.2"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=495.14525131"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 22:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 23:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$75919.5"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$75917.1"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=504.65815826"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 23:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-28 23:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$75984.3"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$75984.3"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=506.99815826"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-28 23:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 00:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76050.0"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76020.3"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=507.47895261"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 00:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 00:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$75961.7"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$75926.7"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=503.4710393"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 00:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 01:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76091.7"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76091.8"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=512.9990393"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 01:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 01:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76123.8"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76059.9"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=512.0150393"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 01:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 02:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76201.4"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76154.2"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=517.2710393"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 02:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 02:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76251.0"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76202.6"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=520.0130393"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 02:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 03:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76223.6"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76208.1"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=520.39147379"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 03:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 03:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76138.2"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76138.2"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=515.74920887"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 03:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 04:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76309.7"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76296.1"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=528.9950393"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 04:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 04:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76383.2"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76332.6"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=527.85911496"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 04:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 05:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76425.6"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76423.4"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=533.2370393"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 05:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 05:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76316.0"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76262.6"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=523.4630393"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 05:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 06:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76338.4"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76321.4"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=527.28627974"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 06:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 06:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76301.6"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76292.0"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=526.2950393"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 06:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 07:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76206.2"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76206.2"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=519.33838235"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 07:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 07:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76279.6"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76240.7"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=522.5270393"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 07:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 08:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76336.5"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76298.1"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=524.61291355"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 08:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 08:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76293.9"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76276.3"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=525.49729789"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 08:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 09:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76471.0"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76460.1"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=535.24129789"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 09:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 09:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76234.4"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76178.3"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=517.89529789"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 09:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 10:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76550.0"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76543.9"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=540.64129789"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 10:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 10:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76416.8"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76416.7"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=532.84129789"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 10:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 11:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76495.0"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76490.3"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=537.32732876"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 11:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 11:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76846.9"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76841.6"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=558.48004267"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 11:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 12:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76964.8"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76955.7"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=565.97336049"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 12:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 12:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239048"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77003.1"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77003.0"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=325.36949104, 总计=567.89317484"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 12:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 13:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=611718, 启动时间=239052"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77280.0"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77225.0"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=464.94958598, 总计=585.39310639"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 13:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 13:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=970839, 启动时间=239020"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77236.6"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77229.9"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=464.94958598, 总计=586.03210639"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 13:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 14:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=970839, 启动时间=239020"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77254.7"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77254.7"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=464.94958598, 总计=584.95872573"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 14:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 14:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=970839, 启动时间=239020"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77049.6"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77049.6"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=464.94958598, 总计=590.78710639"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 14:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 15:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239244"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76989.7"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76979.9"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=590.11213939"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 15:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 15:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77012.3"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77012.3"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=591.12313939"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 15:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 16:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77025.1"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77017.8"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=590.67149599"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 16:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 16:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77060.5"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77053.0"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=591.75874991"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 16:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 17:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$76998.5"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$76998.4"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=590.12374991"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 17:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 17:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77085.7"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77085.6"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=475.99035739, 总计=592.9455119"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=1"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=True"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 17:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 18:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=992230, 启动时间=239252"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77623.9"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77605.4"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 18:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 18:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=1037474, 启动时间=2240"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77873.2"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77850.5"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 18:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 19:00:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=1037474, 启动时间=2240"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77596.7"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77575.4"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 19:00:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 19:30:02",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=1037474, 启动时间=2240"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77499.0"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77469.6"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 19:30:02",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 20:00:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=1037474, 启动时间=2240"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77563.5"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77547.0"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 20:00:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
-    "time": "2026-04-29 20:30:01",
-    "checks_ok": 9,
-    "checks_fail": 0,
-    "items": [
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "进程状态",
-        "status": "✅ OK",
-        "detail": "PID=1037474, 启动时间=2240"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "API数据",
-        "status": "✅ OK",
-        "detail": "各周期数据正常，最新价格=$77112.6"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "API-当前价格",
-        "status": "✅ OK",
-        "detail": "$77112.5"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "API-账户余额",
-        "status": "✅ OK",
-        "detail": "USDT可用=609.16976591, 总计=609.16976591"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "API-持仓信息",
-        "status": "✅ OK",
-        "detail": "持仓数=0"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "State文件",
-        "status": "✅ OK",
-        "detail": "in_position=False"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "WorkLog",
-        "status": "✅ OK",
-        "detail": "最后记录: [2026-04-28 04:00:23] [错误] binance GET https://fapi.binance.com/fapi/v1/klines?i"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "交易统计",
-        "status": "✅ OK",
-        "detail": "总交易=3, 连亏=0"
-      },
-      {
-        "time": "2026-04-29 20:30:01",
-        "item": "日志大小",
-        "status": "✅ OK",
-        "detail": "14584.4KB"
-      }
-    ],
-    "fixes": []
-  },
-  {
     "time": "2026-04-29 21:00:02",
     "checks_ok": 9,
     "checks_fail": 0,
@@ -6097,5 +2253,3110 @@
       }
     ],
     "fixes": []
+  },
+  {
+    "time": "2026-04-30 14:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$75654.5"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 14:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 15:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$75720.6"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 15:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 15:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$75852.7"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 15:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 16:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76129.9"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 16:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 16:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76045.4"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 16:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 17:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76022.1"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 17:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 17:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76230.4"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 17:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 18:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76069.5"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 18:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 18:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$75949.9"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 18:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 19:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76016.1"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 19:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 19:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76075.1"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 19:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 20:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76032.9"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 20:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 20:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76304.8"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 20:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 21:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76258.9"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 21:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 21:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76139.0"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 21:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 22:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76370.3"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 22:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 22:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76276.0"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 22:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 23:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76256.0"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 23:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-04-30 23:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76472.2"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-04-30 23:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 00:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76429.2"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 00:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 00:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76322.6"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 00:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 01:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76220.2"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 01:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 01:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76117.6"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 01:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 02:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76209.1"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 02:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 02:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76250.0"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 02:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 03:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76289.8"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 03:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 03:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76432.8"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 03:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 04:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76376.7"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 04:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 04:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76408.6"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 04:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 05:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76441.5"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 05:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 05:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76299.9"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 05:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 06:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76197.5"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 06:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 06:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76396.3"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 06:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 07:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76208.2"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 07:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 07:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76299.9"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 07:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 08:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76290.2"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 08:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 08:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76480.0"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 08:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 09:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76422.1"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 09:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 09:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76495.6"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 09:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 10:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76644.0"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 10:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 10:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76584.2"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 10:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 11:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76535.2"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，state和交易所均有1仓"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=True, 持仓数=1"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 11:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 11:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77144.8"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 11:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 12:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77093.4"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 12:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 12:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76983.1"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 12:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 13:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77002.9"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 13:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 13:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77037.4"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 13:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 14:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77137.9"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 14:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 14:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77112.0"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 14:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 15:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76980.0"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 15:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 15:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$76967.3"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 15:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 16:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77101.6"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 16:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 16:30:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77404.4"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 16:30:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 17:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77345.6"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 17:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 17:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77311.0"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 17:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 18:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77239.3"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 18:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 18:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77316.3"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 18:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 19:00:02",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77282.3"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 19:00:02",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 19:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77348.1"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 19:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 20:00:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77457.0"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 20:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 20:30:01",
+    "checks_ok": 7,
+    "checks_fail": 0,
+    "items": [
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "进程状态",
+        "status": "✅ OK",
+        "detail": "PID=1325271 运行中"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77720.5"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "持仓同步",
+        "status": "✅ OK",
+        "detail": "一致，均无持仓"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 20:30:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": []
+  },
+  {
+    "time": "2026-05-01 21:00:01",
+    "checks_ok": 5,
+    "checks_fail": 2,
+    "items": [
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "进程状态",
+        "status": "❌ FAIL",
+        "detail": "进程未运行",
+        "fix": "restart"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "API数据",
+        "status": "✅ OK",
+        "detail": "各周期数据正常，最新价格=$77847.1"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "持仓同步",
+        "status": "❌ FAIL",
+        "detail": "幽灵仓位！交易所有持仓但state显示无持仓",
+        "fix": "sync_ghost"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "State文件",
+        "status": "✅ OK",
+        "detail": "in_position=False, 持仓数=0"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "WorkLog",
+        "status": "✅ OK",
+        "detail": "最近错误(进程运行中，忽略历史): [2026-04-30 10:48:09] [错误] 'qty'"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "交易统计",
+        "status": "✅ OK",
+        "detail": "总交易=3, 连亏=0"
+      },
+      {
+        "time": "2026-05-01 21:00:01",
+        "item": "通知队列",
+        "status": "✅ OK",
+        "detail": "无积压"
+      }
+    ],
+    "fixes": [
+      "已重启auto_trade.py",
+      "已同步1个幽灵持仓到state"
+    ]
   }
 ]
