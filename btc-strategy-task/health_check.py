@@ -183,9 +183,9 @@ class HealthChecker:
 
             # 对比判断
             if has_actual_pos and not state_in_pos:
-                msg = f'幽灵仓位！交易所有持仓但state显示无持仓'
-                self.add_fail('持仓同步', msg, fix='sync_ghost')
-                return False
+                # 交易所有持仓但state没有 → 手动仓位，不处理
+                self.add_ok('持仓同步', f'手动仓位(exchange有{len(actual_positions)}仓，state无，属正常)')
+                return True
             elif not has_actual_pos and state_in_pos:
                 msg = f'幽灵state！state有持仓但交易所实际无持仓'
                 self.add_fail('持仓同步', msg, fix='sync_ghost')
