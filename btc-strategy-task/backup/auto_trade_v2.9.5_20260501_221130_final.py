@@ -838,32 +838,46 @@ def main():
             exchange_pos = binance.fetch_positions()
             has_pos = any(p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0 for p in exchange_pos)
 
-            # v2.9.5: 保守同步——只更新策略仓位的数量，不处理手动仓位
-            if state.get('positions'):
-                exchange_by_side = {}
-                for p in exchange_pos:
-                    if float(p.get('contracts', 0)) > 0:
-                        side = p.get('side')
-                        exchange_by_side[side] = float(p.get('contracts', 0))
+            # v2.9.5: 保守同步
+            exchange_by_side = {}
+            for p in exchange_pos:
+                if float(p.get('contracts', 0)) > 0:
+                    side = p.get('side')
+                    exchange_by_side[side] = {
+                        'qty': float(p.get('contracts', 0)),
+                        'entry': float(p.get('entryPrice', 0))
+                    }
 
+            if state.get('positions'):
+                # state有仓位，同步数量
                 synced_positions = []
                 for p in state['positions']:
                     state_side = 'SHORT' if p['direction'] == 'short' else 'LONG'
-                    if state_side in exchange_by_side and exchange_by_side[state_side] > 0:
-                        if abs(p['qty'] - exchange_by_side[state_side]) > 0.001:
-                            log(f"  ↻ {p['direction']}仓位数量更新: {p['qty']} → {exchange_by_side[state_side]} BTC")
-                            p['qty'] = exchange_by_side[state_side]
+                    if state_side in exchange_by_side and exchange_by_side[state_side]['qty'] > 0:
+                        p['qty'] = exchange_by_side[state_side]['qty']
                         synced_positions.append(p)
-
                 if len(synced_positions) != len(state['positions']):
                     dropped = len(state['positions']) - len(synced_positions)
                     log(f"⚠️ 同步：移除{dropped}个幽灵仓位，保留{len(synced_positions)}个")
                     state['positions'] = synced_positions
                     save_state(state)
-
-            # 修复 in_position 状态一致性
-            if not state.get('positions'):
-                state['in_position'] = False
+            elif exchange_by_side:
+                # state空但交易所有——旧幽灵同步错误清空了state，补回来
+                for side, info in exchange_by_side.items():
+                    direction = 'short' if side == 'SHORT' else 'long'
+                    state['positions'] = [{
+                        'entry_price': info['entry'],
+                        'qty': info['qty'],
+                        'direction': direction,
+                        'stop_loss': round(info['entry'] * (1 + 0.03), 1) if direction == 'short' else round(info['entry'] * (1 - 0.03), 1),
+                        'tp': round(info['entry'] * (1 - 0.05), 1) if direction == 'short' else round(info['entry'] * (1 + 0.05), 1),
+                        'sl_algo_id': None, 'tp_algo_id': None,
+                        'reason': '幽灵仓位恢复', 'atr': 0, 'open_time': None
+                    }]
+                    state['in_position'] = True
+                    save_state(state)
+                    log(f"⚠️ 补回幽灵同步丢失的仓位: {direction} {info['qty']} BTC @ ${info['entry']:,.2f}")
+                    break
 
             # v2.7: 持仓全部平仓时清空state（部分平仓时保留其他仓位）
             if not has_pos and state.get('positions') == []:

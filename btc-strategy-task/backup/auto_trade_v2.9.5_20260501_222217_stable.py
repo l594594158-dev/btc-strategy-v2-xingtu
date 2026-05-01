@@ -838,7 +838,7 @@ def main():
             exchange_pos = binance.fetch_positions()
             has_pos = any(p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0 for p in exchange_pos)
 
-            # v2.9.5: 保守同步——只更新策略仓位的数量，不处理手动仓位
+            # v2.9.5: 保守同步——只同步已有仓位的数量，不主动恢复，不取消任何SL/TP
             if state.get('positions'):
                 exchange_by_side = {}
                 for p in exchange_pos:
@@ -850,6 +850,7 @@ def main():
                 for p in state['positions']:
                     state_side = 'SHORT' if p['direction'] == 'short' else 'LONG'
                     if state_side in exchange_by_side and exchange_by_side[state_side] > 0:
+                        # 仓位存在，同步数量
                         if abs(p['qty'] - exchange_by_side[state_side]) > 0.001:
                             log(f"  ↻ {p['direction']}仓位数量更新: {p['qty']} → {exchange_by_side[state_side]} BTC")
                             p['qty'] = exchange_by_side[state_side]
@@ -861,7 +862,7 @@ def main():
                     state['positions'] = synced_positions
                     save_state(state)
 
-            # 修复 in_position 状态一致性
+            # v2.9.5: 修复 in_position 状态一致性——positions为空则 in_position 必须为 False
             if not state.get('positions'):
                 state['in_position'] = False
 
