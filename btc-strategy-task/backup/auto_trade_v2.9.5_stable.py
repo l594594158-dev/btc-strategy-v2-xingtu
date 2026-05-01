@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-BTC合约 自动交易策略 v2.10
+BTC合约 自动交易策略 v2.9.5
 - 10秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.10: 补仓后撤销原SL/TP，以新均价重新挂单（合并为统一条件单）
+- v2.9.5: 保守同步——不取消任何SL/TP订单，只同步数量
 """
 import ccxt
 import pandas as pd
@@ -838,41 +838,32 @@ def main():
             exchange_pos = binance.fetch_positions()
             has_pos = any(p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0 for p in exchange_pos)
 
-            # v2.9.1: 同步state与交易所持仓 + 清理幽灵条件单
+            # v2.9.5: 保守同步——只更新策略仓位的数量，不处理手动仓位
             if state.get('positions'):
-                exchange_entries = {float(p.get('entryPrice', 0)) for p in exchange_pos if float(p.get('contracts', 0)) > 0}
-                synced_positions = [p for p in state['positions'] if float(p.get('entry_price', 0)) in exchange_entries]
+                exchange_by_side = {}
+                for p in exchange_pos:
+                    if float(p.get('contracts', 0)) > 0:
+                        side = p.get('side')
+                        exchange_by_side[side] = float(p.get('contracts', 0))
+
+                synced_positions = []
+                for p in state['positions']:
+                    state_side = 'SHORT' if p['direction'] == 'short' else 'LONG'
+                    if state_side in exchange_by_side and exchange_by_side[state_side] > 0:
+                        if abs(p['qty'] - exchange_by_side[state_side]) > 0.001:
+                            log(f"  ↻ {p['direction']}仓位数量更新: {p['qty']} → {exchange_by_side[state_side]} BTC")
+                            p['qty'] = exchange_by_side[state_side]
+                        synced_positions.append(p)
+
                 if len(synced_positions) != len(state['positions']):
                     dropped = len(state['positions']) - len(synced_positions)
-                    log(f"⚠️ 同步持仓状态：移除{dropped}个幽灵仓位，剩余{len(synced_positions)}个")
-                    # v2.9.1: 取消已移除仓位的幽灵条件单
-                    try:
-                        exchange_algos = binance.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
-                        active_algos = [o for o in exchange_algos if o.get('algoStatus') == 'NEW']
-                        for o in active_algos:
-                            o_qty = float(o.get('quantity', 0))
-                            o_type = o.get('orderType', '')
-                            o_trigger = float(o.get('triggerPrice', 0))
-                            # 如果没有仓位匹配这个algo的数量和价格，就取消
-                            matched = any(
-                                (o_type == 'STOP_MARKET' and o_trigger == p.get('stop_loss') and o_qty >= p.get('qty') * 0.99) or
-                                (o_type == 'TAKE_PROFIT_MARKET' and o_trigger == p.get('tp') and o_qty >= p.get('qty') * 0.99)
-                                for p in synced_positions
-                            )
-                            if not matched:
-                                try:
-                                    binance.fapiPrivateDeleteAlgoOrder({'symbol': 'BTCUSDT', 'algoId': int(o.get('algoId'))})
-                                    log(f"  取消幽灵条件单: algoId={o.get('algoId')} type={o_type} trigger={o_trigger} qty={o_qty}")
-                                except:
-                                    pass
-                    except Exception as e:
-                        log(f"  清理幽灵条件单失败: {e}")
+                    log(f"⚠️ 同步：移除{dropped}个幽灵仓位，保留{len(synced_positions)}个")
                     state['positions'] = synced_positions
-                    if not synced_positions:
-                        save_state({'in_position': False, 'positions': [], 'last_close_time': time.time()})
-                        state = {'in_position': False, 'positions': []}
-                    else:
-                        save_state(state)
+                    save_state(state)
+
+            # 修复 in_position 状态一致性
+            if not state.get('positions'):
+                state['in_position'] = False
 
             # v2.7: 持仓全部平仓时清空state（部分平仓时保留其他仓位）
             if not has_pos and state.get('positions') == []:
