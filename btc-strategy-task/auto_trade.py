@@ -848,7 +848,7 @@ def main():
 
                 synced_positions = []
                 for p in state['positions']:
-                    state_side = 'SHORT' if p['direction'] == 'short' else 'LONG'
+                    state_side = p['direction']  # state方向直接用小写匹配exchange
                     if state_side in exchange_by_side and exchange_by_side[state_side] > 0:
                         if abs(p['qty'] - exchange_by_side[state_side]) > 0.001:
                             log(f"  ↻ {p['direction']}仓位数量更新: {p['qty']} → {exchange_by_side[state_side]} BTC")
@@ -864,6 +864,37 @@ def main():
             # 修复 in_position 状态一致性
             if not state.get('positions'):
                 state['in_position'] = False
+
+            # ========== v2.10: 幽灵仓位导入——交易所有持仓但state为空，自动同步 ==========
+            if state.get('in_position') == False and state.get('positions') == [] and has_pos:
+                ghost_pos_list = []
+                for p in exchange_pos:
+                    if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
+                        direction = p.get('side', 'long')
+                        qty = float(p.get('contracts', 0))
+                        entry = float(p.get('entryPrice', 0))
+                        # 从交易所现有止损止盈单获取价格
+                        sl_price = float(p.get('stopLossPrice', 0)) if p.get('stopLossPrice') else 0
+                        tp_price = float(p.get('takeProfitPrice', 0)) if p.get('takeProfitPrice') else 0
+                        ghost_pos_list.append({
+                            'entry_price': entry,
+                            'qty': qty,
+                            'direction': direction,
+                            'stop_loss': sl_price,
+                            'tp': tp_price,
+                            'reason': 'ghost_import',
+                            'atr': 0
+                        })
+                        peak_key = f"peak_{entry}"
+                        if direction == 'short':
+                            state[peak_key] = entry  # SHORT: 峰值追踪最低价
+                        else:
+                            state[peak_key] = entry  # LONG: 峰值追踪最高价
+                if ghost_pos_list:
+                    state['positions'] = ghost_pos_list
+                    state['in_position'] = True
+                    save_state(state)
+                    log(f"⚠️ 导入{len(ghost_pos_list)}个幽灵仓位到state（direction={ghost_pos_list[0]['direction']}）")
 
             # v2.7: 持仓全部平仓时清空state（部分平仓时保留其他仓位）
             if not has_pos and state.get('positions') == []:
