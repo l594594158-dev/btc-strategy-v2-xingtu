@@ -1,1 +1,1 @@
-{"in_position": false, "positions": [], "last_close_time": 1777903941.503058}
+{"in_position": true, "positions": [{"entry_price": 80308.4, "qty": 0.03, "direction": "short", "stop_loss": 0, "tp": 0, "reason": "ghost_import", "atr": 0}], "last_close_time": 1777906328.471017, "last_signal_time": {"short": 1777906329.1430051}, "peak_80308.4": 79653.9}
