@@ -1137,7 +1137,7 @@ def main():
                             except Exception as e:
                                 log(f"❌ 开仓失败: {e}")
 
-            time.sleep(10)
+            time.sleep(5)
 
         except KeyboardInterrupt:
             log("🛑 停止")
