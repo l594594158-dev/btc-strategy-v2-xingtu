@@ -838,28 +838,9 @@ def main():
             exchange_pos = binance.fetch_positions()
             has_pos = any(p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0 for p in exchange_pos)
 
-            # v2.9.5: 保守同步——只更新策略仓位的数量，不处理手动仓位
-            if state.get('positions'):
-                exchange_by_side = {}
-                for p in exchange_pos:
-                    if float(p.get('contracts', 0)) > 0:
-                        side = p.get('side')
-                        exchange_by_side[side] = float(p.get('contracts', 0))
-
-                synced_positions = []
-                for p in state['positions']:
-                    state_side = p['direction']  # state方向直接用小写匹配exchange
-                    if state_side in exchange_by_side and exchange_by_side[state_side] > 0:
-                        if abs(p['qty'] - exchange_by_side[state_side]) > 0.001:
-                            log(f"  ↻ {p['direction']}仓位数量更新: {p['qty']} → {exchange_by_side[state_side]} BTC")
-                            p['qty'] = exchange_by_side[state_side]
-                        synced_positions.append(p)
-
-                if len(synced_positions) != len(state['positions']):
-                    dropped = len(state['positions']) - len(synced_positions)
-                    log(f"⚠️ 同步：移除{dropped}个幽灵仓位，保留{len(synced_positions)}个")
-                    state['positions'] = synced_positions
-                    save_state(state)
+            # v2.11.2: bot只管自己开的仓，不同步手动仓数量
+            # state['positions'] = bot自行管理的手仓列表，与交易所手动仓完全隔离
+            pass
 
             # 修复 in_position 状态一致性
             if not state.get('positions'):
