@@ -99,16 +99,14 @@ def save_stats(stats):
 NOTIFY_QUEUE = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
 
 def notify_alert(msg):
-    """写入告警文件，供agent推送微信"""
-    with open(ALERT_FILE, 'w') as f:
-        json.dump({'time': datetime.now().isoformat(), 'msg': msg}, f)
+    """通过企业微信发送告警（与send_wechat_msg统一）"""
+    send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """直接发送微信消息 - 写入notify_queue供heartbeat发送"""
+    """通过企业微信(OpenClaw)发送通知（非阻塞）"""
     try:
-        import urllib.request
-        with open(NOTIFY_QUEUE, 'w') as f:
-            json.dump({'time': datetime.now().isoformat(), 'msg': msg, 'sent': False}, f)
+        import os
+        os.system(f'openclaw message send --channel wecom --target LiuGang --message {repr(msg)} >/dev/null 2>&1 &')
     except:
         pass
 
