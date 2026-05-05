@@ -4,7 +4,7 @@ BTC合约 自动交易策略 v2.11.2
 - 5秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响
+- v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响，禁用幽灵仓位自动导入
 """
 import ccxt
 import pandas as pd
@@ -865,36 +865,10 @@ def main():
             if not state.get('positions'):
                 state['in_position'] = False
 
-            # ========== v2.10: 幽灵仓位导入——交易所有持仓但state为空，自动同步 ==========
-            if state.get('in_position') == False and state.get('positions') == [] and has_pos:
-                ghost_pos_list = []
-                for p in exchange_pos:
-                    if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
-                        direction = p.get('side', 'long')
-                        qty = float(p.get('contracts', 0))
-                        entry = float(p.get('entryPrice', 0))
-                        # 从交易所现有止损止盈单获取价格
-                        sl_price = float(p.get('stopLossPrice', 0)) if p.get('stopLossPrice') else 0
-                        tp_price = float(p.get('takeProfitPrice', 0)) if p.get('takeProfitPrice') else 0
-                        ghost_pos_list.append({
-                            'entry_price': entry,
-                            'qty': qty,
-                            'direction': direction,
-                            'stop_loss': sl_price,
-                            'tp': tp_price,
-                            'reason': 'ghost_import',
-                            'atr': 0
-                        })
-                        peak_key = f"peak_{entry}"
-                        if direction == 'short':
-                            state[peak_key] = entry  # SHORT: 峰值追踪最低价
-                        else:
-                            state[peak_key] = entry  # LONG: 峰值追踪最高价
-                if ghost_pos_list:
-                    state['positions'] = ghost_pos_list
-                    state['in_position'] = True
-                    save_state(state)
-                    log(f"⚠️ 导入{len(ghost_pos_list)}个幽灵仓位到state（direction={ghost_pos_list[0]['direction']}）")
+            # ========== v2.11.2: 幽灵仓位导入已禁用 ==========
+            # 手动仓位由用户自行管理，bot只管理自己开仓的positions列表
+            # 如需同步幽灵仓，请手动在state.json中编辑
+            pass
 
             # v2.7: 持仓全部平仓时清空state（部分平仓时保留其他仓位）
             if not has_pos and state.get('positions') == []:
