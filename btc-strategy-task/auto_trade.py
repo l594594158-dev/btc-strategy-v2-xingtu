@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-BTC合约 自动交易策略 v2.9.5
+BTC合约 自动交易策略 v2.11.2
 - 5秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.9.5: 保守同步——不取消任何SL/TP订单，只同步数量
+- v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响
 """
 import ccxt
 import pandas as pd
@@ -1094,41 +1094,12 @@ def main():
                     if last_sig.get(sig, 0) + 300 > time.time():
                         log(f"⏳ {sig}信号冷却中，跳过")
                     else:
-                        # ========== v2.9: 交易所实际持仓检查（防止state不同步）==========
-                        exchange_pos = binance.fetch_positions()
-                        actual_positions = [p for p in exchange_pos
-                                           if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0]
-                        dir_count = sum(1 for p in actual_positions if p.get('side') == sig)
-                        if dir_count >= MAX_POSITIONS_PER_DIR:
-                            log(f"⛔ {sig}方向已有{dir_count}仓(交易所实际)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
-                        elif dir_count > 0:
-                            # 二次开仓价格间隔检查：做多需低于均价1.5%+，做空需高于均价1.5%+
-                            existing_entries = [float(p.get('entryPrice', 0)) for p in actual_positions if p.get('side') == sig]
-                            avg_entry = sum(existing_entries) / len(existing_entries)
-                            if sig == 'long':
-                                if price >= avg_entry * 0.985:
-                                    log(f"⛔ 做多新仓${price:,.0f}需低于均价${avg_entry:,.0f}的1.5%+，当前仅偏离{(1-price/avg_entry)*100:.1f}%，跳过")
-                                    continue
-                            else:
-                                if price <= avg_entry * 1.015:
-                                    log(f"⛔ 做空新仓${price:,.0f}需高于均价${avg_entry:,.0f}的1.5%+，当前仅偏离{(price/avg_entry-1)*100:.1f}%，跳过")
-                                    continue
+                        # ========== v2.11.2: 只检查state中的策略仓，不受手动仓影响 ==========
+                        # 手动仓位由用户自行管理，策略自动开仓不受1.5%间隔限制
+                        state_dir_count = sum(1 for p in state.get('positions', []) if p.get('direction') == sig)
+                        if state_dir_count >= MAX_POSITIONS_PER_DIR:
+                            log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
                         else:
-                            # ========== v2.9.2: 有反对方向持仓时，检查价格间隔≥1.5% ==========
-                            opposite = 'short' if sig == 'long' else 'long'
-                            opp_entries = [float(p.get('entryPrice', 0)) for p in actual_positions if p.get('side') == opposite]
-                            if opp_entries:
-                                opp_avg = sum(opp_entries) / len(opp_entries)
-                                if sig == 'long':
-                                    # 做多：需低于空单均价1.5%+
-                                    if price >= opp_avg * 0.985:
-                                        log(f"⛔ 做多${price:,.0f}需低于空单均价${opp_avg:,.0f}的1.5%+（当前偏离{(price/opp_avg-1)*100:.1f}%），跳过")
-                                        continue
-                                else:
-                                    # 做空：需高于多单均价1.5%+
-                                    if price <= opp_avg * 1.015:
-                                        log(f"⛔ 做空${price:,.0f}需高于多单均价${opp_avg:,.0f}的1.5%+（当前偏离{(1-price/opp_avg)*100:.1f}%），跳过")
-                                        continue
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                             try:
                                 open_position(sig, price, atr, reason, QTY)
