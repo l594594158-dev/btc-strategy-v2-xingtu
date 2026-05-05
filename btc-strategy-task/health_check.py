@@ -17,7 +17,7 @@ from pathlib import Path
 # ========== 路径配置 ==========
 TASK_DIR = '/root/.openclaw/workspace/btc-strategy-task'
 AUTO_TRADE_SCRIPT = f'{TASK_DIR}/auto_trade.py'
-STATE_FILE = f'{TASK_DIR}/databases/state.json'
+STATE_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/state.json'
 WORK_LOG = f'{TASK_DIR}/logs/work_log.txt'
 STATS_FILE = f'{TASK_DIR}/databases/trade_stats.json'
 LOG_DIR = f'{TASK_DIR}/logs/health_check'
@@ -26,8 +26,8 @@ CHECK_LOG = f'{LOG_DIR}/check_log.json'
 NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 
 # API配置
-API_KEY = "CUPwmVULosVO24NBKmoaMm0pvga2msasOa4nBhvPvybrGdA2RcXBYA4aRtGMZjWH"
-SECRET = "Ozht5MjazUu4JKhSLqx4ASmTBH4wlUMdbABOblxXGyhIuof1jhrzUEr9JkWHpUHM"
+API_KEY = "0AMTdD2WpLFzJ5QCYWuwNl44wPdXcEnMgrbrS1N8ODsUrQRySpzUb2UOXEKr2xgA"
+SECRET = "hDgAKTg52laYLVGvh4PEpM5uYqYVYhX28Q9BN3GPQNDlU0UMMlDMmQLvbM0cFxRD"
 SYMBOL = 'BTC/USDT:USDT'
 
 os.makedirs(LOG_DIR, exist_ok=True)

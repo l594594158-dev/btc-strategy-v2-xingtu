@@ -16,13 +16,13 @@ import subprocess
 from datetime import datetime
 
 # ========== API配置 ==========
-API_KEY = "CUPwmVULosVO24NBKmoaMm0pvga2msasOa4nBhvPvybrGdA2RcXBYA4aRtGMZjWH"
-SECRET = "Ozht5MjazUu4JKhSLqx4ASmTBH4wlUMdbABOblxXGyhIuof1jhrzUEr9JkWHpUHM"
+API_KEY = "0AMTdD2WpLFzJ5QCYWuwNl44wPdXcEnMgrbrS1N8ODsUrQRySpzUb2UOXEKr2xgA"
+SECRET = "hDgAKTg52laYLVGvh4PEpM5uYqYVYhX28Q9BN3GPQNDlU0UMMlDMmQLvbM0cFxRD"
 
 binance = ccxt.binance({
     'apiKey': API_KEY,
     'secret': SECRET,
-    'options': {'defaultType': 'swap', 'defaultPositionSide': 'LONG', 'marginMode': 'cross'}
+    'options': {'defaultType': 'swap', 'defaultPositionSide': 'LONG', 'marginMode': 'isolated'}
 })
 
 SYMBOL = 'BTC/USDT:USDT'
