@@ -253,7 +253,7 @@ def check_entry(data):
 
     # === 震荡做多：弱趋势+5m超卖反弹（均值回归）===
     # v2.4新增: ADX<25说明趋势很弱，价格到布林下轨+RSI低迷是最佳均值回归做多机会
-    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb < 0.2 and rsi5m <= 35:
+    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb < 0.2 and rsi5m <= 70:
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
         sl = price * (1 - STOP_LOSS_PCT)
@@ -263,7 +263,7 @@ def check_entry(data):
             f"【做多-v2.4】震荡市+5m超卖反弹(均值回归)\n"
             f"理由: 4h+1d均线空头但ADX={adx1h:.1f}<25趋势极弱\n"
             f"价格触及布林下轨偏离{dist:.1f}%\n"
-            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认(RSI<=35)\n"
+            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认(RSI<=70)\n"
             f"1h ADX<25确认震荡市，逆势均值回归概率高\n"
             f"放量({vol_ratio:.1f}x)确认\n"
             f"固定止盈止损(百分比)\n"
@@ -316,7 +316,7 @@ def check_entry(data):
 
     # === 震荡做空：弱趋势+5m极强超买（均值回归）===
     # v2.4新增: ADX<25说明趋势很弱，价格到布林上轨+RSI高企是最佳均值回归做空机会
-    if adx1h < 25 and r4h['bullish'] and rd['bullish'] and pctb > 0.85 and rsi5m >= 75:
+    if adx1h < 25 and r4h['bullish'] and rd['bullish'] and pctb > 0.85 and rsi5m >= 70:
         bb_u = r5m['bb_u']
         dist = (bb_u - price) / price * 100
         sl = price * (1 + STOP_LOSS_PCT)
@@ -326,7 +326,7 @@ def check_entry(data):
             f"【做空-v2.4】震荡市+5m极强超买(均值回归)\n"
             f"理由: 4h+1d均线多头但ADX={adx1h:.1f}<25趋势极弱\n"
             f"价格触及布林上轨偏离{dist:.1f}%\n"
-            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超买确认(RSI>=75)\n"
+            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超买确认(RSI>=70)\n"
             f"1h ADX<25确认震荡市，逆势均值回归概率高\n"
             f"放量({vol_ratio:.1f}x)确认\n"
             f"固定止盈止损(百分比)\n"
