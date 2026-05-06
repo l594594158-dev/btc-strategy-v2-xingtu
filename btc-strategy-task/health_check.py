@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-BTC合约任务自检脚本 v1.1
-- 每30分钟执行一次自动检查
-- 检查进程运行、API数据、持仓同步、策略状态
+BTC合约任务自检脚本 v1.2
+- 每5分钟执行一次自动检查
+- 检查进程运行、API数据、持仓同步（自动同步）、策略状态
 - 发现问题自动修复并通知
 """
 import ccxt
@@ -158,7 +158,7 @@ class HealthChecker:
 
     # ========== 检查3: 持仓同步（核心！） ==========
     def check_position_sync(self):
-        """检查state.json与交易所持仓是否一致"""
+        """检查state.json与交易所持仓是否一致，自动同步"""
         try:
             binance = get_binance()
 
@@ -173,31 +173,78 @@ class HealthChecker:
             state_in_pos = False
             state_entries = []
             state_total_qty = 0
+            state_positions = []
             if os.path.exists(STATE_FILE):
                 with open(STATE_FILE) as f:
                     state = json.load(f)
                 state_in_pos = state.get('in_position', False)
-                for p in state.get('positions', []):
+                state_positions = state.get('positions', [])
+                for p in state_positions:
                     state_entries.append(float(p.get('entry_price', 0)))
                     state_total_qty += float(p.get('qty', 0))
 
-            # 对比判断
+            # ========== 对比 + 自动同步 ==========
             if has_actual_pos and not state_in_pos:
-                # 交易所有持仓但state没有 → 手动仓位，不处理
-                self.add_ok('持仓同步', f'手动仓位(exchange有{len(actual_positions)}仓，state无，属正常)')
+                # 交易所有持仓但state没有 → 同步（手动仓位）
+                positions = []
+                peaks = {}
+                for p in actual_positions:
+                    side = p['side'].lower()
+                    qty = float(p['contracts'])
+                    entry = float(p['entryPrice'])
+                    positions.append({
+                        'entry_price': entry, 'qty': qty, 'direction': side,
+                        'stop_loss': 0, 'tp': 0, 'sl_algo_id': None, 'tp_algo_id': None,
+                        'reason': '手动仓位（自检自动同步）', 'atr': 0,
+                        'open_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    })
+                    peaks[f'peak_{entry}'] = entry
+                new_state = {'in_position': True, 'positions': positions,
+                             'last_close_time': None, 'last_signal_time': {}}
+                for k, v in peaks.items(): new_state[k] = v
+                with open(STATE_FILE, 'w') as f:
+                    json.dump(new_state, f, indent=2)
+                self.add_ok('持仓同步', f'✅ 自动同步：交易所有{len(actual_positions)}仓，state已补充')
                 return True
+
             elif not has_actual_pos and state_in_pos:
-                msg = f'幽灵state！state有持仓但交易所实际无持仓'
-                self.add_fail('持仓同步', msg, fix='sync_ghost')
-                return False
+                # state有持仓但交易所无 → 清空state
+                with open(STATE_FILE, 'w') as f:
+                    json.dump({'in_position': False, 'positions': [], 'last_close_time': time.time()}, f)
+                self.add_ok('持仓同步', f'✅ 幽灵清理：交易所无持仓，state已清空')
+                return True
+
             elif has_actual_pos and state_in_pos:
-                # 两者都有，检查数量和价格是否一致
                 qty_diff = abs(actual_total_qty - state_total_qty)
                 entry_diff = abs(actual_entries[0] - state_entries[0]) if actual_entries and state_entries else 0
                 if qty_diff > 0.001 or entry_diff > 10:
-                    msg = f'持仓数据不一致！交易所qty={actual_total_qty} state={state_total_qty} | 价差=${entry_diff:.2f}'
-                    self.add_fail('持仓同步', msg, fix='sync_ghost')
-                    return False
+                    # 数量/价格不一致 → 以交易所为准同步state
+                    positions = []
+                    peaks = {}
+                    for p in actual_positions:
+                        side = p['side'].lower()
+                        qty = float(p['contracts'])
+                        entry = float(p['entryPrice'])
+                        # 保留已有仓位信息的reason/atr等
+                        existing = next((sp for sp in state_positions if abs(float(sp.get('entry_price',0))-entry)<1), None)
+                        positions.append({
+                            'entry_price': entry, 'qty': qty, 'direction': side,
+                            'stop_loss': existing.get('stop_loss',0) if existing else 0,
+                            'tp': existing.get('tp',0) if existing else 0,
+                            'sl_algo_id': existing.get('sl_algo_id') if existing else None,
+                            'tp_algo_id': existing.get('tp_algo_id') if existing else None,
+                            'reason': existing.get('reason','手动仓位（自检同步）') if existing else '手动仓位（自检同步）',
+                            'atr': existing.get('atr',0) if existing else 0,
+                            'open_time': existing.get('open_time', datetime.now().strftime('%Y-%m-%d %H:%M:%S')) if existing else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        })
+                        peaks[f'peak_{entry}'] = entry
+                    new_state = {'in_position': True, 'positions': positions,
+                                 'last_close_time': None, 'last_signal_time': state.get('last_signal_time', {})}
+                    for k, v in peaks.items(): new_state[k] = v
+                    with open(STATE_FILE, 'w') as f:
+                        json.dump(new_state, f, indent=2)
+                    self.add_ok('持仓同步', f'✅ 自动修正：qty差异={qty_diff:.4f}，已以交易所为准同步')
+                    return True
                 self.add_ok('持仓同步', f'一致，state和交易所均有{len(actual_positions)}仓')
                 return True
             else:
