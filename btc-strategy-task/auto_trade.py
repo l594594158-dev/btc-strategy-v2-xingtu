@@ -7,6 +7,7 @@ BTC合约 自动交易策略 v2.11.2
 - v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响，禁用幽灵仓位自动导入
 """
 import ccxt
+import requests
 import pandas as pd
 import ta
 import time
@@ -111,10 +112,19 @@ def send_wechat_msg(msg):
         pass
 
 def get_data():
-    k5m = binance.fetch_ohlcv(SYMBOL, timeframe='5m', limit=100)
-    k1h = binance.fetch_ohlcv(SYMBOL, timeframe='1h', limit=200)
-    k4h = binance.fetch_ohlcv(SYMBOL, timeframe='4h', limit=200)
-    k1d = binance.fetch_ohlcv(SYMBOL, timeframe='1d', limit=200)
+    """直接用Binance REST API获取K线数据（解决ccxt fetch_ohlcv数据过期bug）"""
+    result = []
+    for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
+        try:
+            url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
+            resp = requests.get(url, timeout=5)
+            klines = resp.json()
+            data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
+            result.append(data)
+        except Exception as e:
+            log(f'获取{tf}数据失败: {e}')
+            result.append([])
+    k5m, k1h, k4h, k1d = result
     return k5m, k1h, k4h, k1d
 
 def calc(df):

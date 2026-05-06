@@ -132,31 +132,81 @@ class HealthChecker:
 
     # ========== 检查2: API数据获取 ==========
     def check_api_data(self):
-        """检查API数据获取"""
+        """检查API数据获取 + 策略指标实时状态"""
+        import requests as req
         try:
-            data = get_data()
-            required = {'k5m': '5分钟', 'k1h': '1小时', 'k4h': '4小时', 'k1d': '1天'}
-            for key, name in required.items():
-                if key not in data or len(data[key]) < 50:
-                    self.add_fail(f'API-{name}', f'数据不足: {len(data.get(key, []))}条', fix='retry')
+            # 用Binance REST API直接获取实时数据（与auto_trade.py一致）
+            result = []
+            for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
+                url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
+                r = req.get(url, timeout=5)
+                klines = r.json()
+                data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
+                result.append(data)
+            k5m, k1h, k4h, k1d = result
+
+            for name, data in [('5分钟', k5m), ('1小时', k1h), ('4小时', k4h), ('1天', k1d)]:
+                if len(data) < 50:
+                    self.add_fail(f'API-{name}', f'数据不足: {len(data)}条', fix='retry')
                     return False
-                # 检查最新K线收盘价
-                if len(data[key]) > 0:
-                    last_close = data[key][-1][4]  # close price
-                    if last_close is None or last_close == 0:
-                        self.add_fail(f'API-{name}', '最新K线收盘价为0/None', fix='retry')
-                        return False
-            price = data['k5m'][-1][4]
-            self.add_ok('API数据', f'各周期数据正常，最新价格=${price}')
+                if data[-1][4] == 0 or data[-1][4] is None:
+                    self.add_fail(f'API-{name}', '最新K线收盘价为0/None', fix='retry')
+                    return False
+
+            # 计算各周期关键指标
+            def calc_indicators(df_data):
+                import pandas as pd, ta
+                df = pd.DataFrame(df_data, columns=['t','o','h','l','c','v'])
+                close = df['c']; high = df['h']; low = df['l']; volume = df['v']
+                lv = len(df) - 1
+                price = close.iloc[lv]
+                ma7 = ta.trend.SMAIndicator(close, 7).sma_indicator().iloc[lv]
+                rsi = ta.momentum.RSIIndicator(close).rsi().iloc[lv]
+                bb = ta.volatility.BollingerBands(close)
+                bb_u = bb.bollinger_hband().iloc[lv]; bb_l = bb.bollinger_lband().iloc[lv]
+                pctb = (price - bb_l) / (bb_u - bb_l) if bb_u != bb_l else 0.5
+                adx_ind = ta.trend.ADXIndicator(high, low, close, 14)
+                adx = adx_ind.adx().iloc[lv]
+                avg_vol = volume.iloc[max(0, lv-20):lv+1].mean()
+                vr = float(volume.iloc[lv]) / float(avg_vol) if avg_vol > 0 else 0.0
+                bullish = price > ma7
+                return {'price': price, 'rsi': rsi, 'pctb': pctb, 'adx': adx,
+                        'vol_ratio': vr, 'bullish': bullish, 'ma7': ma7, 'bb_l': bb_l, 'bb_u': bb_u}
+
+            r5m = calc_indicators(k5m)
+            r1h = calc_indicators(k1h)
+            r4h = calc_indicators(k4h)
+            rd  = calc_indicators(k1d)
+
+            price = r5m['price']
+            pctb = r5m['pctb']; rs = r5m['rsi']; vr = r5m['vol_ratio']
+            b4h = r4h['bullish']; bd = rd['bullish']
+            a4h = r4h['adx']; a1h = r1h['adx']
+
+            # 策略触发计数
+            short_count = 0
+            for name, cond, val in [
+                ('做空-A', '4h多', b4h), ('做空-A', '1d多', bd), ('做空-A', '%b>0.85', pctb>0.85),
+                ('做空-A', 'RSI>=82', rs>=82), ('做空-A', '4hADX<40', a4h<40), ('做空-A', 'vol>1.5x', vr>1.5),
+                ('做空-B', '1hADX<25', a1h<25), ('做空-B', '4h多', b4h), ('做空-B', '1d多', bd),
+                ('做空-B', '%b>0.85', pctb>0.85), ('做空-B', 'RSI>=70', rs>=70), ('做空-B', 'vol>1.5x', vr>1.5),
+                ('做多-A', '4h空', not b4h), ('做多-A', '1d空', not bd), ('做多-A', '%b<0.18', pctb<0.18),
+                ('做多-A', 'RSI<35', rs<35), ('做多-A', '4hADX<40', a4h<40), ('做多-A', 'vol>1.5x', vr>1.5),
+            ]:
+                if val: short_count += 1
+
+            self.add_ok('API数据', f'各周期正常 | 价格=${price:,.0f} | %b={pctb:.3f} | RSI={rs:.1f} | vol={vr:.1f}x')
+            self.add_ok('趋势状态', f'4h:{"📈" if b4h else "📉"} | 1d:{"📈" if bd else "📉"} | 1hADX={a1h:.1f} | 4hADX={a4h:.1f}')
+            self.add_ok('策略状态', f'最接近做空-A/B: {short_count}/6条件满足')
             return True
-        except ccxt.NetworkError as e:
+        except req.exceptions.RequestException as e:
             self.add_fail('API-网络', f'网络错误: {e}', fix='network')
             return False
         except Exception as e:
             self.add_fail('API-数据', f'获取失败: {e}', fix='restart')
             return False
 
-    # ========== 检查3: 持仓同步（核心！） ==========
+    # ========== 检查3: 持仓同步 ==========
     def check_position_sync(self):
         """检查state.json与交易所持仓是否一致，自动同步"""
         try:
