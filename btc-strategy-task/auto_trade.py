@@ -4,6 +4,7 @@ BTC合约 自动交易策略 v2.11.2
 - 5秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
+- v2.11.6: 增加仓位间隔1.5%价格检查（同向/逆向均需偏离>1.5%才允许开仓）
 - v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响，禁用幽灵仓位自动导入
 """
 import ccxt
@@ -1055,12 +1056,29 @@ def main():
                     if last_sig.get(sig, 0) + 300 > time.time():
                         log(f"⏳ {sig}信号冷却中，跳过")
                     else:
-                        # ========== v2.11.2: 只检查state中的策略仓，不受手动仓影响 ==========
-                        # 手动仓位由用户自行管理，策略自动开仓不受1.5%间隔限制
-                        state_dir_count = sum(1 for p in state.get('positions', []) if p.get('direction') == sig)
-                        if state_dir_count >= MAX_POSITIONS_PER_DIR:
-                            log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                        # ========== v2.11.6: 仓位间隔>1.5%检查 ==========
+                        existing_positions = state.get('positions', [])
+                        if existing_positions:
+                            avg_prices = [p['entry_price'] for p in existing_positions]
+                            avg_entry = sum(avg_prices) / len(avg_prices)
+                            gap_pct = abs(price - avg_entry) / avg_entry * 100
+                            if gap_pct <= 1.5:
+                                log(f"⛔ 价格间隔{gap_pct:.2f}%≤1.5%，跳过（需偏离>1.5%）")
+                            else:
+                                log(f"✅ 价格间隔{gap_pct:.2f}%>1.5%，继续检查")
+                                state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
+                                if state_dir_count >= MAX_POSITIONS_PER_DIR:
+                                    log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                                else:
+                                    log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
+                                    try:
+                                        open_position(sig, price, atr, reason, QTY)
+                                        state.setdefault('last_signal_time', {})[sig] = time.time()
+                                        save_state(state)
+                                    except Exception as e:
+                                        log(f"❌ 开仓失败: {e}")
                         else:
+                            # 无持仓，直接开仓
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                             try:
                                 open_position(sig, price, atr, reason, QTY)
