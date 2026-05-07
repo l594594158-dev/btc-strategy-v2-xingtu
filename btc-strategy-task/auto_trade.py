@@ -808,7 +808,7 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 BTC自动交易启动 v2.10 | 10秒周期 | {LEVERAGE}x | {QTY} BTC")
+    log(f"🚀 BTC自动交易启动 v2.10 | 5秒周期 | {LEVERAGE}x | {QTY} BTC")
     log(f"v2.10: 补仓撤销旧SL/TP，以新均价重新挂单 | 有信号就开仓追加")
     stats = load_stats()
     if stats.get('consecutive_losses', 0) > 0:
@@ -1100,7 +1100,7 @@ def main():
             log(f"❌ 异常: {e}")
             import traceback; traceback.print_exc()
             work_log("错误", str(e)[:100])
-            time.sleep(10)
+            time.sleep(5)
 
 if __name__ == "__main__":
     main()
