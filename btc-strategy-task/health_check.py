@@ -366,7 +366,7 @@ class HealthChecker:
                 # 发送微信通知函数
                 def send_wechat(msg):
                     result = subprocess.run([
-                        'openclaw', 'message', 'send',
+                        '/root/.local/share/pnpm/openclaw', 'message', 'send',
                         '--channel', WECHAT_CHANNEL,
                         '--target', WECHAT_TARGET,
                         '--message', msg
