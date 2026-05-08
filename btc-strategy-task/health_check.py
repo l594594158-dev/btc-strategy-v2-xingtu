@@ -355,58 +355,23 @@ class HealthChecker:
             self.add_fail('策略状态', f'检查失败: {e}', fix='restart')
             return False
 
-    # ========== 检查5: 微信通知队列 ==========
+    # ========== 检查5: 通知队列 ==========
     def check_notify_queue(self):
-        """检查是否有待发送的微信通知，自动发送"""
+        """检查通知队列状态（CLI无法在cron环境发wecom，仅统计不清除）"""
         try:
             if os.path.exists(NOTIFY_QUEUE):
                 with open(NOTIFY_QUEUE) as f:
                     q = json.load(f)
-                
-                # 发送微信通知函数
-                def send_wechat(msg):
-                    result = subprocess.run([
-                        '/root/.local/share/pnpm/openclaw', 'message', 'send',
-                        '--channel', WECHAT_CHANNEL,
-                        '--target', WECHAT_TARGET,
-                        '--message', msg
-                    ], capture_output=True, text=True)
-                    return result.returncode == 0
-                
-                # 支持两种格式：数组 或 单个dict
                 if isinstance(q, list):
                     pending = [x for x in q if isinstance(x, dict) and not x.get('sent', True)]
-                    if pending:
-                        # 自动发送积压消息
-                        sent_count = 0
-                        for item in pending:
-                            msg = item.get('msg', '')
-                            if msg and send_wechat(msg):
-                                item['sent'] = True
-                                sent_count += 1
-                                log(f'✅ 自动发送积压通知: {msg[:50]}...')
-                        
-                        if sent_count > 0:
-                            with open(NOTIFY_QUEUE, 'w') as f:
-                                json.dump(q, f, ensure_ascii=False, indent=2)
-                            self.add_ok('通知队列', f'自动发送{len(pending)}条积压通知')
-                        else:
-                            self.add_ok('通知队列', f'有{len(pending)}条未发送(发送失败)')
-                    else:
-                        self.add_ok('通知队列', '无积压')
                 elif isinstance(q, dict):
-                    if not q.get('sent', True):
-                        msg = q.get('msg', '')
-                        if msg and send_wechat(msg):
-                            q['sent'] = True
-                            with open(NOTIFY_QUEUE, 'w') as f:
-                                json.dump(q, f, ensure_ascii=False, indent=2)
-                            self.add_ok('通知队列', f'自动发送1条积压通知')
-                            log(f'✅ 自动发送积压通知: {msg[:50]}...')
-                        else:
-                            self.add_ok('通知队列', f'有1条未发送(发送失败)')
-                    else:
-                        self.add_ok('通知队列', '无积压')
+                    pending = [q] if not q.get('sent', True) else []
+                else:
+                    pending = []
+                if pending:
+                    self.add_ok('通知队列', f'有{len(pending)}条积压(需手动处理)')
+                else:
+                    self.add_ok('通知队列', '无积压')
             else:
                 self.add_ok('通知队列', '无积压')
             return True
