@@ -101,14 +101,29 @@ def save_stats(stats):
 NOTIFY_QUEUE = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
 
 def notify_alert(msg):
-    """通过企业微信发送告警（与send_wechat_msg统一）"""
+    """写通知到队列文件（由AI助手检查并转发）"""
     send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """通过企业微信(OpenClaw)发送通知（非阻塞）"""
+    """写通知到队列文件，AI助手会话自动检测并转发到企业微信"""
     try:
-        import os
-        os.system(f'openclaw message send --channel wecom --target LiuGang --message {repr(msg)} >/dev/null 2>&1 &')
+        import os, json
+        queue_file = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
+        # 追加到队列
+        queue = []
+        if os.path.exists(queue_file):
+            try:
+                with open(queue_file) as f:
+                    queue = json.load(f)
+                if not isinstance(queue, list):
+                    queue = []
+            except:
+                queue = []
+        queue.append({'time': datetime.now().isoformat(), 'msg': msg, 'sent': False})
+        # 保留最近50条
+        queue = queue[-50:]
+        with open(queue_file, 'w') as f:
+            json.dump(queue, f, ensure_ascii=False, indent=2)
     except:
         pass
 
