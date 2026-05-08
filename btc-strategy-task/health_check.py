@@ -355,28 +355,58 @@ class HealthChecker:
             self.add_fail('策略状态', f'检查失败: {e}', fix='restart')
             return False
 
-    # ========== 检查5: 通知队列 ==========
+    # ========== 检查5: 通知验证 ==========
     def check_notify_queue(self):
-        """检查通知队列状态（CLI无法在cron环境发wecom，仅统计不清除）"""
+        """检查通知队列 + 验证开仓后通知是否正确发送"""
         try:
+            # 读取state持仓
+            state_positions = []
+            if os.path.exists(STATE_FILE):
+                with open(STATE_FILE) as f:
+                    state = json.load(f)
+                if state.get('in_position'):
+                    state_positions = state.get('positions', [])
+
+            # 读取通知队列
+            queue = []
             if os.path.exists(NOTIFY_QUEUE):
                 with open(NOTIFY_QUEUE) as f:
                     q = json.load(f)
                 if isinstance(q, list):
-                    pending = [x for x in q if isinstance(x, dict) and not x.get('sent', True)]
+                    queue = q
                 elif isinstance(q, dict):
-                    pending = [q] if not q.get('sent', True) else []
+                    queue = [q]
+
+            # 检查积压未发送
+            pending = [x for x in queue if isinstance(x, dict) and not x.get('sent', True)]
+
+            # 验证: 有持仓就必须有对应通知
+            if state_positions:
+                # 提取队列中所有通知消息文字
+                queue_msgs = ' '.join([x.get('msg', '') for x in queue])
+                position_notified = True
+                missing_entries = []
+                for p in state_positions:
+                    entry_str = f"${p['entry_price']:,.2f}" if isinstance(p['entry_price'], (int, float)) else f"${p['entry_price']}"
+                    # 检查通知消息中是否包含该入场价
+                    if entry_str not in queue_msgs:
+                        position_notified = False
+                        missing_entries.append(entry_str)
+                
+                if not position_notified:
+                    self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {missing_entries}', fix='notify')
+                elif pending:
+                    self.add_ok('通知验证', f'已通知{len(queue)}条, {len(pending)}条待转发')
                 else:
-                    pending = []
-                if pending:
-                    self.add_ok('通知队列', f'有{len(pending)}条积压(需手动处理)')
-                else:
-                    self.add_ok('通知队列', '无积压')
+                    self.add_ok('通知验证', f'已通知{len(queue)}条, 无积压 ✅')
             else:
-                self.add_ok('通知队列', '无积压')
+                if pending:
+                    self.add_ok('通知验证', f'无持仓, {len(pending)}条积压可清理')
+                else:
+                    self.add_ok('通知验证', '无持仓, 无积压')
             return True
         except Exception as e:
-            self.add_fail('通知队列', str(e))
+            self.add_fail('通知验证', str(e))
             return False
 
     # ========== 修复执行 ==========
