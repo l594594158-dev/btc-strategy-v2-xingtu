@@ -105,11 +105,34 @@ def notify_alert(msg):
     send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """写通知到队列文件，AI助手会话自动检测并转发到企业微信"""
+    """发送企业微信通知：先写delivery-queue(后台重试)，同时写notify_queue(AI会话兜底转发)"""
+    import os, json, uuid, time as _time
+    ts = datetime.now().isoformat()
+
+    # 通道1: delivery-queue（OpenClaw内部队列，WebSocket健康时自动发送+重试）
     try:
-        import os, json
+        delivery_dir = '/root/.openclaw/delivery-queue'
+        os.makedirs(delivery_dir, exist_ok=True)
+        eid = str(uuid.uuid4())
+        entry = {
+            'id': eid,
+            'enqueuedAt': int(_time.time() * 1000),
+            'channel': 'wecom',
+            'to': 'LiuGang',
+            'payloads': [{'text': msg, 'replyToTag': False, 'replyToCurrent': False, 'audioAsVoice': False}],
+            'gifPlayback': False, 'forceDocument': False, 'silent': False,
+            'mirror': {'sessionKey': 'agent:main:wecom:group:liugang', 'agentId': 'main', 'text': msg},
+            'session': {'key': 'agent:main:wecom:group:liugang', 'agentId': 'main'},
+            'retryCount': 0
+        }
+        with open(os.path.join(delivery_dir, f'{eid}.json'), 'w') as f:
+            json.dump(entry, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        log(f'⚠️ delivery-queue写入失败: {e}')
+
+    # 通道2: notify_queue（AI会话检测+health_check转发双保险）
+    try:
         queue_file = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
-        # 追加到队列
         queue = []
         if os.path.exists(queue_file):
             try:
@@ -119,8 +142,7 @@ def send_wechat_msg(msg):
                     queue = []
             except:
                 queue = []
-        queue.append({'time': datetime.now().isoformat(), 'msg': msg, 'sent': False})
-        # 保留最近50条
+        queue.append({'time': ts, 'msg': msg, 'sent': False})
         queue = queue[-50:]
         with open(queue_file, 'w') as f:
             json.dump(queue, f, ensure_ascii=False, indent=2)

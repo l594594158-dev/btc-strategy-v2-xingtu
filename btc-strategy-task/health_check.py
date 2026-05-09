@@ -396,12 +396,18 @@ class HealthChecker:
                 if not position_notified:
                     self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {missing_entries}', fix='notify')
                 elif pending:
-                    self.add_ok('通知验证', f'已通知{len(queue)}条, {len(pending)}条待转发')
+                    self.add_fail('通知验证', f'{len(pending)}条通知待转发，已触发重发', fix='forward_notify')
                 else:
                     self.add_ok('通知验证', f'已通知{len(queue)}条, 无积压 ✅')
             else:
                 if pending:
-                    self.add_ok('通知验证', f'无持仓, {len(pending)}条积压可清理')
+                    # 无持仓但有积压通知：标记为已发送（幽灵通知）
+                    for x in queue:
+                        if isinstance(x, dict):
+                            x['sent'] = True
+                    with open(NOTIFY_QUEUE, 'w') as f:
+                        json.dump(queue, f, ensure_ascii=False, indent=2)
+                    self.add_ok('通知验证', f'无持仓, {len(pending)}条幽灵通知已清理')
                 else:
                     self.add_ok('通知验证', '无持仓, 无积压')
             return True
@@ -489,6 +495,47 @@ class HealthChecker:
             elif fix_action == 'retry':
                 log('🔧 数据问题，等待下一轮重试...')
                 return '等待重试'
+
+            elif fix_action == 'forward_notify':
+                log('🔧 执行修复: 转发积压通知到delivery-queue...')
+                try:
+                    import uuid as _uuid
+                    delivery_dir = '/root/.openclaw/delivery-queue'
+                    os.makedirs(delivery_dir, exist_ok=True)
+                    forwarded = 0
+                    if os.path.exists(NOTIFY_QUEUE):
+                        with open(NOTIFY_QUEUE) as f:
+                            q = json.load(f)
+                        if isinstance(q, dict):
+                            q = [q]
+                        for item in q:
+                            if isinstance(item, dict) and not item.get('sent'):
+                                msg = item.get('msg', '')
+                                if msg:
+                                    eid = str(_uuid.uuid4())
+                                    entry = {
+                                        'id': eid,
+                                        'enqueuedAt': int(time.time() * 1000),
+                                        'channel': 'wecom',
+                                        'to': 'LiuGang',
+                                        'payloads': [{'text': msg, 'replyToTag': False, 'replyToCurrent': False, 'audioAsVoice': False}],
+                                        'gifPlayback': False, 'forceDocument': False, 'silent': False,
+                                        'mirror': {'sessionKey': 'agent:main:wecom:group:liugang', 'agentId': 'main', 'text': msg},
+                                        'session': {'key': 'agent:main:wecom:group:liugang', 'agentId': 'main'},
+                                        'retryCount': 0
+                                    }
+                                    with open(os.path.join(delivery_dir, f'{eid}.json'), 'w') as f:
+                                        json.dump(entry, f, ensure_ascii=False, indent=2)
+                                    item['sent'] = True  # 标记已转发
+                                    forwarded += 1
+                        if forwarded > 0:
+                            with open(NOTIFY_QUEUE, 'w') as f:
+                                json.dump(q, f, ensure_ascii=False, indent=2)
+                    log(f'✅ 已转发{forwarded}条通知到delivery-queue')
+                    return f'已转发{forwarded}条通知'
+                except Exception as e:
+                    log(f'❌ 通知转发失败: {e}')
+                    return f'转发失败: {e}'
 
             return None
         except Exception as e:
