@@ -497,11 +497,9 @@ class HealthChecker:
                 return '等待重试'
 
             elif fix_action == 'forward_notify':
-                log('🔧 执行修复: 转发积压通知到delivery-queue...')
+                log('🔧 执行修复: CLI转发积压通知...')
                 try:
-                    import uuid as _uuid
-                    delivery_dir = '/root/.openclaw/delivery-queue'
-                    os.makedirs(delivery_dir, exist_ok=True)
+                    openclaw_bin = '/root/.local/share/pnpm/openclaw'
                     forwarded = 0
                     if os.path.exists(NOTIFY_QUEUE):
                         with open(NOTIFY_QUEUE) as f:
@@ -512,29 +510,21 @@ class HealthChecker:
                             if isinstance(item, dict) and not item.get('sent'):
                                 msg = item.get('msg', '')
                                 if msg:
-                                    eid = str(_uuid.uuid4())
-                                    entry = {
-                                        'id': eid,
-                                        'enqueuedAt': int(time.time() * 1000),
-                                        'channel': 'wecom',
-                                        'to': 'LiuGang',
-                                        'payloads': [{'text': msg, 'replyToTag': False, 'replyToCurrent': False, 'audioAsVoice': False}],
-                                        'gifPlayback': False, 'forceDocument': False, 'silent': False,
-                                        'mirror': {'sessionKey': 'agent:main:wecom:group:liugang', 'agentId': 'main', 'text': msg},
-                                        'session': {'key': 'agent:main:wecom:group:liugang', 'agentId': 'main'},
-                                        'retryCount': 0
-                                    }
-                                    with open(os.path.join(delivery_dir, f'{eid}.json'), 'w') as f:
-                                        json.dump(entry, f, ensure_ascii=False, indent=2)
-                                    item['sent'] = True  # 标记已转发
-                                    forwarded += 1
+                                    result = subprocess.run(
+                                        [openclaw_bin, 'message', 'send', '--channel', 'wecom',
+                                         '--target', 'LiuGang', '--message', msg],
+                                        capture_output=True, text=True, timeout=8
+                                    )
+                                    if 'Sent via WeCom' in (result.stdout + result.stderr):
+                                        item['sent'] = True
+                                        forwarded += 1
                         if forwarded > 0:
                             with open(NOTIFY_QUEUE, 'w') as f:
                                 json.dump(q, f, ensure_ascii=False, indent=2)
-                    log(f'✅ 已转发{forwarded}条通知到delivery-queue')
+                    log(f'✅ CLI已转发{forwarded}条通知')
                     return f'已转发{forwarded}条通知'
                 except Exception as e:
-                    log(f'❌ 通知转发失败: {e}')
+                    log(f'❌ CLI通知转发失败: {e}')
                     return f'转发失败: {e}'
 
             return None

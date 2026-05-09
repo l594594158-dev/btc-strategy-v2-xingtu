@@ -105,32 +105,27 @@ def notify_alert(msg):
     send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """发送企业微信通知：先写delivery-queue(后台重试)，同时写notify_queue(AI会话兜底转发)"""
-    import os, json, uuid, time as _time
+    """发送企业微信通知：openclaw CLI主通道 + notify_queue兜底"""
+    import os, json, subprocess as _sp, time as _time
     ts = datetime.now().isoformat()
+    sent_ok = False
 
-    # 通道1: delivery-queue（OpenClaw内部队列，WebSocket健康时自动发送+重试）
+    # 通道1: openclaw CLI直接发送（5秒超时）
     try:
-        delivery_dir = '/root/.openclaw/delivery-queue'
-        os.makedirs(delivery_dir, exist_ok=True)
-        eid = str(uuid.uuid4())
-        entry = {
-            'id': eid,
-            'enqueuedAt': int(_time.time() * 1000),
-            'channel': 'wecom',
-            'to': 'LiuGang',
-            'payloads': [{'text': msg, 'replyToTag': False, 'replyToCurrent': False, 'audioAsVoice': False}],
-            'gifPlayback': False, 'forceDocument': False, 'silent': False,
-            'mirror': {'sessionKey': 'agent:main:wecom:group:liugang', 'agentId': 'main', 'text': msg},
-            'session': {'key': 'agent:main:wecom:group:liugang', 'agentId': 'main'},
-            'retryCount': 0
-        }
-        with open(os.path.join(delivery_dir, f'{eid}.json'), 'w') as f:
-            json.dump(entry, f, ensure_ascii=False, indent=2)
+        openclaw_bin = '/root/.local/share/pnpm/openclaw'
+        if os.path.exists(openclaw_bin):
+            result = _sp.run(
+                [openclaw_bin, 'message', 'send', '--channel', 'wecom',
+                 '--target', 'LiuGang', '--message', msg],
+                capture_output=True, text=True, timeout=5
+            )
+            if 'Sent via WeCom' in (result.stdout + result.stderr):
+                sent_ok = True
+                log(f'📤 企业微信通知已发送')
     except Exception as e:
-        log(f'⚠️ delivery-queue写入失败: {e}')
+        log(f'⚠️ CLI发送失败: {e}')
 
-    # 通道2: notify_queue（AI会话检测+health_check转发双保险）
+    # 通道2: notify_queue兜底（CLI失败时，由health_check每5分钟重试）
     try:
         queue_file = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
         queue = []
@@ -142,10 +137,12 @@ def send_wechat_msg(msg):
                     queue = []
             except:
                 queue = []
-        queue.append({'time': ts, 'msg': msg, 'sent': False})
+        queue.append({'time': ts, 'msg': msg, 'sent': sent_ok})
         queue = queue[-50:]
         with open(queue_file, 'w') as f:
             json.dump(queue, f, ensure_ascii=False, indent=2)
+        if not sent_ok:
+            log(f'📋 通知已入notify_queue（待转发）')
     except:
         pass
 
