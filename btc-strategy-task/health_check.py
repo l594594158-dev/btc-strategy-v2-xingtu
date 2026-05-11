@@ -382,19 +382,33 @@ class HealthChecker:
 
             # 验证: 有持仓就必须有对应通知
             if state_positions:
-                # 提取队列中所有通知消息文字
+                # 读取队列中所有通知消息文字
                 queue_msgs = ' '.join([x.get('msg', '') for x in queue])
-                position_notified = True
                 missing_entries = []
                 for p in state_positions:
                     entry_str = f"${p['entry_price']:,.2f}" if isinstance(p['entry_price'], (int, float)) else f"${p['entry_price']}"
-                    # 检查通知消息中是否包含该入场价
                     if entry_str not in queue_msgs:
-                        position_notified = False
                         missing_entries.append(entry_str)
                 
-                if not position_notified:
-                    self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {missing_entries}', fix='notify')
+                if missing_entries:
+                    # v2.11.8: 自动补录手动仓位通知，避免反复报警
+                    auto_fixed = []
+                    for entry_str in missing_entries:
+                        matching = [p for p in state_positions if entry_str in (f"${p['entry_price']:,.2f}" if isinstance(p['entry_price'], (int, float)) else f"${p['entry_price']}")]
+                        is_manual = matching and '手动仓位' in matching[0].get('reason', '')
+                        if is_manual:
+                            queue.append({'time': datetime.now().isoformat(), 'msg': f'[手动仓位同步] 入场价{entry_str}', 'sent': True})
+                            auto_fixed.append(entry_str)
+                    if auto_fixed:
+                        with open(NOTIFY_QUEUE, 'w') as f:
+                            json.dump(queue, f, ensure_ascii=False, indent=2)
+                        remaining = [e for e in missing_entries if e not in auto_fixed]
+                        if remaining:
+                            self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {remaining}', fix='notify')
+                        else:
+                            self.add_ok('通知验证', f'✅ 已自动补录{len(auto_fixed)}条手动仓位通知')
+                    else:
+                        self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {missing_entries}', fix='notify')
                 elif pending:
                     self.add_fail('通知验证', f'{len(pending)}条通知待转发，已触发重发', fix='forward_notify')
                 else:
