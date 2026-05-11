@@ -267,7 +267,7 @@ def check_entry(data):
     adx1d = rd['adx']
 
     # === 做多-A（逆势）：大周期空头 + 5m超卖反弹 ===
-    if not r4h['bullish'] and not rd['bullish'] and pctb < 0.18:
+    if not r4h['bullish'] and not rd['bullish'] and pctb < 0.17:
         if adx4h >= 40:
             observe = f"观望 | 4h ADX={adx4h:.1f}>=40 空头趋势过强，逆势做多风险大"
             return None, observe, price, atr
@@ -293,7 +293,7 @@ def check_entry(data):
             return 'long', entry_reason, price, atr
 
     # === 做多-震荡（震荡市+5m超卖均值回归）===
-    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb < 0.18 and rsi5m <= 60:
+    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb < 0.17 and rsi5m <= 60:
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
         sl = price * (1 - STOP_LOSS_PCT)
@@ -314,7 +314,7 @@ def check_entry(data):
         return 'long', entry_reason, price, atr
 
     # === 做多-B（顺势）：大周期多头 + 回调支撑 ===
-    if adx1h > 25 and r4h['bullish'] and rd['bullish'] and pctb < 0.18:
+    if adx1h > 25 and r4h['bullish'] and rd['bullish'] and pctb < 0.17:
         if rsi5m >= 35 and rsi5m <= 55:
             bb_l = r5m['bb_l']
             dist = (price - bb_l) / price * 100
