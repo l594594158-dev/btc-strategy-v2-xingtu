@@ -1093,24 +1093,29 @@ def main():
                         # ========== v2.11.6: 仓位间隔>1.5%检查 ==========
                         existing_positions = state.get('positions', [])
                         if existing_positions:
-                            avg_prices = [p['entry_price'] for p in existing_positions]
-                            avg_entry = sum(avg_prices) / len(avg_prices)
-                            gap_pct = abs(price - avg_entry) / avg_entry * 100
-                            if gap_pct <= 1.5:
-                                log(f"⛔ 价格间隔{gap_pct:.2f}%≤1.5%，跳过（需偏离>1.5%）")
+                            # v2.11.7: 不允许反方向持仓，已有仓位方向与信号方向相反则跳过
+                            existing_dirs = set(p.get('direction') for p in existing_positions)
+                            if sig not in existing_dirs and len(existing_dirs) > 0:
+                                log(f"⛔ 已有{existing_dirs}方向持仓，禁止开反向{sig}仓")
                             else:
-                                log(f"✅ 价格间隔{gap_pct:.2f}%>1.5%，继续检查")
-                                state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
-                                if state_dir_count >= MAX_POSITIONS_PER_DIR:
-                                    log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                                avg_prices = [p['entry_price'] for p in existing_positions]
+                                avg_entry = sum(avg_prices) / len(avg_prices)
+                                gap_pct = abs(price - avg_entry) / avg_entry * 100
+                                if gap_pct <= 1.5:
+                                    log(f"⛔ 价格间隔{gap_pct:.2f}%≤1.5%，跳过（需偏离>1.5%）")
                                 else:
-                                    log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
-                                    try:
-                                        open_position(sig, price, atr, reason, QTY)
-                                        state.setdefault('last_signal_time', {})[sig] = time.time()
-                                        save_state(state)
-                                    except Exception as e:
-                                        log(f"❌ 开仓失败: {e}")
+                                    log(f"✅ 价格间隔{gap_pct:.2f}%>1.5%，继续检查")
+                                    state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
+                                    if state_dir_count >= MAX_POSITIONS_PER_DIR:
+                                        log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                                    else:
+                                        log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
+                                        try:
+                                            open_position(sig, price, atr, reason, QTY)
+                                            state.setdefault('last_signal_time', {})[sig] = time.time()
+                                            save_state(state)
+                                        except Exception as e:
+                                            log(f"❌ 开仓失败: {e}")
                         else:
                             # 无持仓，直接开仓
                             log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
