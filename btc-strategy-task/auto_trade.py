@@ -18,8 +18,8 @@ import subprocess
 from datetime import datetime
 
 # ========== API配置 ==========
-API_KEY = "0AMTdD2WpLFzJ5QCYWuwNl44wPdXcEnMgrbrS1N8ODsUrQRySpzUb2UOXEKr2xgA"
-SECRET = "hDgAKTg52laYLVGvh4PEpM5uYqYVYhX28Q9BN3GPQNDlU0UMMlDMmQLvbM0cFxRD"
+API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
 
 binance = ccxt.binance({
     'apiKey': API_KEY,
@@ -30,10 +30,11 @@ binance = ccxt.binance({
 SYMBOL = 'BTC/USDT:USDT'
 QTY = 0.030
 LEVERAGE = 20
-STATE_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/state.json'
-ALERT_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/last_alert.json'
-WORK_LOG = '/root/.openclaw/workspace/btc-strategy-task/logs/work_log.txt'
-STATS_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/trade_stats.json'
+BASE_DIR = '/root/btc-strategy-backup/btc-strategy-task'
+STATE_FILE = f'{BASE_DIR}/databases/state.json'
+ALERT_FILE = f'{BASE_DIR}/databases/last_alert.json'
+WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
+STATS_FILE = f'{BASE_DIR}/databases/trade_stats.json'
 
 # ========== v2.0 新增风控参数 ==========
 MAX_CONSECUTIVE_LOSS = 3      # 连续亏损达到此数则暂停交易
@@ -98,7 +99,7 @@ def save_stats(stats):
     with open(STATS_FILE, 'w') as f:
         json.dump(stats, f)
 
-NOTIFY_QUEUE = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
+NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
 
 def notify_alert(msg):
     """写通知到队列文件（由AI助手检查并转发）"""
@@ -127,7 +128,7 @@ def send_wechat_msg(msg):
 
     # 通道2: notify_queue兜底（CLI失败时，由health_check每5分钟重试）
     try:
-        queue_file = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
+        queue_file = NOTIFY_QUEUE
         queue = []
         if os.path.exists(queue_file):
             try:

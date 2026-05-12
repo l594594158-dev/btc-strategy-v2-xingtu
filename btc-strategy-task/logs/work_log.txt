@@ -1,1 +1,4 @@
 [2026-05-04 23:42:50] [移动止盈平仓] SHORT 0.03 BTC @ 79775.6 从峰值$79282.3回升0.62%
+[2026-05-12 16:55:08] [错误] single positional indexer is out-of-bounds
+[2026-05-12 19:45:09] [错误] single positional indexer is out-of-bounds
+[2026-05-12 21:15:11] [错误] single positional indexer is out-of-bounds
