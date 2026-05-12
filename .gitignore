@@ -1,19 +1,21 @@
-# 敏感文件 - 不推送
+
 .backup/
-*.log
-__pycache__/
-*.pyc
-node_modules/
-*.env
+btc-strategy-task/databases/*.json
+btc-strategy-task/logs/health_check/*.log
+btc-strategy-task/logs/*.log
 credentials/
+*.env
+*.log
 memory-tdai/
-
-# OpenClaw 运行时文件
-.openclaw/memory-tdai/
-.openclaw/logs/
+node_modules/
 .openclaw/canvas/
+.openclaw/logs/
 .openclaw/media/
-
-# 临时文件
-*.tmp
+.openclaw/memory-tdai/
+# OpenClaw 运行时文件
+*.pyc
+__pycache__/
 *.swp
+*.tmp
+# 临时文件
+# 敏感文件 - 不推送
