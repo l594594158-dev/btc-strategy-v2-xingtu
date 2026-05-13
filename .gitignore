@@ -1,6 +1,7 @@
 
 .backup/
 btc-strategy-task/databases/*.json
+btc-strategy-task/api_config.py
 btc-strategy-task/logs/health_check/*.log
 btc-strategy-task/logs/*.log
 credentials/
