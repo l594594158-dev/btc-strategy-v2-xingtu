@@ -8,7 +8,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_NAME="btc-strategy-backup"
-TARGET_DIR="$SCRIPT_DIR"
+TARGET_DIR="/root/btc-strategy-backup/btc-strategy-task"
 
 echo "=========================================="
 echo "  BTC永续合约策略 - 一键部署"

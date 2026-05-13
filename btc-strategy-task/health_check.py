@@ -15,9 +15,9 @@ from datetime import datetime
 from pathlib import Path
 
 # ========== 路径配置 ==========
-TASK_DIR = '/root/.openclaw/workspace/btc-strategy-task'
+TASK_DIR = '/root/btc-strategy-backup/btc-strategy-task'
 AUTO_TRADE_SCRIPT = f'{TASK_DIR}/auto_trade.py'
-STATE_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/state.json'
+STATE_FILE = f'{TASK_DIR}/databases/state.json'
 WORK_LOG = f'{TASK_DIR}/logs/work_log.txt'
 STATS_FILE = f'{TASK_DIR}/databases/trade_stats.json'
 LOG_DIR = f'{TASK_DIR}/logs/health_check'
@@ -30,8 +30,8 @@ WECHAT_CHANNEL = 'openclaw-weixin'
 WECHAT_TARGET = 'o9cq80_h_BaEgBVnsrfqjOMF8Rug@im.wechat'
 
 # API配置
-API_KEY = "0AMTdD2WpLFzJ5QCYWuwNl44wPdXcEnMgrbrS1N8ODsUrQRySpzUb2UOXEKr2xgA"
-SECRET = "hDgAKTg52laYLVGvh4PEpM5uYqYVYhX28Q9BN3GPQNDlU0UMMlDMmQLvbM0cFxRD"
+API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
 SYMBOL = 'BTC/USDT:USDT'
 
 os.makedirs(LOG_DIR, exist_ok=True)

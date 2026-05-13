@@ -18,8 +18,8 @@ import subprocess
 from datetime import datetime
 
 # ========== API配置 ==========
-API_KEY = "0AMTdD2WpLFzJ5QCYWuwNl44wPdXcEnMgrbrS1N8ODsUrQRySpzUb2UOXEKr2xgA"
-SECRET = "hDgAKTg52laYLVGvh4PEpM5uYqYVYhX28Q9BN3GPQNDlU0UMMlDMmQLvbM0cFxRD"
+API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
 
 binance = ccxt.binance({
     'apiKey': API_KEY,

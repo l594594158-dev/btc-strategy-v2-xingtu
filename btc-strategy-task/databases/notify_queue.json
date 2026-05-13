@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "time": "2026-05-12T21:15:09.035335",
+    "msg": "🔴 自检发现问题(1项)\n• API-网络: 网络错误: HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=5)\n\n🔧 已修复:\n• 等待网络恢复\n",
+    "sent": true
+  },
+  {
+    "time": "2026-05-12T22:00:08.330595",
+    "msg": "[手动仓位同步] 入场价$80,504.10",
+    "sent": true
+  }
+]
