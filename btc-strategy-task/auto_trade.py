@@ -875,6 +875,10 @@ def main():
                 '1d': calc(df1d)
             }
 
+            # ========== v2.12: 100根5m K线高低价（开仓保护验证用）==========
+            k5m_low = min(k[3] for k in k5m)   # 100根5m最低价
+            k5m_high = max(k[2] for k in k5m)  # 100根5m最高价
+
             state = load_state()
 
             # 检查持仓状态
@@ -1086,6 +1090,18 @@ def main():
                 sig, reason, price, atr = check_entry(data)
 
                 if sig:
+                    # ========== v2.12: 开仓保护验证 ==========
+                    if sig == 'short':
+                        limit_price = k5m_low * 1.01
+                        if price <= limit_price:
+                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的1%(${limit_price:.2f})，跳过")
+                            continue
+                    elif sig == 'long':
+                        limit_price = k5m_high * 0.99
+                        if price >= limit_price:
+                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的1%(${limit_price:.2f})，跳过")
+                            continue
+
                     # 信号去抖：同一方向开仓后冷却300秒，防止信号重复触发
                     state = load_state()
                     last_sig = state.get('last_signal_time', {})
