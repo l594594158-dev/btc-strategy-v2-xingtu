@@ -267,7 +267,7 @@ def check_entry(data):
     adx4h = r4h['adx']
     adx1d = rd['adx']
 
-    # === 做多-A（逆势抄底）：大周期空头 + 5m超卖反弹 ===
+    # === 做多-A（逆势抄底）：大周期空头 + 超卖反弹 ===
     if not r4h['bullish'] and not rd['bullish'] and pctb <= 0.15:
         if adx4h >= 40:
             observe = f"观望 | 4h ADX={adx4h:.1f}>=40 空头趋势过强，逆势做多风险大"
@@ -276,16 +276,17 @@ def check_entry(data):
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
 
-        if rsi5m < 30:
+        if adx1h > 25 and rsi5m < 25:
             sl = price * (1 - STOP_LOSS_PCT)
             tp1 = price * (1 + TAKE_PROFIT_PCT)
 
             entry_reason = (
-                f"【做多-A·逆势抄底】大周期空头+5m超卖反弹\n"
-                f"条件: 4h空+1d空+%b≤0.15+RSI<30+4hADX<40+vol>1.5x\n"
+                f"【做多-A·逆势抄底】大周期空头+超卖反弹\n"
+                f"条件: 4h空+1d空+%b≤0.15+RSI<25+1hADX>25+4hADX<40+vol>1.5x\n"
                 f"理由: 4h+1d均线空头,价格跌至布林下轨偏离{dist:.1f}%\n"
-                f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认(RSI<30)\n"
-                f"4h ADX={adx4h:.1f}<40空头趋势未过强 | 放量({vol_ratio:.1f}x)\n"
+                f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认(RSI<25)\n"
+                f"1h ADX={adx1h:.1f}>25主趋势确认 | 4h ADX={adx4h:.1f}<40空头趋势未过强\n"
+                f"放量({vol_ratio:.1f}x)\n"
                 f"固定止盈止损(百分比)\n"
                 f"入场: ${price:,.2f}\n"
                 f"止损: ${sl:,.2f} (-{STOP_LOSS_PCT*100:.1f}%)\n"
@@ -294,7 +295,7 @@ def check_entry(data):
             return 'long', entry_reason, price, atr
 
     # === 震荡做多（均值回归）：震荡市+5m超卖均值回归 ===
-    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb <= 0.15 and rsi5m <= 45:
+    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb <= 0.15 and rsi5m <= 30:
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
         sl = price * (1 - STOP_LOSS_PCT)
@@ -302,10 +303,10 @@ def check_entry(data):
 
         entry_reason = (
             f"【震荡做多·均值回归】震荡市+5m超卖均值回归\n"
-            f"条件: 4h空+1d空+1hADX<25+%b≤0.15+RSI≤45+vol>1.5x\n"
+            f"条件: 4h空+1d空+1hADX<25+%b≤0.15+RSI≤30+vol>1.5x\n"
             f"理由: 4h+1d均线空头,ADX={adx1h:.1f}<25趋势极弱\n"
             f"价格触及布林下轨偏离{dist:.1f}%\n"
-            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 均值回归确认(RSI≤45)\n"
+            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 均值回归确认(RSI≤30)\n"
             f"放量({vol_ratio:.1f}x)确认\n"
             f"固定止盈止损(百分比)\n"
             f"入场: ${price:,.2f}\n"
@@ -316,7 +317,7 @@ def check_entry(data):
 
     # === 做多-B（顺势追多）：大周期多头 + 回调支撑 ===
     if adx1h > 25 and r4h['bullish'] and rd['bullish'] and pctb <= 0.15:
-        if rsi5m > 35 and rsi5m < 55:
+        if rsi5m > 30 and rsi5m < 40:
             bb_l = r5m['bb_l']
             dist = (price - bb_l) / price * 100
             sl = price * (1 - STOP_LOSS_PCT)
@@ -324,9 +325,9 @@ def check_entry(data):
 
             entry_reason = (
                 f"【做多-B·顺势追多】大周期多头+5m回调支撑\n"
-                f"条件: 4h多+1d多+%b≤0.15+RSI35~55+1hADX>25+vol>1.5x\n"
+                f"条件: 4h多+1d多+%b≤0.15+RSI30~40+1hADX>25+vol>1.5x\n"
                 f"理由: 4h+1d均线多头,价格回踩布林下轨偏离{dist:.1f}%\n"
-                f"5m RSI={rsi5m:.1f} 回调到位(35<RSI<55区间)\n"
+                f"5m RSI={rsi5m:.1f} 回调到位(30<RSI<40区间)\n"
                 f"1h ADX={adx1h:.1f}>25主趋势确认 | 放量({vol_ratio:.1f}x)\n"
                 f"固定止盈止损(百分比)\n"
                 f"入场: ${price:,.2f}\n"
