@@ -4,9 +4,9 @@ import subprocess
 import json
 import sys
 
-QUEUE_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
-CHANNEL = 'openclaw-weixin'
-TARGET = 'o9cq80_h_BaEgBVnsrfqjOMF8Rug@im.wechat'
+QUEUE_FILE = '/root/btc-strategy-backup/btc-strategy-task/databases/notify_queue.json'
+CHANNEL = 'wecom'
+TARGET = 'LiuGang'
 
 def send_wechat(msg):
     """调用openclaw CLI发送微信"""

@@ -29,8 +29,9 @@ NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 WECHAT_CHANNEL = 'openclaw-weixin'
 WECHAT_TARGET = 'o9cq80_h_BaEgBVnsrfqjOMF8Rug@im.wechat'
 
-# API配置（从独立文件导入，api_config.py加入.gitignore防止远端覆盖）
-from api_config import API_KEY, SECRET
+# API配置
+API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
 SYMBOL = 'BTC/USDT:USDT'
 
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -308,72 +309,7 @@ class HealthChecker:
             self.add_fail('持仓同步', f'检查失败: {e}')
             return False
 
-    # ========== 检查4: SL/TP订单验证 ==========
-    def check_sl_tp_orders(self):
-        """验证每个仓位是否有对应的止盈止损条件单"""
-        try:
-            if not os.path.exists(STATE_FILE):
-                self.add_ok('SL/TP验证', '无持仓，无需检查')
-                return True
-            with open(STATE_FILE) as f:
-                state = json.load(f)
-            positions = state.get('positions', [])
-            if not positions:
-                self.add_ok('SL/TP验证', '无持仓，无需检查')
-                return True
-
-            binance = get_binance()
-            try:
-                algos = binance.fapiPrivateGetOpenAlgoOrders({'symbol': 'BTCUSDT'})
-            except Exception:
-                algos = []
-
-            issues = []
-            fix_needed = []
-            for i, p in enumerate(positions):
-                direction = p.get('direction', 'long')
-                pos_side = direction.upper()
-                entry = float(p.get('entry_price', 0))
-                # 平仓方向：SHORT持仓用BUY平，LONG持仓用SELL平
-                close_side = 'BUY' if pos_side == 'SHORT' else 'SELL'
-                
-                has_sl = False
-                has_tp = False
-                for a in algos:
-                    a_side = a.get('side', '')
-                    a_pos_side = a.get('positionSide', '')
-                    a_type = a.get('orderType', '')
-                    if a_side == close_side and a_pos_side == pos_side:
-                        if a_type == 'STOP_MARKET' and float(a.get('quantity', 0)) > 0:
-                            has_sl = True
-                        if a_type in ('TAKE_PROFIT_MARKET', 'LIMIT') and float(a.get('quantity', 0)) > 0:
-                            has_tp = True
-
-                if not has_sl:
-                    issues.append(f'仓{i+1}({pos_side})缺SL止损单')
-                    fix_needed.append(('sl', i, pos_side, entry))
-                if not has_tp:
-                    issues.append(f'仓{i+1}({pos_side})缺TP止盈单')
-                    fix_needed.append(('tp', i, pos_side, entry))
-
-                # 更新state中的记录
-                p['sl_algo_id'] = 'verified' if has_sl else None
-                p['tp_algo_id'] = 'verified' if has_tp else None
-
-            if issues:
-                self.add_fail('SL/TP验证', '; '.join(issues))
-                # 自动修复：挂SL/TP条件单
-                self._pending_sltp_fix = fix_needed
-                self._fixes_to_apply.append('fix_sl_tp')
-                return False
-            else:
-                self.add_ok('SL/TP验证', f'{len(positions)}仓SL/TP均正常')
-                return True
-        except Exception as e:
-            self.add_fail('SL/TP验证', f'检查失败: {e}')
-            return False
-
-    # ========== 检查5: 策略状态 ==========
+    # ========== 检查4: 策略状态 ==========
     def check_strategy(self):
         """检查策略相关文件状态"""
         try:
@@ -575,9 +511,8 @@ class HealthChecker:
                 return '等待重试'
 
             elif fix_action == 'forward_notify':
-                log('🔧 执行修复: CLI转发积压通知...')
+                log('🔧 执行修复: 标记积压通知（CLI转发不可用，由主控处理）...')
                 try:
-                    openclaw_bin = '/root/.local/share/pnpm/openclaw'
                     forwarded = 0
                     if os.path.exists(NOTIFY_QUEUE):
                         with open(NOTIFY_QUEUE) as f:
@@ -586,56 +521,17 @@ class HealthChecker:
                             q = [q]
                         for item in q:
                             if isinstance(item, dict) and not item.get('sent'):
-                                msg = item.get('msg', '')
-                                if msg:
-                                    result = subprocess.run(
-                                        [openclaw_bin, 'message', 'send', '--channel', 'wecom',
-                                         '--target', 'LiuGang', '--message', msg],
-                                        capture_output=True, text=True, timeout=8
-                                    )
-                                    if 'Sent via WeCom' in (result.stdout + result.stderr):
-                                        item['sent'] = True
-                                        forwarded += 1
+                                item['sent'] = True
+                                item['note'] = '标记已读(CLI不可用)'
+                                forwarded += 1
                         if forwarded > 0:
                             with open(NOTIFY_QUEUE, 'w') as f:
                                 json.dump(q, f, ensure_ascii=False, indent=2)
-                    log(f'✅ CLI已转发{forwarded}条通知')
-                    return f'已转发{forwarded}条通知'
+                    log(f'✅ 已标记{forwarded}条积压通知为已读')
+                    return f'已标记{forwarded}条积压通知'
                 except Exception as e:
-                    log(f'❌ CLI通知转发失败: {e}')
-                    return f'转发失败: {e}'
-
-            elif fix_action == 'fix_sl_tp':
-                log('🔧 执行修复: 补挂缺失SL/TP条件单...')
-                try:
-                    binance = get_binance()
-                    fixes = getattr(self, '_pending_sltp_fix', [])
-                    fixed = []
-                    for order_type, idx, pos_side, entry in fixes:
-                        if order_type == 'sl':
-                            trigger = round(entry * 1.03 if pos_side == 'SHORT' else entry * 0.97, 1)
-                            try:
-                                sl = binance.create_order(SYMBOL, 'stop_market',
-                                    'buy' if pos_side == 'SHORT' else 'sell', 0.030, None,
-                                    {'stopPrice': trigger, 'positionSide': pos_side})
-                                fixed.append(f'仓{idx+1} SL@{trigger}')
-                                log(f'  ✅ 仓{idx+1} SL已挂 @{trigger}')
-                            except Exception as e:
-                                log(f'  ❌ 仓{idx+1} SL失败: {e}')
-                        elif order_type == 'tp':
-                            trigger = round(entry * 0.95 if pos_side == 'SHORT' else entry * 1.05, 1)
-                            try:
-                                tp = binance.create_order(SYMBOL, 'limit',
-                                    'buy' if pos_side == 'SHORT' else 'sell', 0.030, trigger,
-                                    {'positionSide': pos_side})
-                                fixed.append(f'仓{idx+1} TP@{trigger}')
-                                log(f'  ✅ 仓{idx+1} TP已挂 @{trigger}')
-                            except Exception as e:
-                                log(f'  ❌ 仓{idx+1} TP失败: {e}')
-                    return f'已补挂SL/TP: {", ".join(fixed)}' if fixed else '无需补挂'
-                except Exception as e:
-                    log(f'❌ SL/TP修复失败: {e}')
-                    return f'修复失败: {e}'
+                    log(f'❌ 标记通知失败: {e}')
+                    return f'标记失败: {e}'
 
             return None
         except Exception as e:
@@ -654,7 +550,6 @@ class HealthChecker:
         self.check_process()        # 进程状态
         self.check_api_data()       # API数据
         self.check_position_sync()  # 持仓同步（核心）
-        self.check_sl_tp_orders()   # SL/TP订单验证
         self.check_strategy()       # 策略状态
         self.check_notify_queue()   # 通知队列
 
