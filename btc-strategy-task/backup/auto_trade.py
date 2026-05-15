@@ -28,12 +28,13 @@ binance = ccxt.binance({
 })
 
 SYMBOL = 'BTC/USDT:USDT'
-QTY = 0.030
+QTY = 0.050
 LEVERAGE = 20
-STATE_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/state.json'
-ALERT_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/last_alert.json'
-WORK_LOG = '/root/.openclaw/workspace/btc-strategy-task/logs/work_log.txt'
-STATS_FILE = '/root/.openclaw/workspace/btc-strategy-task/databases/trade_stats.json'
+BASE_DIR = '/root/btc-strategy-backup/btc-strategy-task'
+STATE_FILE = f'{BASE_DIR}/databases/state.json'
+ALERT_FILE = f'{BASE_DIR}/databases/last_alert.json'
+WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
+STATS_FILE = f'{BASE_DIR}/databases/trade_stats.json'
 
 # ========== v2.0 新增风控参数 ==========
 MAX_CONSECUTIVE_LOSS = 3      # 连续亏损达到此数则暂停交易
@@ -98,53 +99,24 @@ def save_stats(stats):
     with open(STATS_FILE, 'w') as f:
         json.dump(stats, f)
 
-NOTIFY_QUEUE = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
+NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
+NOTIFY_QUEUE_NEW = f'{BASE_DIR}/databases/notify_queue.jsonl'  # JSON Lines 格式，由notifier.py消费
 
 def notify_alert(msg):
     """写通知到队列文件（由AI助手检查并转发）"""
     send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """发送企业微信通知：openclaw CLI主通道 + notify_queue兜底"""
-    import os, json, subprocess as _sp, time as _time
+    """发送企业微信通知：写入JSONL队列，由notifier.py守护进程消费推送"""
+    import json
     ts = datetime.now().isoformat()
-    sent_ok = False
-
-    # 通道1: openclaw CLI直接发送（5秒超时）
     try:
-        openclaw_bin = '/root/.local/share/pnpm/openclaw'
-        if os.path.exists(openclaw_bin):
-            result = _sp.run(
-                [openclaw_bin, 'message', 'send', '--channel', 'wecom',
-                 '--target', 'LiuGang', '--message', msg],
-                capture_output=True, text=True, timeout=5
-            )
-            if 'Sent via WeCom' in (result.stdout + result.stderr):
-                sent_ok = True
-                log(f'📤 企业微信通知已发送')
+        entry = {'ts': ts, 'msg': msg, 'delivered': False, 'retries': 0}
+        with open(NOTIFY_QUEUE_NEW, 'a') as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+        log(f'📋 通知已写入队列（待notifier推送）')
     except Exception as e:
-        log(f'⚠️ CLI发送失败: {e}')
-
-    # 通道2: notify_queue兜底（CLI失败时，由health_check每5分钟重试）
-    try:
-        queue_file = '/root/.openclaw/workspace/btc-strategy-task/databases/notify_queue.json'
-        queue = []
-        if os.path.exists(queue_file):
-            try:
-                with open(queue_file) as f:
-                    queue = json.load(f)
-                if not isinstance(queue, list):
-                    queue = []
-            except:
-                queue = []
-        queue.append({'time': ts, 'msg': msg, 'sent': sent_ok})
-        queue = queue[-50:]
-        with open(queue_file, 'w') as f:
-            json.dump(queue, f, ensure_ascii=False, indent=2)
-        if not sent_ok:
-            log(f'📋 通知已入notify_queue（待转发）')
-    except:
-        pass
+        log(f'⚠️ 通知入队失败: {e}')
 
 def get_data():
     """直接用Binance REST API获取K线数据（解决ccxt fetch_ohlcv数据过期bug）"""
@@ -266,8 +238,8 @@ def check_entry(data):
     adx4h = r4h['adx']
     adx1d = rd['adx']
 
-    # === 做多-A（逆势）：大周期空头 + 5m超卖反弹 ===
-    if not r4h['bullish'] and not rd['bullish'] and pctb < 0.17:
+    # === 做多-A（逆势抄底）：大周期空头 + 超卖反弹 ===
+    if not r4h['bullish'] and not rd['bullish'] and pctb <= 0.15:
         if adx4h >= 40:
             observe = f"观望 | 4h ADX={adx4h:.1f}>=40 空头趋势过强，逆势做多风险大"
             return None, observe, price, atr
@@ -275,16 +247,17 @@ def check_entry(data):
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
 
-        if rsi5m < 35:
+        if adx1h > 25 and rsi5m < 25:
             sl = price * (1 - STOP_LOSS_PCT)
             tp1 = price * (1 + TAKE_PROFIT_PCT)
 
             entry_reason = (
-                f"【做多-A·逆势】大周期空头+5m超卖反弹\n"
-                f"条件: 4h空+1d空+%b<0.18+RSI<35+4hADX<40+vol>1.5x\n"
+                f"【做多-A·逆势抄底】大周期空头+超卖反弹\n"
+                f"条件: 4h空+1d空+%b≤0.15+RSI<25+1hADX>25+4hADX<40+vol>1.5x\n"
                 f"理由: 4h+1d均线空头,价格跌至布林下轨偏离{dist:.1f}%\n"
-                f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认\n"
-                f"4h ADX={adx4h:.1f}<40空头趋势未过强 | 放量({vol_ratio:.1f}x)\n"
+                f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认(RSI<25)\n"
+                f"1h ADX={adx1h:.1f}>25主趋势确认 | 4h ADX={adx4h:.1f}<40空头趋势未过强\n"
+                f"放量({vol_ratio:.1f}x)\n"
                 f"固定止盈止损(百分比)\n"
                 f"入场: ${price:,.2f}\n"
                 f"止损: ${sl:,.2f} (-{STOP_LOSS_PCT*100:.1f}%)\n"
@@ -292,19 +265,19 @@ def check_entry(data):
             )
             return 'long', entry_reason, price, atr
 
-    # === 做多-震荡（震荡市+5m超卖均值回归）===
-    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb < 0.17 and rsi5m <= 60:
+    # === 震荡做多（均值回归）：震荡市+5m超卖均值回归 ===
+    if adx1h < 25 and not r4h['bullish'] and not rd['bullish'] and pctb <= 0.15 and rsi5m <= 30:
         bb_l = r5m['bb_l']
         dist = (price - bb_l) / price * 100
         sl = price * (1 - STOP_LOSS_PCT)
         tp1 = price * (1 + TAKE_PROFIT_PCT)
 
         entry_reason = (
-            f"【做多-震荡】震荡市+5m超卖均值回归\n"
-            f"条件: 4h空+1d空+1hADX<25+%b<0.18+RSI<=60+vol>1.5x\n"
+            f"【震荡做多·均值回归】震荡市+5m超卖均值回归\n"
+            f"条件: 4h空+1d空+1hADX<25+%b≤0.15+RSI≤30+vol>1.5x\n"
             f"理由: 4h+1d均线空头,ADX={adx1h:.1f}<25趋势极弱\n"
             f"价格触及布林下轨偏离{dist:.1f}%\n"
-            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 双超卖确认\n"
+            f"5m %b={pctb:.3f} + RSI={rsi5m:.1f} 均值回归确认(RSI≤30)\n"
             f"放量({vol_ratio:.1f}x)确认\n"
             f"固定止盈止损(百分比)\n"
             f"入场: ${price:,.2f}\n"
@@ -313,19 +286,19 @@ def check_entry(data):
         )
         return 'long', entry_reason, price, atr
 
-    # === 做多-B（顺势）：大周期多头 + 回调支撑 ===
-    if adx1h > 25 and r4h['bullish'] and rd['bullish'] and pctb < 0.17:
-        if rsi5m >= 35 and rsi5m <= 55:
+    # === 做多-B（顺势追多）：大周期多头 + 回调支撑 ===
+    if adx1h > 25 and r4h['bullish'] and rd['bullish'] and pctb <= 0.15:
+        if rsi5m > 30 and rsi5m < 40:
             bb_l = r5m['bb_l']
             dist = (price - bb_l) / price * 100
             sl = price * (1 - STOP_LOSS_PCT)
             tp1 = price * (1 + TAKE_PROFIT_PCT)
 
             entry_reason = (
-                f"【做多-B·顺势】大周期多头+5m回调支撑\n"
-                f"条件: 4h多+1d多+%b<0.18+RSI35~55+1hADX>25+vol>1.5x\n"
+                f"【做多-B·顺势追多】大周期多头+5m回调支撑\n"
+                f"条件: 4h多+1d多+%b≤0.15+RSI30~40+1hADX>25+vol>1.5x\n"
                 f"理由: 4h+1d均线多头,价格回踩布林下轨偏离{dist:.1f}%\n"
-                f"5m RSI={rsi5m:.1f} 回调到位(35~55区间)\n"
+                f"5m RSI={rsi5m:.1f} 回调到位(30<RSI<40区间)\n"
                 f"1h ADX={adx1h:.1f}>25主趋势确认 | 放量({vol_ratio:.1f}x)\n"
                 f"固定止盈止损(百分比)\n"
                 f"入场: ${price:,.2f}\n"
@@ -842,7 +815,7 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 BTC自动交易启动 v2.10 | 5秒周期 | {LEVERAGE}x | {QTY} BTC")
+    log(f"🚀 BTC自动交易启动 v2.10 | 2秒周期(移动止盈5秒) | {LEVERAGE}x | {QTY} BTC")
     log(f"v2.10: 补仓撤销旧SL/TP，以新均价重新挂单 | 有信号就开仓追加")
     stats = load_stats()
     if stats.get('consecutive_losses', 0) > 0:
@@ -857,6 +830,7 @@ def main():
             log(f"  仓{i+1}: {p['direction']} {p['qty']} BTC @ ${p['entry_price']:,.2f} | SL=${p['stop_loss']:,.0f} TP=${p['tp']:,.0f}")
 
     cycle = 0
+    last_trail_check = 0  # 移动止盈5秒计时器
     while True:
         try:
             cycle += 1
@@ -872,6 +846,10 @@ def main():
                 '4h': calc(df4h),
                 '1d': calc(df1d)
             }
+
+            # ========== v2.12: 100根5m K线高低价（开仓保护验证用）==========
+            k5m_low = min(k[3] for k in k5m)   # 100根5m最低价
+            k5m_high = max(k[2] for k in k5m)  # 100根5m最高价
 
             state = load_state()
 
@@ -950,9 +928,9 @@ def main():
                         state['last_manual_alert'] = time.time()
                         save_state(state)
 
-            # ========== v2.9: 移动止盈（集成版）==========
-            # 使用exchange_pos（交易所实时持仓），避免幽灵仓位
-            if has_pos:
+            # ========== v2.9: 移动止盈（集成版）- 每5秒执行 ==========
+            if has_pos and (time.time() - last_trail_check >= 5):
+                last_trail_check = time.time()
                 price = data['5m']['price']
                 trail_closed = []  # 记录被移动止盈平仓的仓位entry_price
                 # 将exchange_pos转为本地positions格式用于移动止盈追踪
@@ -1084,6 +1062,18 @@ def main():
                 sig, reason, price, atr = check_entry(data)
 
                 if sig:
+                    # ========== v2.12: 开仓保护验证 ==========
+                    if sig == 'short':
+                        limit_price = k5m_low * 1.01
+                        if price <= limit_price:
+                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的1%(${limit_price:.2f})，跳过")
+                            continue
+                    elif sig == 'long':
+                        limit_price = k5m_high * 0.99
+                        if price >= limit_price:
+                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的1%(${limit_price:.2f})，跳过")
+                            continue
+
                     # 信号去抖：同一方向开仓后冷却300秒，防止信号重复触发
                     state = load_state()
                     last_sig = state.get('last_signal_time', {})
@@ -1126,7 +1116,7 @@ def main():
                             except Exception as e:
                                 log(f"❌ 开仓失败: {e}")
 
-            time.sleep(5)
+            time.sleep(2)
 
         except KeyboardInterrupt:
             log("🛑 停止")
@@ -1139,7 +1129,7 @@ def main():
             log(f"❌ 异常: {e}")
             import traceback; traceback.print_exc()
             work_log("错误", str(e)[:100])
-            time.sleep(5)
+            time.sleep(2)
 
 if __name__ == "__main__":
     main()

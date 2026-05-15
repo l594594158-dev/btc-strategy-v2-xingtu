@@ -100,52 +100,23 @@ def save_stats(stats):
         json.dump(stats, f)
 
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
+NOTIFY_QUEUE_NEW = f'{BASE_DIR}/databases/notify_queue.jsonl'  # JSON Lines 格式，由notifier.py消费
 
 def notify_alert(msg):
     """写通知到队列文件（由AI助手检查并转发）"""
     send_wechat_msg(msg)
 
 def send_wechat_msg(msg):
-    """发送企业微信通知：openclaw CLI主通道 + notify_queue兜底"""
-    import os, json, subprocess as _sp, time as _time
+    """发送企业微信通知：写入JSONL队列，由notifier.py守护进程消费推送"""
+    import json
     ts = datetime.now().isoformat()
-    sent_ok = False
-
-    # 通道1: openclaw CLI直接发送（5秒超时）
     try:
-        openclaw_bin = '/root/.local/share/pnpm/openclaw'
-        if os.path.exists(openclaw_bin):
-            result = _sp.run(
-                [openclaw_bin, 'message', 'send', '--channel', 'wecom',
-                 '--target', 'LiuGang', '--message', msg],
-                capture_output=True, text=True, timeout=5
-            )
-            if 'Sent via WeCom' in (result.stdout + result.stderr):
-                sent_ok = True
-                log(f'📤 企业微信通知已发送')
+        entry = {'ts': ts, 'msg': msg, 'delivered': False, 'retries': 0}
+        with open(NOTIFY_QUEUE_NEW, 'a') as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+        log(f'📋 通知已写入队列（待notifier推送）')
     except Exception as e:
-        log(f'⚠️ CLI发送失败: {e}')
-
-    # 通道2: notify_queue兜底（CLI失败时，由health_check每5分钟重试）
-    try:
-        queue_file = NOTIFY_QUEUE
-        queue = []
-        if os.path.exists(queue_file):
-            try:
-                with open(queue_file) as f:
-                    queue = json.load(f)
-                if not isinstance(queue, list):
-                    queue = []
-            except:
-                queue = []
-        queue.append({'time': ts, 'msg': msg, 'sent': sent_ok})
-        queue = queue[-50:]
-        with open(queue_file, 'w') as f:
-            json.dump(queue, f, ensure_ascii=False, indent=2)
-        if not sent_ok:
-            log(f'📋 通知已入notify_queue（待转发）')
-    except:
-        pass
+        log(f'⚠️ 通知入队失败: {e}')
 
 def get_data():
     """直接用Binance REST API获取K线数据（解决ccxt fetch_ohlcv数据过期bug）"""
