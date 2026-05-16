@@ -135,59 +135,81 @@ def get_data():
     return k5m, k1h, k4h, k1d
 
 def calc(df):
+    # ========== 数据量保护：不足最小窗口时返回默认值 ==========
+    # SMA(25)需要至少25根K线，数据不足时报IndexError
+    if df.empty or len(df) < 7:
+        import math
+        log(f'⚠️ calc数据不足({len(df)}行)，返回默认值')
+        return {
+            'price': 0, 'ma7': 0, 'ma25': 0,
+            'macd': float('nan'), 'macd_sig': float('nan'), 'rsi': 50,
+            'bb_u': 0, 'bb_l': 0, 'bb_m': 0,
+            'atr': 0, 'pctb': 0.5,
+            'adx': 0, 'adx_pos': 0, 'adx_neg': 0,
+            'volume_ratio': 1, 'is_volume_surge': False,
+            'bullish': False, 'bearish': False
+        }
+
     close = df['c']
     high = df['h']
     low = df['l']
     volume = df['v']  # 成交量
     lv = len(df) - 1
 
-    ma7 = ta.trend.SMAIndicator(close, 7).sma_indicator().iloc[lv]
-    ma25 = ta.trend.SMAIndicator(close, 25).sma_indicator().iloc[lv]
-    macd_ind = ta.trend.MACD(close)
-    macd = macd_ind.macd().iloc[lv]
-    macd_sig = macd_ind.macd_signal().iloc[lv]
-    rsi = ta.momentum.RSIIndicator(close).rsi().iloc[lv]
-    bb = ta.volatility.BollingerBands(close)
-    bb_u = bb.bollinger_hband().iloc[lv]
-    bb_l = bb.bollinger_lband().iloc[lv]
-    bb_m = bb.bollinger_mavg().iloc[lv]
-    atr = ta.volatility.AverageTrueRange(high, low, close).average_true_range().iloc[lv]
-    price = close.iloc[lv]
-    pctb = (price - bb_l) / (bb_u - bb_l) if (bb_u - bb_l) != 0 else 0.5
-
-    # ========== 新增优化1: ADX趋势强度 ==========
-    # ADX > 25 表示市场有趋势，< 25 震荡市指标信号易失效
     try:
-        adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
-        adx = adx_ind.adx().iloc[lv]
-        adx_pos = adx_ind.adx_pos().iloc[lv]
-        adx_neg = adx_ind.adx_neg().iloc[lv]
+        ma7 = ta.trend.SMAIndicator(close, 7).sma_indicator().iloc[lv]
+        ma25 = ta.trend.SMAIndicator(close, 25).sma_indicator().iloc[lv]
+        macd_ind = ta.trend.MACD(close)
+        macd = macd_ind.macd().iloc[lv]
+        macd_sig = macd_ind.macd_signal().iloc[lv]
+        rsi = ta.momentum.RSIIndicator(close).rsi().iloc[lv]
+        bb = ta.volatility.BollingerBands(close)
+        bb_u = bb.bollinger_hband().iloc[lv]
+        bb_l = bb.bollinger_lband().iloc[lv]
+        bb_m = bb.bollinger_mavg().iloc[lv]
+        atr = ta.volatility.AverageTrueRange(high, low, close).average_true_range().iloc[lv]
+        price = close.iloc[lv]
+        pctb = (price - bb_l) / (bb_u - bb_l) if (bb_u - bb_l) != 0 else 0.5
+
+        # ========== ADX趋势强度 ==========
+        try:
+            adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
+            adx = adx_ind.adx().iloc[lv]
+            adx_pos = adx_ind.adx_pos().iloc[lv]
+            adx_neg = adx_ind.adx_neg().iloc[lv]
+        except Exception as e:
+            adx = 25
+            adx_pos = 25
+            adx_neg = 25
+
+        # ========== 成交量确认 ==========
+        avg_volume = volume.iloc[max(0, lv-20):lv+1].mean()
+        current_volume = volume.iloc[lv]
+        volume_ratio = current_volume / avg_volume if avg_volume > 0 else 1
+        is_volume_surge = volume_ratio > 1.5
+
+        # ========== 趋势判断 ==========
+        import math
+        if math.isnan(macd) or math.isnan(macd_sig):
+            macd_bullish = price > ma7
+            macd_bearish = price < ma7
+        else:
+            macd_bullish = price > ma7
+            macd_bearish = price < ma7
     except Exception as e:
-        adx = 25  # 默认放行
-        adx_pos = 25
-        adx_neg = 25
-
-    # ========== 新增优化2: 成交量确认 ==========
-    # 当前成交量 > 近20根K线平均量的1.5倍 = 放量
-    avg_volume = volume.iloc[max(0, lv-20):lv+1].mean()
-    current_volume = volume.iloc[lv]
-    volume_ratio = current_volume / avg_volume if avg_volume > 0 else 1
-    is_volume_surge = volume_ratio > 1.5
-
-    # ========== 趋势判断：价格为主，NaN时降级 ==========
-    # price > MA7 = 多头，price < MA7 = 空头（更稳定）
-    # MACD/Signal仅作辅助参考（NaN时才降级）
-    import math
-    if math.isnan(macd) or math.isnan(macd_sig):
-        macd_bullish = price > ma7
-        macd_bearish = price < ma7
-    else:
-        macd_bullish = price > ma7
-        macd_bearish = price < ma7
+        log(f'⚠️ calc指标计算异常: {e}，返回默认值')
+        return {
+            'price': 0, 'ma7': 0, 'ma25': 0,
+            'macd': float('nan'), 'macd_sig': float('nan'), 'rsi': 50,
+            'bb_u': 0, 'bb_l': 0, 'bb_m': 0,
+            'atr': 0, 'pctb': 0.5,
+            'adx': 0, 'adx_pos': 0, 'adx_neg': 0,
+            'volume_ratio': 1, 'is_volume_surge': False,
+            'bullish': False, 'bearish': False
+        }
 
     return {
         'price': price, 'ma7': ma7, 'ma25': ma25,
-
         'macd': macd, 'macd_sig': macd_sig, 'rsi': rsi,
         'bb_u': bb_u, 'bb_l': bb_l, 'bb_m': bb_m,
         'atr': atr, 'pctb': pctb,
