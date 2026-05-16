@@ -1086,14 +1086,14 @@ def main():
                 if sig:
                     # ========== v2.12: 开仓保护验证 ==========
                     if sig == 'short':
-                        limit_price = k5m_low * 1.01
+                        limit_price = k5m_low * 1.015
                         if price <= limit_price:
-                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的1%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的1.5%(${limit_price:.2f})，跳过")
                             continue
                     elif sig == 'long':
-                        limit_price = k5m_high * 0.99
+                        limit_price = k5m_high * 0.985
                         if price >= limit_price:
-                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的1%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的1.5%(${limit_price:.2f})，跳过")
                             continue
 
                     # 信号去抖：同一方向开仓后冷却300秒，防止信号重复触发
