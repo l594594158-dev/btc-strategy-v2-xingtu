@@ -28,7 +28,8 @@ binance = ccxt.binance({
 })
 
 SYMBOL = 'BTC/USDT:USDT'
-QTY = 0.030
+QTY_FIRST = 0.025     # 首仓开仓量（BTC）
+QTY_REPLENISH = 0.035  # 补仓单次量（BTC）
 LEVERAGE = 20
 BASE_DIR = '/root/btc-strategy-backup/btc-strategy-task'
 STATE_FILE = f'{BASE_DIR}/databases/state.json'
@@ -43,7 +44,7 @@ MIN_RSI_SHORT = 82            # 做空最低RSI要求（更极端才进）
 MIN_RSI_LONG = 35              # 做多最高RSI要求
 STOP_LOSS_PCT = 3.5 / 100     # 止损百分比（3.5%）
 TAKE_PROFIT_PCT = 5.0 / 100   # 止盈百分比（5%，全仓一次性）
-MAX_POSITIONS_PER_DIR = 3     # 单方向最大仓位数量（v2.8）
+MAX_POSITIONS_PER_DIR = 2     # 单方向最大仓位数量（v2.8），2仓后不再补仓
 MAX_TOTAL_QTY = 0.10          # 单方向总持仓上限（BTC），仓位保护
 
 # ========== v2.9: 移动止盈参数（集成进主策略）==========
@@ -74,7 +75,7 @@ def load_state():
         if 'positions' not in s and s.get('in_position') and s.get('entry_price', 0) > 0:
             s['positions'] = [{
                 'entry_price': s['entry_price'],
-                'qty': s.get('qty', QTY),
+                'qty': s.get('qty', QTY_FIRST),
                 'direction': s.get('direction', 'long'),
                 'stop_loss': s.get('stop_loss', 0),
                 'tp': s.get('tp1', s.get('tp', 0)),
@@ -838,7 +839,7 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 BTC自动交易启动 v2.10 | 2秒周期(移动止盈5秒) | {LEVERAGE}x | {QTY} BTC")
+    log(f"🚀 BTC自动交易启动 v2.10 | 2秒周期(移动止盈5秒) | {LEVERAGE}x | 首仓{QTY_FIRST} BTC / 补仓{QTY_REPLENISH} BTC")
     log(f"v2.10: 补仓撤销旧SL/TP，以新均价重新挂单 | 有信号就开仓追加")
     stats = load_stats()
     if stats.get('consecutive_losses', 0) > 0:
@@ -1124,24 +1125,24 @@ def main():
                                     else:
                                         # ========== v2.12.1: 总持仓量保护 ==========
                                         state_total_qty = sum(p['qty'] for p in existing_positions if p.get('direction') == sig)
-                                        if state_total_qty + QTY > MAX_TOTAL_QTY:
-                                            log(f"⛔ {sig}方向总持仓{state_total_qty:.3f}+{QTY:.3f}将突破上限{MAX_TOTAL_QTY} BTC，跳过")
+                                        if state_total_qty + QTY_REPLENISH > MAX_TOTAL_QTY:
+                                            log(f"⛔ {sig}方向总持仓{state_total_qty:.3f}+{QTY_REPLENISH:.3f}将突破上限{MAX_TOTAL_QTY} BTC，跳过")
                                         else:
-                                            log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
+                                            log(f"🚨 触发补仓信号! {sig} | {reason.split(chr(10))[0]}")
                                             try:
-                                                open_position(sig, price, atr, reason, QTY)
+                                                open_position(sig, price, atr, reason, QTY_REPLENISH)
                                                 state.setdefault('last_signal_time', {})[sig] = time.time()
                                                 save_state(state)
                                             except Exception as e:
                                                 log(f"❌ 开仓失败: {e}")
                         else:
-                            # 无持仓，直接开仓
-                            if QTY > MAX_TOTAL_QTY:
-                                log(f"⛔ 单次开仓量{QTY:.3f}超过总上限{MAX_TOTAL_QTY} BTC，跳过")
+                            # 无持仓，直接开首仓
+                            if QTY_FIRST > MAX_TOTAL_QTY:
+                                log(f"⛔ 单次开仓量{QTY_FIRST:.3f}超过总上限{MAX_TOTAL_QTY} BTC，跳过")
                             else:
                                 log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
                                 try:
-                                    open_position(sig, price, atr, reason, QTY)
+                                    open_position(sig, price, atr, reason, QTY_FIRST)
                                     state.setdefault('last_signal_time', {})[sig] = time.time()
                                     save_state(state)
                                 except Exception as e:
