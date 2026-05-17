@@ -4,7 +4,7 @@ BTC合约 自动交易策略 v2.11.2
 - 5秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.11.6: 增加仓位间隔1.5%价格检查（同向/逆向均需偏离>1.5%才允许开仓）
+- v2.13: 开仓保护>2%(100根5m极值)，补仓间隔需偏离开仓均价>2.5%
 - v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响，禁用幽灵仓位自动导入
 """
 import ccxt
@@ -1087,14 +1087,14 @@ def main():
                 if sig:
                     # ========== v2.12: 开仓保护验证 ==========
                     if sig == 'short':
-                        limit_price = k5m_low * 1.015
+                        limit_price = k5m_low * 1.02
                         if price <= limit_price:
-                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的1.5%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的2%(${limit_price:.2f})，跳过")
                             continue
                     elif sig == 'long':
-                        limit_price = k5m_high * 0.985
+                        limit_price = k5m_high * 0.98
                         if price >= limit_price:
-                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的1.5%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的2%(${limit_price:.2f})，跳过")
                             continue
 
                     # 信号去抖：同一方向开仓后冷却300秒，防止信号重复触发
@@ -1103,7 +1103,7 @@ def main():
                     if last_sig.get(sig, 0) + 300 > time.time():
                         log(f"⏳ {sig}信号冷却中，跳过")
                     else:
-                        # ========== v2.11.6: 仓位间隔>1.5%检查 ==========
+                        # ========== v2.13: 补仓间隔>开仓均价2.5%检查 ==========
                         existing_positions = state.get('positions', [])
                         if existing_positions:
                             # v2.11.7: 不允许反方向持仓，已有仓位方向与信号方向相反则跳过
@@ -1114,10 +1114,10 @@ def main():
                                 avg_prices = [p['entry_price'] for p in existing_positions]
                                 avg_entry = sum(avg_prices) / len(avg_prices)
                                 gap_pct = abs(price - avg_entry) / avg_entry * 100
-                                if gap_pct <= 1.5:
-                                    log(f"⛔ 价格间隔{gap_pct:.2f}%≤1.5%，跳过（需偏离>1.5%）")
+                                if gap_pct <= 2.5:
+                                    log(f"⛔ 价格间隔{gap_pct:.2f}%≤2.5%，跳过（需偏离>2.5%）")
                                 else:
-                                    log(f"✅ 价格间隔{gap_pct:.2f}%>1.5%，继续检查")
+                                    log(f"✅ 价格间隔{gap_pct:.2f}%>2.5%，继续检查")
                                     state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
                                     if state_dir_count >= MAX_POSITIONS_PER_DIR:
                                         log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
