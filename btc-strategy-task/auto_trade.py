@@ -44,7 +44,7 @@ MIN_RSI_LONG = 35              # 做多最高RSI要求
 STOP_LOSS_PCT = 3.0 / 100     # 止损百分比（3.0%）
 TAKE_PROFIT_PCT = 5.0 / 100   # 止盈百分比（5%，全仓一次性）
 MAX_POSITIONS_PER_DIR = 3     # 单方向最大仓位数量（v2.8）
-MAX_TOTAL_QTY = 0.15          # 单方向总持仓上限（BTC），仓位保护
+MAX_TOTAL_QTY = 0.10          # 单方向总持仓上限（BTC），仓位保护
 
 # ========== v2.9: 移动止盈参数（集成进主策略）==========
 TRAIL_ACTIVATION_PCT = 1.0 / 100   # 激活条件：超出开仓价1.0%
