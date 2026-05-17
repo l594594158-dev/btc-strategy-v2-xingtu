@@ -4,7 +4,7 @@ BTC合约 自动交易策略 v2.11.2
 - 5秒监控 + 多周期指标分析
 - 自定义止盈止损
 - 开仓理由记录 + 微信通知
-- v2.13: 开仓保护>2%(100根5m极值)，补仓间隔需偏离开仓均价>2.5%
+- v2.13: 开仓保护>2%(200根5m极值)，补仓间隔需偏离开仓均价>2.5%
 - v2.11.2: 移除1.5%间隔限制，自动开仓不受手动仓影响，禁用幽灵仓位自动导入
 """
 import ccxt
@@ -122,7 +122,7 @@ def send_wechat_msg(msg):
 def get_data():
     """直接用Binance REST API获取K线数据（解决ccxt fetch_ohlcv数据过期bug）"""
     result = []
-    for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
+    for tf, limit in [('5m', 200), ('1h', 200), ('4h', 200), ('1d', 200)]:
         try:
             url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
             resp = requests.get(url, timeout=5)
@@ -870,9 +870,9 @@ def main():
                 '1d': calc(df1d)
             }
 
-            # ========== v2.12: 100根5m K线高低价（开仓保护验证用）==========
-            k5m_low = min(k[3] for k in k5m)   # 100根5m最低价
-            k5m_high = max(k[2] for k in k5m)  # 100根5m最高价
+            # ========== v2.13: 200根5m K线高低价（开仓保护验证用）==========
+            k5m_low = min(k[3] for k in k5m)   # 200根5m最低价
+            k5m_high = max(k[2] for k in k5m)  # 200根5m最高价
 
             state = load_state()
 
@@ -1089,12 +1089,12 @@ def main():
                     if sig == 'short':
                         limit_price = k5m_low * 1.02
                         if price <= limit_price:
-                            log(f"⛔ 做空保护: ${price:.2f} 未超过100根5m最低价${k5m_low:.2f}的2%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做空保护: ${price:.2f} 未超过200根5m最低价${k5m_low:.2f}的2%(${limit_price:.2f})，跳过")
                             continue
                     elif sig == 'long':
                         limit_price = k5m_high * 0.98
                         if price >= limit_price:
-                            log(f"⛔ 做多保护: ${price:.2f} 未低于100根5m最高价${k5m_high:.2f}的2%(${limit_price:.2f})，跳过")
+                            log(f"⛔ 做多保护: ${price:.2f} 未低于200根5m最高价${k5m_high:.2f}的2%(${limit_price:.2f})，跳过")
                             continue
 
                     # 信号去抖：同一方向开仓后冷却5000秒，防止信号重复触发
