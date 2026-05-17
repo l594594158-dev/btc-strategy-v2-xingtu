@@ -28,7 +28,7 @@ binance = ccxt.binance({
 })
 
 SYMBOL = 'BTC/USDT:USDT'
-QTY = 0.050
+QTY = 0.030
 LEVERAGE = 20
 BASE_DIR = '/root/btc-strategy-backup/btc-strategy-task'
 STATE_FILE = f'{BASE_DIR}/databases/state.json'
