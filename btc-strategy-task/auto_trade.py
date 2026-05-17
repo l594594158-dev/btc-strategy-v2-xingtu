@@ -1107,34 +1107,50 @@ def main():
                         # ========== v2.13: 补仓间隔>开仓均价2.5%检查 ==========
                         existing_positions = state.get('positions', [])
                         if existing_positions:
-                            # v2.11.7: 不允许反方向持仓，已有仓位方向与信号方向相反则跳过
                             existing_dirs = set(p.get('direction') for p in existing_positions)
-                            if sig not in existing_dirs and len(existing_dirs) > 0:
-                                log(f"⛔ 已有{existing_dirs}方向持仓，禁止开反向{sig}仓")
+                            existing_dir = list(existing_dirs)[0]
+                            avg_prices = [p['entry_price'] for p in existing_positions]
+                            avg_entry = sum(avg_prices) / len(avg_prices)
+                            gap_pct = abs(price - avg_entry) / avg_entry * 100
+                            adx4h_val = data['4h']['adx']
+
+                            # ========== ADX趋势锁 ==========
+                            lock_active = (gap_pct > 2.5 and adx4h_val > 30)
+
+                            if lock_active:
+                                log(f"🔒 ADX锁: 4h ADX={adx4h_val:.1f}>30,偏离开仓均价{gap_pct:.1f}%>2.5%")
+                                if sig == existing_dir:
+                                    log(f"⛔ 趋势行情,禁止{sig}补仓")
+                                    continue
+                                else:
+                                    log(f"✅ 允许反向{ sig }顺势开仓")
                             else:
-                                avg_prices = [p['entry_price'] for p in existing_positions]
-                                avg_entry = sum(avg_prices) / len(avg_prices)
-                                gap_pct = abs(price - avg_entry) / avg_entry * 100
+                                # 锁未激活：不允许反方向持仓
+                                if sig not in existing_dirs and len(existing_dirs) > 0:
+                                    log(f"⛔ 已有{existing_dirs}方向持仓，禁止开反向{sig}仓")
+                                    continue
+                                # 锁未激活：gap检查
                                 if gap_pct <= 2.5:
                                     log(f"⛔ 价格间隔{gap_pct:.2f}%≤2.5%，跳过（需偏离>2.5%）")
-                                else:
-                                    log(f"✅ 价格间隔{gap_pct:.2f}%>2.5%，继续检查")
-                                    state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
-                                    if state_dir_count >= MAX_POSITIONS_PER_DIR:
-                                        log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
-                                    else:
-                                        # ========== v2.12.1: 总持仓量保护 ==========
-                                        state_total_qty = sum(p['qty'] for p in existing_positions if p.get('direction') == sig)
-                                        if state_total_qty + QTY_REPLENISH > MAX_TOTAL_QTY:
-                                            log(f"⛔ {sig}方向总持仓{state_total_qty:.3f}+{QTY_REPLENISH:.3f}将突破上限{MAX_TOTAL_QTY} BTC，跳过")
-                                        else:
-                                            log(f"🚨 触发补仓信号! {sig} | {reason.split(chr(10))[0]}")
-                                            try:
-                                                open_position(sig, price, atr, reason, QTY_REPLENISH)
-                                                state.setdefault('last_signal_time', {})[sig] = time.time()
-                                                save_state(state)
-                                            except Exception as e:
-                                                log(f"❌ 开仓失败: {e}")
+                                    continue
+
+                            # ========== 开仓逻辑（补仓或锁中反向开仓）==========
+                            qty_use = QTY_REPLENISH if sig == existing_dir else QTY_FIRST
+                            state_dir_count = sum(1 for p in existing_positions if p.get('direction') == sig)
+                            if state_dir_count >= MAX_POSITIONS_PER_DIR:
+                                log(f"⛔ {sig}方向已有{state_dir_count}仓(策略仓)，达到上限{MAX_POSITIONS_PER_DIR}，跳过开仓")
+                                continue
+                            state_total_qty = sum(p['qty'] for p in existing_positions if p.get('direction') == sig)
+                            if state_total_qty + qty_use > MAX_TOTAL_QTY:
+                                log(f"⛔ {sig}方向总持仓{state_total_qty:.3f}+{qty_use:.3f}将突破上限{MAX_TOTAL_QTY} BTC，跳过")
+                                continue
+                            log(f"🚨 触发信号! {sig} | {reason.split(chr(10))[0]}")
+                            try:
+                                open_position(sig, price, atr, reason, qty_use)
+                                state.setdefault('last_signal_time', {})[sig] = time.time()
+                                save_state(state)
+                            except Exception as e:
+                                log(f"❌ 开仓失败: {e}")
                         else:
                             # 无持仓，直接开首仓
                             if QTY_FIRST > MAX_TOTAL_QTY:
