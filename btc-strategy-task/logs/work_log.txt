@@ -7,3 +7,5 @@
 [2026-05-15 04:15:07] [错误] single positional indexer is out-of-bounds
 [2026-05-15 07:35:51] [错误] single positional indexer is out-of-bounds
 [2026-05-15 21:30:25] [错误] single positional indexer is out-of-bounds
+[2026-05-16 12:55:06] [错误] min() iterable argument is empty
+[2026-05-16 18:00:07] [错误] min() iterable argument is empty
