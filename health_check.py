@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-BTC合约任务自检脚本 v3.0
+BTC合约任务自检脚本 v4.0
 - 每5分钟执行一次
 - 检查进程、API、持仓、策略信号、通知队列
-- 适配v3.0模式B：多空各1仓均价合并 + ±1%止盈止损 + 双向持仓
+- 适配v4.0趋势回调：双向各1仓 + TP2.5%/SL1.5% + 50x/0.007BTC
 """
 import ccxt, os, json, subprocess, time, requests as req
 from datetime import datetime
@@ -13,6 +13,10 @@ STATE_FILE = f'{TASK_DIR}/databases/state.json'
 NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 LOG_DIR = f'{TASK_DIR}/logs/health_check'
 SYMBOL = 'BTC/USDT:USDT'
+QTY = 0.007
+LEV = 50
+TP_PCT = 2.5 / 100
+SL_PCT = 1.5 / 100
 os.makedirs(LOG_DIR, exist_ok=True)
 
 def log(msg): print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
@@ -24,10 +28,13 @@ def get_exchange():
 def get_data():
     result = []
     for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
-        url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
-        r = req.get(url, timeout=5)
-        kls = r.json()
-        result.append([[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in kls])
+        try:
+            url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
+            r = req.get(url, timeout=5)
+            kls = r.json()
+            result.append([[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in kls])
+        except:
+            result.append([])
     return result
 
 def calc_indicators(df_data):
@@ -36,11 +43,8 @@ def calc_indicators(df_data):
     close = df['c']; high = df['h']; low = df['l']; volume = df['v']
     lv = len(df) - 1
     price = close.iloc[lv]
-    ma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
+    sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
     rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
-    bb = ta.volatility.BollingerBands(close, 20, 2)
-    bb_u = bb.bollinger_hband().iloc[lv]; bb_l = bb.bollinger_lband().iloc[lv]
-    pctb = (price - bb_l) / (bb_u - bb_l) if bb_u != bb_l else 0.5
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, 14)
         adx = adx_ind.adx().iloc[lv]
@@ -50,8 +54,32 @@ def calc_indicators(df_data):
         adx = 25; adx_pos = 25; adx_neg = 25
     avg_vol = volume.iloc[max(0,lv-19):lv+1].mean()
     vr = float(volume.iloc[lv]) / float(avg_vol) if avg_vol > 0 else 1
-    return {'price': price, 'sma20': ma20, 'rsi': rsi, 'pctb': pctb,
+    return {'price': price, 'sma20': sma20, 'rsi': rsi,
             'adx': adx, 'adx_pos': adx_pos, 'adx_neg': adx_neg, 'vol_ratio': vr}
+
+def check_signal(r5, r1, r4, rd):
+    """v4.0 趋势回调信号: LONG顺势追多 / SHORT顺势摸顶"""
+    price = r5['price']; rsi5m = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
+    sma5m = r5['sma20']; sma4h = r4['sma20']; sma1d = rd['sma20']
+    
+    if adx1h <= 25:
+        return None, f"1hADX={adx1h:.1f}≤25"
+    if adx4h >= 40:
+        return None, f"4hADX={adx4h:.1f}≥40"
+    if not (sma5m*0.99 <= price <= sma5m*1.01):
+        return None, f"偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%"
+    
+    h4_bull = price > sma4h
+    d1_bull = price > sma1d
+    
+    if h4_bull and d1_bull and rsi5m > 40:
+        return 'LONG', 'LONG顺势追多'
+    if (not h4_bull) and (not d1_bull) and rsi5m < 60:
+        return 'SHORT', 'SHORT顺势摸顶'
+    
+    dir_4h = '多' if h4_bull else '空'
+    dir_1d = '多' if d1_bull else '空'
+    return None, f"4h{dir_4h}/1d{dir_1d} RSI={rsi5m:.1f}"
 
 def check_all():
     ok, fail = 0, 0
@@ -68,50 +96,23 @@ def check_all():
     except Exception as e:
         log(f"❌ 进程检查失败: {e}"); fail += 1
 
-    # === 2. API数据 ===
+    # === 2. API数据 + 策略信号 ===
     try:
         k5m, k1h, k4h, k1d = get_data()
         r5 = calc_indicators(k5m); r1 = calc_indicators(k1h)
         r4 = calc_indicators(k4h); rd = calc_indicators(k1d)
 
-        price = r5['price']; pctb = r5['pctb']; rsi = r5['rsi']; vr = r5['vol_ratio']
+        price = r5['price']; rsi = r5['rsi']; vr = r5['vol_ratio']
         a1h = r1['adx']; a4h = r4['adx']
         b4h = price > r4['sma20']; b1d = price > rd['sma20']
-        plus_di = r1['adx_pos']; minus_di = r1['adx_neg']
+        pct_from_sma = (price - r5['sma20']) / r5['sma20'] * 100
 
-        # 统计多少策略条件满足
-        conds = []
-        # 全局前置
-        global_ok = vr > 1.5 and a4h < 35
-        if not global_ok:
-            conds.append(f"全局过滤: {'缩量' if vr<=1.5 else 'ADX4h≥35'}")
-        else:
-            # L1
-            l1 = not b4h and not b1d and pctb<=0.15 and rsi<20 and a1h<30
-            # L2
-            l2 = not b4h and not b1d and a1h<25 and pctb<=0.15 and rsi<=30
-            # L3
-            l3 = b4h and b1d and pctb<=0.15 and 30<=rsi<=40 and 20<=a1h<=35 and plus_di>minus_di
-            # S1
-            s1 = b4h and b1d and pctb>0.85 and rsi>=82 and a1h<30
-            # S2
-            s2 = b4h and b1d and a1h<25 and pctb>0.85 and rsi>=70
-            # S3
-            s3 = not b4h and not b1d and pctb>0.85 and 65<=rsi<=85 and 20<=a1h<=35 and minus_di>plus_di
-            
-            active = []
-            if l1: active.append('L1')
-            if l2: active.append('L2')
-            if l3: active.append('L3')
-            if s1: active.append('S1')
-            if s2: active.append('S2')
-            if s3: active.append('S3')
-            if active:
-                conds.append(f"🔥 信号: {','.join(active)}")
-            else:
-                conds.append('无信号')
-
-        log(f"✅ API ${price:,.0f} | %b={pctb:.3f} RSI={rsi:.1f} | 4h{'多' if b4h else '空'} 1d{'多' if b1d else '空'} | ADX1h={a1h:.1f} ADX4h={a4h:.1f} vol={vr:.1f}x | {conds[0]}")
+        sig, info = check_signal(r5, r1, r4, rd)
+        sig_str = f"🔥 {info}" if sig else f"⏸ {info}"
+        
+        log(f"✅ API ${price:,.0f} | RSI={rsi:.1f} SMA20偏差{pct_from_sma:+.1f}% | "
+            f"4h{'📈多' if b4h else '📉空'} 1d{'📈多' if b1d else '📉空'} | "
+            f"ADX1h={a1h:.1f} ADX4h={a4h:.1f} vol={vr:.1f}x | {sig_str}")
         ok += 1
     except Exception as e:
         log(f"❌ API: {e}"); fail += 1
@@ -122,12 +123,13 @@ def check_all():
         ex_pos = exchange.fetch_positions()
         ex_long = None; ex_short = None
         for p in ex_pos:
+            if p.get('symbol') != SYMBOL: continue
             qty = float(p.get('contracts', 0))
             if qty <= 0: continue
             side = 'long' if p['side'] in ('long', 'LONG') else 'short'
             entry = float(p['entryPrice'])
-            if side == 'long': ex_long = {'price': entry, 'qty': qty}
-            else: ex_short = {'price': entry, 'qty': qty}
+            if side == 'long': ex_long = {'entry': entry, 'qty': qty}
+            else: ex_short = {'entry': entry, 'qty': qty}
 
         state = {}
         if os.path.exists(STATE_FILE):
@@ -136,15 +138,15 @@ def check_all():
         st_long = state.get('long_pos')
         st_short = state.get('short_pos')
 
-        # 同步逻辑
         changed = False
-        if ex_long and (not st_long or abs(sum(st_long['prices'])/len(st_long['prices'])-ex_long['price'])>50):
-            state['long_pos'] = {'prices': [ex_long['price']], 'signals': ['manual'], 'open_time': datetime.now().isoformat()}
+        # v4.0 state: {'entry': price, 'signal': reason, 'open_time': iso}
+        if ex_long and (not st_long or abs(st_long.get('entry', 0) - ex_long['entry']) > 50):
+            state['long_pos'] = {'entry': ex_long['entry'], 'signal': '手动同步', 'open_time': datetime.now().isoformat()}
             changed = True
         elif not ex_long and st_long:
             state['long_pos'] = None; changed = True
-        if ex_short and (not st_short or abs(sum(st_short['prices'])/len(st_short['prices'])-ex_short['price'])>50):
-            state['short_pos'] = {'prices': [ex_short['price']], 'signals': ['manual'], 'open_time': datetime.now().isoformat()}
+        if ex_short and (not st_short or abs(st_short.get('entry', 0) - ex_short['entry']) > 50):
+            state['short_pos'] = {'entry': ex_short['entry'], 'signal': '手动同步', 'open_time': datetime.now().isoformat()}
             changed = True
         elif not ex_short and st_short:
             state['short_pos'] = None; changed = True
@@ -152,14 +154,10 @@ def check_all():
         if changed:
             with open(STATE_FILE, 'w') as f: json.dump(state, f)
 
-        has_ex = bool(ex_long or ex_short)
-        has_st = bool(st_long or st_short)
-        detail = ''
-        if ex_long: detail += f"LONG ${ex_long['price']:.0f}({ex_long['qty']}BTC) "
-        if ex_short: detail += f"SHORT ${ex_short['price']:.0f}({ex_short['qty']}BTC)"
-        if not detail: detail = '无持仓'
-        status = '✅' if has_ex == has_st else '🔄已同步'
-        log(f"✅ 持仓 {status} {detail}"); ok += 1
+        detail = []
+        if ex_long: detail.append(f"LONG ${ex_long['entry']:.0f}({ex_long['qty']}BTC)")
+        if ex_short: detail.append(f"SHORT ${ex_short['entry']:.0f}({ex_short['qty']}BTC)")
+        log(f"✅ 持仓 {' | '.join(detail) if detail else '无持仓'}"); ok += 1
     except Exception as e:
         log(f"❌ 持仓同步: {e}"); fail += 1
 
@@ -170,31 +168,49 @@ def check_all():
         for d_key, direction, ps in [('long_pos','LONG','LONG'), ('short_pos','SHORT','SHORT')]:
             pos = state.get(d_key)
             if not pos: continue
-            avg = sum(pos['prices']) / len(pos['prices'])
-            sl_target = round(avg*0.99,1) if direction=='LONG' else round(avg*1.01,1)
-            tp_target = round(avg*1.01,1) if direction=='LONG' else round(avg*0.99,1)
-            algos = exchange.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
+            entry = pos.get('entry', 0)
+            if not entry: continue
+            sl_target = round(entry*(1-SL_PCT), 1) if direction=='LONG' else round(entry*(1+SL_PCT), 1)
+            tp_target = round(entry*(1+TP_PCT), 1) if direction=='LONG' else round(entry*(1-TP_PCT), 1)
+            
+            # 查持仓量
+            positions = exchange.fetch_positions()
+            qty = 0
+            for p in positions:
+                if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
+                    if (direction == 'LONG' and p.get('side') == 'long') or \
+                       (direction == 'SHORT' and p.get('side') == 'short'):
+                        qty = float(p['contracts'])
+                        break
+            if qty == 0: continue
+            
+            try:
+                algos = exchange.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
+            except:
+                algos = []
             has_sl = any(o.get('orderType')=='STOP_MARKET' and o.get('positionSide')==ps for o in algos)
             has_tp = any(o.get('orderType')=='TAKE_PROFIT_MARKET' and o.get('positionSide')==ps for o in algos)
+            
             sl_status = '✅' if has_sl else '❌缺失'
             tp_status = '✅' if has_tp else '❌缺失'
-            log(f"  {direction} 均价${avg:.0f} | SL${sl_target} {sl_status} | TP${tp_target} {tp_status}")
+            log(f"  {direction} ${entry:.0f} | SL${sl_target} {sl_status} | TP${tp_target} {tp_status}")
+            
             if not has_sl or not has_tp:
-                log(f"   🔧 补挂SL/TP...")
+                close_side = 'sell' if direction == 'LONG' else 'buy'
                 try:
                     if not has_sl:
-                        exchange.create_order(SYMBOL, 'STOP_MARKET', 'sell' if direction=='LONG' else 'buy',
-                            pos.get('qty',0.01) or abs(sum(pos['prices']))/len(pos['prices'])*0.01/avg*avg,
+                        exchange.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                             params={'stopPrice': sl_target, 'positionSide': ps})
+                        log(f"   🔧 补挂SL ${sl_target}")
                     if not has_tp:
-                        exchange.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', 'sell' if direction=='LONG' else 'buy',
-                            pos.get('qty',0.01) or abs(sum(pos['prices']))/len(pos['prices'])*0.01/avg*avg,
+                        exchange.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                             params={'stopPrice': tp_target, 'positionSide': ps})
+                        log(f"   🔧 补挂TP ${tp_target}")
                 except Exception as e:
-                    log(f"   挂单失败: {e}")
+                    log(f"   ⚠️ 补挂失败: {e}")
         ok += 1
     except Exception as e:
-        log(f"⚠️ SL/TP检查: {e}")
+        log(f"⚠️ SL/TP: {e}")
 
     # === 5. 通知队列 ===
     try:
@@ -217,15 +233,13 @@ def check_all():
             log('🔧 重启 auto_trade.py...')
             subprocess.run(['pkill', '-f', 'auto_trade.py'], capture_output=True)
             time.sleep(2)
-            subprocess.Popen(f'cd {TASK_DIR} && python3 -u auto_trade.py </dev/null &>>logs/auto_trade_v3.log &', shell=True)
+            subprocess.Popen(f'cd {TASK_DIR} && python3 -u auto_trade.py > logs/auto_trade_v4.log 2>&1 &', shell=True)
             log('✅ 已重启')
 
-    # 汇总
     msg = f"🔍 自检: {ok}✅ {fail}❌"
     if fixes: msg += f" | 已修{len(fixes)}项"
     log(f"=== {msg} ===")
 
-    # 写日志
     report = {'time': datetime.now().isoformat(), 'ok': ok, 'fail': fail, 'fixes': fixes}
     check_log = f'{LOG_DIR}/check_log.json'
     logs = []
