@@ -105,14 +105,22 @@ def calc(df):
     except:
         adx = 25; adx_pos = 25; adx_neg = 25
 
-    avg_vol = volume.iloc[max(0, lv-19):lv+1].mean()
-    cur_vol = volume.iloc[lv]
+    # 闭K指标 (与回测一致)
+    closed_lv = max(0, lv - 1)
+    avg_vol = volume.iloc[max(0, closed_lv-19):closed_lv+1].mean()
+    cur_vol = volume.iloc[closed_lv]
     vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
+
+    close_closed = close.iloc[closed_lv]
+    sma_closed = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[closed_lv]
+    adx_closed = adx_ind.adx().iloc[closed_lv] if 'adx_ind' in dir() else 25
 
     return {
         'price': price, 'sma20': sma20, 'rsi': rsi,
         'adx': adx, 'adx_pos': adx_pos, 'adx_neg': adx_neg,
-        'vol_ratio': vol_ratio
+        'vol_ratio': vol_ratio,
+        'close_closed': close_closed, 'sma_closed': sma_closed,
+        'adx_closed': adx_closed
     }
 
 # ========== 信号判断（全放宽7条件）==========
@@ -121,17 +129,19 @@ def check_entry(data):
 
     price = r5['price']
     rsi5m = r5['rsi']
-    adx1h = r1['adx']
-    adx4h = r4['adx']
+    adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
+    adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
     sma5m = r5['sma20']
 
-    # ① 4h方向
-    sma4h = r4['sma20']
-    h4_bull = price > sma4h
-    # ② 1d方向
-    sma1d = rd['sma20']
-    d1_bull = price > sma1d
+    # ① 4h方向 (闭K收盘价 vs 闭K SMA20 → 同回测+603%版)
+    h4_close = r4.get('close_closed', r4['price'])
+    sma4h = r4.get('sma_closed', r4['sma20'])
+    h4_bull = h4_close > sma4h
+    # ② 1d方向 (闭K收盘价 vs 闭K SMA20)
+    d1_close = rd.get('close_closed', rd['price'])
+    sma1d = rd.get('sma_closed', rd['sma20'])
+    d1_bull = d1_close > sma1d
 
     # ③ 回调范围 ±1.0%
     in_range = sma5m * 0.99 <= price <= sma5m * 1.01
@@ -148,8 +158,9 @@ def check_entry(data):
     if not in_range:
         return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%"
 
-    # ⑦ 放量（全放宽=取消放量过滤，vol_ratio>=1.0永远成立）
-    # 原版要求 >1.2，全放宽取消此条件
+    # ⑦ 放量 ≥1.0（过滤缩量噪音）
+    if vol_ratio < 1.0:
+        return None, f"观望 | 缩量 vol={vol_ratio:.1f}x"
 
     # LONG 顺势追多
     if h4_bull and d1_bull and rsi5m > 40:
@@ -197,22 +208,56 @@ def manage_positions(state, price, signal, reason):
             state['short_pos'] = None
             closed = True
 
-    # ── 新信号（双向各1仓，同向跳过）──
+    # ── 新信号（双向各1仓，同方向1仓保护）──
     if signal == 'LONG':
-        if state.get('long_pos') is None:
-            state['long_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
-            log(f"🚀 LONG开仓 | {reason} @ ${price:.0f}")
-        else:
+        if state.get('long_pos') is not None:
             log(f"⏭ LONG信号跳过 | 已有LONG仓")
+        elif do_open('LONG', price, reason):
+            state['long_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
-        if state.get('short_pos') is None:
-            state['short_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
-            log(f"🚀 SHORT开仓 | {reason} @ ${price:.0f}")
-        else:
+        if state.get('short_pos') is not None:
             log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
+        elif do_open('SHORT', price, reason):
+            state['short_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
 
     save_state(state)
     return closed
+
+# ========== 开仓执行（交易所级单方向单仓保护） ==========
+def do_open(direction, price, reason):
+    try:
+        # ① 交易所级防护：查现有持仓，同方向已有则拒绝
+        positions = binance.fetch_positions()
+        for p in positions:
+            if p.get('symbol') != SYMBOL:
+                continue
+            qty = float(p.get('contracts', 0))
+            if qty <= 0:
+                continue
+            side = 'LONG' if p.get('side') == 'long' else 'SHORT'
+            if side == direction:
+                log(f"🛡 交易所防护 | 已有{direction}仓{qty}BTC | 拒绝开仓")
+                return False
+
+        # ② 市价开仓
+        open_side = 'buy' if direction == 'LONG' else 'sell'
+        order = binance.create_order(SYMBOL, 'market', open_side, QTY,
+                                     params={'positionSide': direction})
+        entry_price = order.get('average', price)
+
+        log(f"🚀 {direction}市价开仓 | {reason} | ${entry_price:.0f}")
+
+        msg = (f"🟢 BTC开仓\n"
+               f"{direction} @ ${entry_price:,.0f}\n"
+               f"{reason}")
+        notify_alert(msg)
+        work_log("开仓", f"{direction} | ${entry_price:.0f} | {reason}")
+        return True
+
+    except Exception as e:
+        log(f"❌ {direction}开仓失败: {e}")
+        work_log("错误", f"开仓失败: {e}")
+        return False
 
 # ========== 平仓执行 ==========
 def do_close(direction, price, pos_data, reason):

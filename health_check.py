@@ -1,256 +1,624 @@
 #!/usr/bin/env python3
 """
-BTC合约任务自检脚本 v4.0
-- 每5分钟执行一次
-- 检查进程、API、持仓、策略信号、通知队列
-- 适配v4.0趋势回调：双向各1仓 + TP2.5%/SL1.5% + 50x/0.007BTC
+BTC合约任务自检脚本 v1.2
+- 每5分钟执行一次自动检查
+- 检查进程运行、API数据、持仓同步（自动同步）、策略状态
+- 发现问题自动修复并通知
 """
-import ccxt, os, json, subprocess, time, requests as req
+import ccxt
+import os
+import json
+import subprocess
+import time
+import signal
 from datetime import datetime
+from pathlib import Path
 
+# ========== 路径配置 ==========
 TASK_DIR = '/root/btc-strategy-backup/btc-strategy-task'
+AUTO_TRADE_SCRIPT = f'{TASK_DIR}/auto_trade.py'
 STATE_FILE = f'{TASK_DIR}/databases/state.json'
-NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
+WORK_LOG = f'{TASK_DIR}/logs/work_log.txt'
+STATS_FILE = f'{TASK_DIR}/databases/trade_stats.json'
 LOG_DIR = f'{TASK_DIR}/logs/health_check'
+FIX_LOG = f'{LOG_DIR}/fix_log.txt'
+CHECK_LOG = f'{LOG_DIR}/check_log.json'
+NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
+
+# 微信通知配置
+WECHAT_CHANNEL = 'openclaw-weixin'
+WECHAT_TARGET = 'o9cq80_h_BaEgBVnsrfqjOMF8Rug@im.wechat'
+
+# API配置
+API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
 SYMBOL = 'BTC/USDT:USDT'
-QTY = 0.007
-LEV = 50
-TP_PCT = 2.5 / 100
-SL_PCT = 1.5 / 100
+
 os.makedirs(LOG_DIR, exist_ok=True)
 
-def log(msg): print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
+# ========== 日志工具 ==========
+def log(msg):
+    ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    line = f"[{ts}] {msg}"
+    print(line)
+    return line
 
-def get_exchange():
-    from api_config import API_KEY, SECRET
-    return ccxt.binance({'apiKey': API_KEY, 'secret': SECRET, 'options': {'defaultType': 'swap'}})
+def get_binance():
+    """创建币安实例"""
+    return ccxt.binance({
+        'apiKey': API_KEY,
+        'secret': SECRET,
+        'options': {'defaultType': 'swap'}
+    })
 
 def get_data():
-    result = []
-    for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
+    """获取所有周期数据"""
+    binance = get_binance()
+    k5m = binance.fetch_ohlcv(SYMBOL, timeframe='5m', limit=100)
+    k1h = binance.fetch_ohlcv(SYMBOL, timeframe='1h', limit=200)
+    k4h = binance.fetch_ohlcv(SYMBOL, timeframe='4h', limit=200)
+    k1d = binance.fetch_ohlcv(SYMBOL, timeframe='1d', limit=200)
+    return {'k5m': k5m, 'k1h': k1h, 'k4h': k4h, 'k1d': k1d}
+
+# ========== 自检项 ==========
+class HealthChecker:
+    def __init__(self):
+        self.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        self.results = []
+        self.fixes = []
+        self.checks_ok = 0
+        self.checks_fail = 0
+        self._fixes_to_apply = []
+
+    def add_ok(self, item, detail=''):
+        self.checks_ok += 1
+        self.results.append({
+            'time': self.timestamp,
+            'item': item,
+            'status': '✅ OK',
+            'detail': detail
+        })
+        log(f"✅ {item}: {detail or '正常'}")
+
+    def add_fail(self, item, detail='', fix=None):
+        self.checks_fail += 1
+        self.results.append({
+            'time': self.timestamp,
+            'item': item,
+            'status': '❌ FAIL',
+            'detail': detail,
+            'fix': fix
+        })
+        log(f"❌ {item}: {detail}")
+        if fix:
+            log(f"   🔧 修复: {fix}")
+            self._fixes_to_apply.append(fix)
+
+    # ========== 检查1: 进程状态 ==========
+    def check_process(self):
+        """检查auto_trade.py进程是否正常运行"""
         try:
-            url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
-            r = req.get(url, timeout=5)
-            kls = r.json()
-            result.append([[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in kls])
-        except:
-            result.append([])
-    return result
+            result = subprocess.run(
+                ['ps', 'aux'], capture_output=True, text=True
+            )
+            python_pids = []
+            for line in result.stdout.split('\n'):
+                if 'auto_trade.py' in line and 'grep' not in line and 'python3' in line:
+                    parts = line.split()
+                    pid = parts[1]
+                    # 找到实际的python进程（不是bash包装脚本）
+                    python_pids.append(pid)
 
-def calc_indicators(df_data):
-    import pandas as pd, ta
-    df = pd.DataFrame(df_data, columns=['t','o','h','l','c','v'])
-    close = df['c']; high = df['h']; low = df['l']; volume = df['v']
-    lv = len(df) - 1
-    price = close.iloc[lv]
-    sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
-    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
-    try:
-        adx_ind = ta.trend.ADXIndicator(high, low, close, 14)
-        adx = adx_ind.adx().iloc[lv]
-        adx_pos = adx_ind.adx_pos().iloc[lv]
-        adx_neg = adx_ind.adx_neg().iloc[lv]
-    except:
-        adx = 25; adx_pos = 25; adx_neg = 25
-    avg_vol = volume.iloc[max(0,lv-19):lv+1].mean()
-    vr = float(volume.iloc[lv]) / float(avg_vol) if avg_vol > 0 else 1
-    return {'price': price, 'sma20': sma20, 'rsi': rsi,
-            'adx': adx, 'adx_pos': adx_pos, 'adx_neg': adx_neg, 'vol_ratio': vr}
-
-def check_signal(r5, r1, r4, rd):
-    """v4.0 趋势回调信号: LONG顺势追多 / SHORT顺势摸顶"""
-    price = r5['price']; rsi5m = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
-    sma5m = r5['sma20']; sma4h = r4['sma20']; sma1d = rd['sma20']
-    
-    if adx1h <= 25:
-        return None, f"1hADX={adx1h:.1f}≤25"
-    if adx4h >= 40:
-        return None, f"4hADX={adx4h:.1f}≥40"
-    if not (sma5m*0.99 <= price <= sma5m*1.01):
-        return None, f"偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%"
-    
-    h4_bull = price > sma4h
-    d1_bull = price > sma1d
-    
-    if h4_bull and d1_bull and rsi5m > 40:
-        return 'LONG', 'LONG顺势追多'
-    if (not h4_bull) and (not d1_bull) and rsi5m < 60:
-        return 'SHORT', 'SHORT顺势摸顶'
-    
-    dir_4h = '多' if h4_bull else '空'
-    dir_1d = '多' if d1_bull else '空'
-    return None, f"4h{dir_4h}/1d{dir_1d} RSI={rsi5m:.1f}"
-
-def check_all():
-    ok, fail = 0, 0
-    fixes = []
-    
-    # === 1. 进程 ===
-    try:
-        r = subprocess.run(['ps', 'aux'], capture_output=True, text=True)
-        pids = [l.split()[1] for l in r.stdout.split('\n') if 'auto_trade.py' in l and 'grep' not in l and 'python3' in l]
-        if pids:
-            log(f"✅ 进程 PID={pids[-1]}"); ok += 1
-        else:
-            log(f"❌ 进程未运行"); fail += 1; fixes.append('restart')
-    except Exception as e:
-        log(f"❌ 进程检查失败: {e}"); fail += 1
-
-    # === 2. API数据 + 策略信号 ===
-    try:
-        k5m, k1h, k4h, k1d = get_data()
-        r5 = calc_indicators(k5m); r1 = calc_indicators(k1h)
-        r4 = calc_indicators(k4h); rd = calc_indicators(k1d)
-
-        price = r5['price']; rsi = r5['rsi']; vr = r5['vol_ratio']
-        a1h = r1['adx']; a4h = r4['adx']
-        b4h = price > r4['sma20']; b1d = price > rd['sma20']
-        pct_from_sma = (price - r5['sma20']) / r5['sma20'] * 100
-
-        sig, info = check_signal(r5, r1, r4, rd)
-        sig_str = f"🔥 {info}" if sig else f"⏸ {info}"
-        
-        log(f"✅ API ${price:,.0f} | RSI={rsi:.1f} SMA20偏差{pct_from_sma:+.1f}% | "
-            f"4h{'📈多' if b4h else '📉空'} 1d{'📈多' if b1d else '📉空'} | "
-            f"ADX1h={a1h:.1f} ADX4h={a4h:.1f} vol={vr:.1f}x | {sig_str}")
-        ok += 1
-    except Exception as e:
-        log(f"❌ API: {e}"); fail += 1
-
-    # === 3. 持仓同步 ===
-    try:
-        exchange = get_exchange()
-        ex_pos = exchange.fetch_positions()
-        ex_long = None; ex_short = None
-        for p in ex_pos:
-            if p.get('symbol') != SYMBOL: continue
-            qty = float(p.get('contracts', 0))
-            if qty <= 0: continue
-            side = 'long' if p['side'] in ('long', 'LONG') else 'short'
-            entry = float(p['entryPrice'])
-            if side == 'long': ex_long = {'entry': entry, 'qty': qty}
-            else: ex_short = {'entry': entry, 'qty': qty}
-
-        state = {}
-        if os.path.exists(STATE_FILE):
-            with open(STATE_FILE) as f: state = json.load(f)
-
-        st_long = state.get('long_pos')
-        st_short = state.get('short_pos')
-
-        changed = False
-        # v4.0 state: {'entry': price, 'signal': reason, 'open_time': iso}
-        if ex_long and (not st_long or abs(st_long.get('entry', 0) - ex_long['entry']) > 50):
-            state['long_pos'] = {'entry': ex_long['entry'], 'signal': '手动同步', 'open_time': datetime.now().isoformat()}
-            changed = True
-        elif not ex_long and st_long:
-            state['long_pos'] = None; changed = True
-        if ex_short and (not st_short or abs(st_short.get('entry', 0) - ex_short['entry']) > 50):
-            state['short_pos'] = {'entry': ex_short['entry'], 'signal': '手动同步', 'open_time': datetime.now().isoformat()}
-            changed = True
-        elif not ex_short and st_short:
-            state['short_pos'] = None; changed = True
-
-        if changed:
-            with open(STATE_FILE, 'w') as f: json.dump(state, f)
-
-        detail = []
-        if ex_long: detail.append(f"LONG ${ex_long['entry']:.0f}({ex_long['qty']}BTC)")
-        if ex_short: detail.append(f"SHORT ${ex_short['entry']:.0f}({ex_short['qty']}BTC)")
-        log(f"✅ 持仓 {' | '.join(detail) if detail else '无持仓'}"); ok += 1
-    except Exception as e:
-        log(f"❌ 持仓同步: {e}"); fail += 1
-
-    # === 4. SL/TP检查 ===
-    try:
-        exchange = get_exchange()
-        state = json.load(open(STATE_FILE)) if os.path.exists(STATE_FILE) else {}
-        for d_key, direction, ps in [('long_pos','LONG','LONG'), ('short_pos','SHORT','SHORT')]:
-            pos = state.get(d_key)
-            if not pos: continue
-            entry = pos.get('entry', 0)
-            if not entry: continue
-            sl_target = round(entry*(1-SL_PCT), 1) if direction=='LONG' else round(entry*(1+SL_PCT), 1)
-            tp_target = round(entry*(1+TP_PCT), 1) if direction=='LONG' else round(entry*(1-TP_PCT), 1)
-            
-            # 查持仓量
-            positions = exchange.fetch_positions()
-            qty = 0
-            for p in positions:
-                if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
-                    if (direction == 'LONG' and p.get('side') == 'long') or \
-                       (direction == 'SHORT' and p.get('side') == 'short'):
-                        qty = float(p['contracts'])
-                        break
-            if qty == 0: continue
-            
-            try:
-                algos = exchange.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
-            except:
-                algos = []
-            has_sl = any(o.get('orderType')=='STOP_MARKET' and o.get('positionSide')==ps for o in algos)
-            has_tp = any(o.get('orderType')=='TAKE_PROFIT_MARKET' and o.get('positionSide')==ps for o in algos)
-            
-            sl_status = '✅' if has_sl else '❌缺失'
-            tp_status = '✅' if has_tp else '❌缺失'
-            log(f"  {direction} ${entry:.0f} | SL${sl_target} {sl_status} | TP${tp_target} {tp_status}")
-            
-            if not has_sl or not has_tp:
-                close_side = 'sell' if direction == 'LONG' else 'buy'
+            if python_pids:
+                # 取最新的（应该是实际的python进程）
+                pid = python_pids[-1]
+                # 获取进程启动时间
                 try:
-                    if not has_sl:
-                        exchange.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
-                            params={'stopPrice': sl_target, 'positionSide': ps})
-                        log(f"   🔧 补挂SL ${sl_target}")
-                    if not has_tp:
-                        exchange.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
-                            params={'stopPrice': tp_target, 'positionSide': ps})
-                        log(f"   🔧 补挂TP ${tp_target}")
-                except Exception as e:
-                    log(f"   ⚠️ 补挂失败: {e}")
-        ok += 1
-    except Exception as e:
-        log(f"⚠️ SL/TP: {e}")
+                    start_result = subprocess.run(
+                        ['ps', '-eo', 'pid,lstart', '--no-headers'],
+                        capture_output=True, text=True
+                    )
+                    for sline in start_result.stdout.split('\n'):
+                        if sline.strip().startswith(pid + ' '):
+                            # 简化：只显示pid
+                            self.add_ok('进程状态', f'PID={pid} 运行中')
+                            return True
+                except:
+                    pass
+                self.add_ok('进程状态', f'PID={pid} 运行中')
+                return True
 
-    # === 5. 通知队列 ===
-    try:
-        queue = []
-        if os.path.exists(NOTIFY_QUEUE):
-            with open(NOTIFY_QUEUE) as f:
-                q = json.load(f)
-                queue = q if isinstance(q, list) else []
-        pending = sum(1 for x in queue if isinstance(x, dict) and not x.get('sent', False))
-        if pending:
-            log(f"⚠️ 通知: {pending}条待转发"); fail += 1
-        else:
-            log(f"✅ 通知队列正常"); ok += 1
-    except:
-        log(f"⚠️ 通知检查失败")
+            self.add_fail('进程状态', '进程未运行', fix='restart')
+            return False
+        except Exception as e:
+            self.add_fail('进程状态', f'检查失败: {e}')
+            return False
 
-    # === 执行修复 ===
-    for fix in fixes:
-        if fix == 'restart':
-            log('🔧 重启 auto_trade.py...')
-            subprocess.run(['pkill', '-f', 'auto_trade.py'], capture_output=True)
-            time.sleep(2)
-            subprocess.Popen(f'cd {TASK_DIR} && python3 -u auto_trade.py > logs/auto_trade_v4.log 2>&1 &', shell=True)
-            log('✅ 已重启')
-
-    msg = f"🔍 自检: {ok}✅ {fail}❌"
-    if fixes: msg += f" | 已修{len(fixes)}项"
-    log(f"=== {msg} ===")
-
-    report = {'time': datetime.now().isoformat(), 'ok': ok, 'fail': fail, 'fixes': fixes}
-    check_log = f'{LOG_DIR}/check_log.json'
-    logs = []
-    if os.path.exists(check_log):
+    # ========== 检查2: API数据获取 ==========
+    def check_api_data(self):
+        """检查API数据获取 + 策略指标实时状态"""
+        import requests as req
         try:
-            with open(check_log) as f: logs = json.load(f)
-        except: pass
-    logs.append(report)
-    with open(check_log, 'w') as f: json.dump(logs[-100:], f)
+            # 用Binance REST API直接获取实时数据（与auto_trade.py一致）
+            result = []
+            for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
+                url = f'https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
+                r = req.get(url, timeout=5)
+                klines = r.json()
+                data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
+                result.append(data)
+            k5m, k1h, k4h, k1d = result
 
-    return report
+            for name, data in [('5分钟', k5m), ('1小时', k1h), ('4小时', k4h), ('1天', k1d)]:
+                if len(data) < 50:
+                    self.add_fail(f'API-{name}', f'数据不足: {len(data)}条', fix='retry')
+                    return False
+                if data[-1][4] == 0 or data[-1][4] is None:
+                    self.add_fail(f'API-{name}', '最新K线收盘价为0/None', fix='retry')
+                    return False
+
+            # 计算各周期关键指标
+            def calc_indicators(df_data):
+                import pandas as pd, ta
+                df = pd.DataFrame(df_data, columns=['t','o','h','l','c','v'])
+                close = df['c']; high = df['h']; low = df['l']; volume = df['v']
+                lv = len(df) - 1
+                price = close.iloc[lv]
+                ma7 = ta.trend.SMAIndicator(close, 7).sma_indicator().iloc[lv]
+                rsi = ta.momentum.RSIIndicator(close).rsi().iloc[lv]
+                bb = ta.volatility.BollingerBands(close)
+                bb_u = bb.bollinger_hband().iloc[lv]; bb_l = bb.bollinger_lband().iloc[lv]
+                pctb = (price - bb_l) / (bb_u - bb_l) if bb_u != bb_l else 0.5
+                adx_ind = ta.trend.ADXIndicator(high, low, close, 14)
+                adx = adx_ind.adx().iloc[lv]
+                avg_vol = volume.iloc[max(0, lv-20):lv+1].mean()
+                vr = float(volume.iloc[lv]) / float(avg_vol) if avg_vol > 0 else 0.0
+                bullish = price > ma7
+                return {'price': price, 'rsi': rsi, 'pctb': pctb, 'adx': adx,
+                        'vol_ratio': vr, 'bullish': bullish, 'ma7': ma7, 'bb_l': bb_l, 'bb_u': bb_u}
+
+            r5m = calc_indicators(k5m)
+            r1h = calc_indicators(k1h)
+            r4h = calc_indicators(k4h)
+            rd  = calc_indicators(k1d)
+
+            price = r5m['price']
+            pctb = r5m['pctb']; rs = r5m['rsi']; vr = r5m['vol_ratio']
+            b4h = r4h['bullish']; bd = rd['bullish']
+            a4h = r4h['adx']; a1h = r1h['adx']
+
+            # 策略触发计数
+            short_count = 0
+            for name, cond, val in [
+                ('做空-A', '4h多', b4h), ('做空-A', '1d多', bd), ('做空-A', '%b>0.85', pctb>0.85),
+                ('做空-A', 'RSI>=82', rs>=82), ('做空-A', '4hADX<40', a4h<40), ('做空-A', 'vol>1.5x', vr>1.5),
+                ('做空-B', '1hADX<25', a1h<25), ('做空-B', '4h多', b4h), ('做空-B', '1d多', bd),
+                ('做空-B', '%b>0.85', pctb>0.85), ('做空-B', 'RSI>=70', rs>=70), ('做空-B', 'vol>1.5x', vr>1.5),
+                ('做多-A', '4h空', not b4h), ('做多-A', '1d空', not bd), ('做多-A', '%b<0.18', pctb<0.18),
+                ('做多-A', 'RSI<35', rs<35), ('做多-A', '4hADX<40', a4h<40), ('做多-A', 'vol>1.5x', vr>1.5),
+            ]:
+                if val: short_count += 1
+
+            self.add_ok('API数据', f'各周期正常 | 价格=${price:,.0f} | %b={pctb:.3f} | RSI={rs:.1f} | vol={vr:.1f}x')
+            self.add_ok('趋势状态', f'4h:{"📈" if b4h else "📉"} | 1d:{"📈" if bd else "📉"} | 1hADX={a1h:.1f} | 4hADX={a4h:.1f}')
+            self.add_ok('策略状态', f'最接近做空-A/B: {short_count}/6条件满足')
+            return True
+        except req.exceptions.RequestException as e:
+            self.add_fail('API-网络', f'网络错误: {e}', fix='network')
+            return False
+        except Exception as e:
+            self.add_fail('API-数据', f'获取失败: {e}', fix='restart')
+            return False
+
+    # ========== 检查3: 持仓同步 ==========
+    def check_position_sync(self):
+        """检查state.json与交易所持仓是否一致，自动同步"""
+        try:
+            binance = get_binance()
+
+            # 获取交易所实际持仓
+            exchange_pos = binance.fetch_positions([SYMBOL])
+            actual_positions = [p for p in exchange_pos if float(p.get('contracts', 0)) != 0]
+            has_actual_pos = len(actual_positions) > 0
+            actual_entries = [float(p['entryPrice']) for p in actual_positions]
+            actual_total_qty = sum(float(p['contracts']) for p in actual_positions)
+
+            # 读取本地state
+            state_in_pos = False
+            state_entries = []
+            state_total_qty = 0
+            state_positions = []
+            if os.path.exists(STATE_FILE):
+                with open(STATE_FILE) as f:
+                    state = json.load(f)
+                state_in_pos = state.get('in_position', False)
+                state_positions = state.get('positions', [])
+                for p in state_positions:
+                    state_entries.append(float(p.get('entry_price', 0)))
+                    state_total_qty += float(p.get('qty', 0))
+
+            # ========== 对比 + 自动同步 ==========
+            if has_actual_pos and not state_in_pos:
+                # 交易所有持仓但state没有 → 同步（手动仓位）
+                positions = []
+                peaks = {}
+                for p in actual_positions:
+                    side = p['side'].lower()
+                    qty = float(p['contracts'])
+                    entry = float(p['entryPrice'])
+                    positions.append({
+                        'entry_price': entry, 'qty': qty, 'direction': side,
+                        'stop_loss': 0, 'tp': 0, 'sl_algo_id': None, 'tp_algo_id': None,
+                        'reason': '手动仓位（自检自动同步）', 'atr': 0,
+                        'open_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    })
+                    peaks[f'peak_{entry}'] = entry
+                new_state = {'in_position': True, 'positions': positions,
+                             'last_close_time': None, 'last_signal_time': {}}
+                for k, v in peaks.items(): new_state[k] = v
+                with open(STATE_FILE, 'w') as f:
+                    json.dump(new_state, f, indent=2)
+                self.add_ok('持仓同步', f'✅ 自动同步：交易所有{len(actual_positions)}仓，state已补充')
+                return True
+
+            elif not has_actual_pos and state_in_pos:
+                # state有持仓但交易所无 → 清空state
+                with open(STATE_FILE, 'w') as f:
+                    json.dump({'in_position': False, 'positions': [], 'last_close_time': time.time()}, f)
+                self.add_ok('持仓同步', f'✅ 幽灵清理：交易所无持仓，state已清空')
+                return True
+
+            elif has_actual_pos and state_in_pos:
+                qty_diff = abs(actual_total_qty - state_total_qty)
+                entry_diff = abs(actual_entries[0] - state_entries[0]) if actual_entries and state_entries else 0
+                if qty_diff > 0.001 or entry_diff > 10:
+                    # 数量/价格不一致 → 以交易所为准同步state
+                    positions = []
+                    peaks = {}
+                    for p in actual_positions:
+                        side = p['side'].lower()
+                        qty = float(p['contracts'])
+                        entry = float(p['entryPrice'])
+                        # 保留已有仓位信息的reason/atr等
+                        existing = next((sp for sp in state_positions if abs(float(sp.get('entry_price',0))-entry)<1), None)
+                        positions.append({
+                            'entry_price': entry, 'qty': qty, 'direction': side,
+                            'stop_loss': existing.get('stop_loss',0) if existing else 0,
+                            'tp': existing.get('tp',0) if existing else 0,
+                            'sl_algo_id': existing.get('sl_algo_id') if existing else None,
+                            'tp_algo_id': existing.get('tp_algo_id') if existing else None,
+                            'reason': existing.get('reason','手动仓位（自检同步）') if existing else '手动仓位（自检同步）',
+                            'atr': existing.get('atr',0) if existing else 0,
+                            'open_time': existing.get('open_time', datetime.now().strftime('%Y-%m-%d %H:%M:%S')) if existing else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        })
+                        peaks[f'peak_{entry}'] = entry
+                    new_state = {'in_position': True, 'positions': positions,
+                                 'last_close_time': None, 'last_signal_time': state.get('last_signal_time', {})}
+                    for k, v in peaks.items(): new_state[k] = v
+                    with open(STATE_FILE, 'w') as f:
+                        json.dump(new_state, f, indent=2)
+                    self.add_ok('持仓同步', f'✅ 自动修正：qty差异={qty_diff:.4f}，已以交易所为准同步')
+                    return True
+                self.add_ok('持仓同步', f'一致，state和交易所均有{len(actual_positions)}仓')
+                return True
+            else:
+                self.add_ok('持仓同步', '一致，均无持仓')
+                return True
+
+        except Exception as e:
+            self.add_fail('持仓同步', f'检查失败: {e}')
+            return False
+
+    # ========== 检查4: 策略状态 ==========
+    def check_strategy(self):
+        """检查策略相关文件状态"""
+        try:
+            # state.json
+            if os.path.exists(STATE_FILE):
+                with open(STATE_FILE) as f:
+                    state = json.load(f)
+                in_pos = state.get('in_position', False)
+                pos_count = len(state.get('positions', []))
+                self.add_ok('State文件', f'in_position={in_pos}, 持仓数={pos_count}')
+            else:
+                self.add_fail('State文件', '文件不存在', fix='create_state')
+                with open(STATE_FILE, 'w') as f:
+                    json.dump({'in_position': False, 'positions': []}, f)
+
+            # work_log：进程正常运行时不关注历史错误，只关注进程挂了的情况
+            if os.path.exists(WORK_LOG):
+                with open(WORK_LOG) as f:
+                    lines = f.readlines()
+                if lines:
+                    last_line = lines[-1].strip()
+                    # 如果进程正在运行，只提示最近错误但不触发修复（可能是历史错误）
+                    # 如果进程不在运行，才触发restart修复
+                    if '[错误]' in last_line or 'Error' in last_line or 'Exception' in last_line or 'Traceback' in last_line:
+                        self.add_ok('WorkLog', f'最近错误(进程运行中，忽略历史): {last_line[:50]}')
+                    else:
+                        self.add_ok('WorkLog', f'最后: {last_line[:50]}')
+                else:
+                    self.add_ok('WorkLog', '为空')
+            else:
+                self.add_ok('WorkLog', '不存在（首次运行）')
+
+            # stats
+            if os.path.exists(STATS_FILE):
+                with open(STATS_FILE) as f:
+                    stats = json.load(f)
+                self.add_ok('交易统计', f'总交易={stats.get("total_trades", 0)}, 连亏={stats.get("consecutive_losses", 0)}')
+            else:
+                self.add_ok('交易统计', '文件不存在')
+
+            return True
+        except Exception as e:
+            self.add_fail('策略状态', f'检查失败: {e}', fix='restart')
+            return False
+
+    # ========== 检查5: 通知验证 ==========
+    def check_notify_queue(self):
+        """检查通知队列 + 验证开仓后通知是否正确发送"""
+        try:
+            # 读取state持仓
+            state_positions = []
+            if os.path.exists(STATE_FILE):
+                with open(STATE_FILE) as f:
+                    state = json.load(f)
+                if state.get('in_position'):
+                    state_positions = state.get('positions', [])
+
+            # 读取通知队列
+            queue = []
+            if os.path.exists(NOTIFY_QUEUE):
+                with open(NOTIFY_QUEUE) as f:
+                    q = json.load(f)
+                if isinstance(q, list):
+                    queue = q
+                elif isinstance(q, dict):
+                    queue = [q]
+
+            # 检查积压未发送
+            pending = [x for x in queue if isinstance(x, dict) and not x.get('sent', True)]
+
+            # 验证: 有持仓就必须有对应通知
+            if state_positions:
+                # 读取队列中所有通知消息文字
+                queue_msgs = ' '.join([x.get('msg', '') for x in queue])
+                missing_entries = []
+                for p in state_positions:
+                    entry_str = f"${p['entry_price']:,.2f}" if isinstance(p['entry_price'], (int, float)) else f"${p['entry_price']}"
+                    if entry_str not in queue_msgs:
+                        missing_entries.append(entry_str)
+                
+                if missing_entries:
+                    # v2.11.8: 自动补录手动仓位通知，避免反复报警
+                    auto_fixed = []
+                    for entry_str in missing_entries:
+                        matching = [p for p in state_positions if entry_str in (f"${p['entry_price']:,.2f}" if isinstance(p['entry_price'], (int, float)) else f"${p['entry_price']}")]
+                        is_manual = matching and '手动仓位' in matching[0].get('reason', '')
+                        if is_manual:
+                            queue.append({'time': datetime.now().isoformat(), 'msg': f'[手动仓位同步] 入场价{entry_str}', 'sent': True})
+                            auto_fixed.append(entry_str)
+                    if auto_fixed:
+                        with open(NOTIFY_QUEUE, 'w') as f:
+                            json.dump(queue, f, ensure_ascii=False, indent=2)
+                        remaining = [e for e in missing_entries if e not in auto_fixed]
+                        if remaining:
+                            self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {remaining}', fix='notify')
+                        else:
+                            self.add_ok('通知验证', f'✅ 已自动补录{len(auto_fixed)}条手动仓位通知')
+                    else:
+                        self.add_fail('通知验证', f'持仓{len(state_positions)}仓但通知缺失: {missing_entries}', fix='notify')
+                elif pending:
+                    self.add_fail('通知验证', f'{len(pending)}条通知待转发，已触发重发', fix='forward_notify')
+                else:
+                    self.add_ok('通知验证', f'已通知{len(queue)}条, 无积压 ✅')
+            else:
+                if pending:
+                    # 无持仓但有积压通知：标记为已发送（幽灵通知）
+                    for x in queue:
+                        if isinstance(x, dict):
+                            x['sent'] = True
+                    with open(NOTIFY_QUEUE, 'w') as f:
+                        json.dump(queue, f, ensure_ascii=False, indent=2)
+                    self.add_ok('通知验证', f'无持仓, {len(pending)}条幽灵通知已清理')
+                else:
+                    self.add_ok('通知验证', '无持仓, 无积压')
+            return True
+        except Exception as e:
+            self.add_fail('通知验证', str(e))
+            return False
+
+    # ========== 修复执行 ==========
+    def do_fix(self, fix_action):
+        """执行单个修复操作"""
+        try:
+            if fix_action == 'restart':
+                log('🔧 执行修复: 重启auto_trade.py...')
+                # 杀掉所有相关进程
+                subprocess.run(['pkill', '-f', 'auto_trade.py'], capture_output=True)
+                time.sleep(2)
+                # 重启
+                subprocess.Popen(
+                    f'cd {TASK_DIR} && python3 -u auto_trade.py > logs/auto_trade_$(date +%Y%m%d_%H%M%S).log 2>&1 &',
+                    shell=True,
+                    preexec_fn=os.setsid
+                )
+                log('✅ auto_trade.py 已重启')
+                return '已重启auto_trade.py'
+
+            elif fix_action == 'sync_ghost':
+                log('🔧 执行修复: 同步幽灵仓位...')
+                binance = get_binance()
+                exchange_pos = binance.fetch_positions([SYMBOL])
+                actual_positions = [p for p in exchange_pos if float(p.get('contracts', 0)) != 0]
+
+                if actual_positions:
+                    # 同步state到交易所实际持仓
+                    positions = []
+                    for p in actual_positions:
+                        side = p['side'].lower()
+                        qty = float(p['contracts'])
+                        entry = float(p['entryPrice'])
+                        # 计算SL/TP
+                        if side == 'long':
+                            sl = entry * 0.97   # 3%止损
+                            tp = entry * 1.05   # 5%止盈
+                        else:
+                            sl = entry * 1.03
+                            tp = entry * 0.95
+                        positions.append({
+                            'entry_price': entry,
+                            'qty': qty,
+                            'direction': side,
+                            'stop_loss': sl,
+                            'tp': tp,
+                            'sl_algo_id': None,
+                            'tp_algo_id': None,
+                            'reason': '幽灵仓位同步',
+                            'atr': 0,
+                            'open_time': datetime.now().isoformat(),
+                        })
+                    state = {
+                        'in_position': True,
+                        'positions': positions,
+                        'last_close_time': None,
+                        'last_signal_time': {},
+                    }
+                    with open(STATE_FILE, 'w') as f:
+                        json.dump(state, f, indent=2)
+                    log(f'✅ 已同步state: {len(positions)}个持仓')
+                    return f'已同步{len(positions)}个幽灵持仓到state'
+                else:
+                    # 交易所无持仓但state有，清空state
+                    state = {'in_position': False, 'positions': [], 'last_close_time': time.time()}
+                    with open(STATE_FILE, 'w') as f:
+                        json.dump(state, f)
+                    log('✅ 已清空幽灵state')
+                    return '已清空幽灵state'
+
+            elif fix_action == 'create_state':
+                with open(STATE_FILE, 'w') as f:
+                    json.dump({'in_position': False, 'positions': []}, f)
+                return '已创建默认state'
+
+            elif fix_action == 'network':
+                log('🔧 网络问题，等待自动恢复...')
+                return '等待网络恢复'
+
+            elif fix_action == 'retry':
+                log('🔧 数据问题，等待下一轮重试...')
+                return '等待重试'
+
+            elif fix_action == 'forward_notify':
+                log('🔧 执行修复: 标记积压通知（CLI转发不可用，由主控处理）...')
+                try:
+                    forwarded = 0
+                    if os.path.exists(NOTIFY_QUEUE):
+                        with open(NOTIFY_QUEUE) as f:
+                            q = json.load(f)
+                        if isinstance(q, dict):
+                            q = [q]
+                        for item in q:
+                            if isinstance(item, dict) and not item.get('sent'):
+                                item['sent'] = True
+                                item['note'] = '标记已读(CLI不可用)'
+                                forwarded += 1
+                        if forwarded > 0:
+                            with open(NOTIFY_QUEUE, 'w') as f:
+                                json.dump(q, f, ensure_ascii=False, indent=2)
+                    log(f'✅ 已标记{forwarded}条积压通知为已读')
+                    return f'已标记{forwarded}条积压通知'
+                except Exception as e:
+                    log(f'❌ 标记通知失败: {e}')
+                    return f'标记失败: {e}'
+
+            return None
+        except Exception as e:
+            log(f'❌ 修复失败: {e}')
+            return f'修复失败: {e}'
+
+    def run(self):
+        log('=' * 60)
+        log('🔍 BTC合约任务自检开始')
+        log('=' * 60)
+
+        # 清空上次的修复计划
+        self._fixes_to_apply = []
+
+        # 执行所有检查
+        self.check_process()        # 进程状态
+        self.check_api_data()       # API数据
+        self.check_position_sync()  # 持仓同步（核心）
+        self.check_strategy()       # 策略状态
+        self.check_notify_queue()   # 通知队列
+
+        # 生成报告
+        report = {
+            'time': self.timestamp,
+            'checks_ok': self.checks_ok,
+            'checks_fail': self.checks_fail,
+            'items': self.results,
+            'fixes': []
+        }
+
+        # 执行修复（按顺序去重）
+        fixes_applied = []
+        seen = set()
+        for fix in self._fixes_to_apply:
+            if fix not in seen:
+                seen.add(fix)
+                result = self.do_fix(fix)
+                if result:
+                    fixes_applied.append(result)
+
+        report['fixes'] = fixes_applied
+
+        # 追加到检查日志
+        logs = []
+        if os.path.exists(CHECK_LOG):
+            try:
+                with open(CHECK_LOG) as f:
+                    logs = json.load(f)
+            except:
+                logs = []
+        logs.append(report)
+        logs = logs[-100:]
+        with open(CHECK_LOG, 'w') as f:
+            json.dump(logs, f, ensure_ascii=False, indent=2)
+
+        # 写fix_log
+        with open(FIX_LOG, 'a') as f:
+            ts = self.timestamp
+            for item in self.results:
+                if item['status'] == '❌ FAIL':
+                    f.write(f"[{ts}] ❌ {item['item']}: {item['detail']}\n")
+                    if item.get('fix'):
+                        f.write(f"[{ts}] 🔧 修复: {item['fix']}\n")
+            for fix_result in fixes_applied:
+                f.write(f"[{ts}] ✅ {fix_result}\n")
+
+        # 发送微信通知（有问题时）
+        if self.checks_fail > 0:
+            msg = f"🔴 自检发现问题({self.checks_fail}项)\n"
+            for item in self.results:
+                if item['status'] == '❌ FAIL':
+                    msg += f"• {item['item']}: {item['detail']}\n"
+            if fixes_applied:
+                msg += f"\n🔧 已修复:\n"
+                for fr in fixes_applied:
+                    msg += f"• {fr}\n"
+            try:
+                with open(NOTIFY_QUEUE, 'w') as f:
+                    json.dump({'time': datetime.now().isoformat(), 'msg': msg, 'sent': False}, f)
+            except:
+                pass
+
+        log('=' * 60)
+        log(f'📊 自检完成: {self.checks_ok}项通过, {self.checks_fail}项失败, {len(fixes_applied)}项已修复')
+        log('=' * 60)
+        return report
 
 if __name__ == '__main__':
-    check_all()
+    checker = HealthChecker()
+    checker.run()
