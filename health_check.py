@@ -29,9 +29,9 @@ NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 WECHAT_CHANNEL = 'openclaw-weixin'
 WECHAT_TARGET = 'o9cq80_h_BaEgBVnsrfqjOMF8Rug@im.wechat'
 
-# API配置
-API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
-SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
+# API配置（从api_config统一读取，与auto_trade.py保持一致）
+from api_config import API_KEY, SECRET
+
 SYMBOL = 'BTC/USDT:USDT'
 
 os.makedirs(LOG_DIR, exist_ok=True)
