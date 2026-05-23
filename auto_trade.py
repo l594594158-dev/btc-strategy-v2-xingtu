@@ -213,13 +213,17 @@ def manage_positions(state, price, signal, reason):
     if signal == 'LONG':
         if state.get('long_pos') is not None:
             log(f"⏭ LONG信号跳过 | 已有LONG仓")
-        elif do_open('LONG', price, reason):
-            state['long_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
+        else:
+            entry_price = do_open('LONG', price, reason)
+            if entry_price:
+                state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
         if state.get('short_pos') is not None:
             log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
-        elif do_open('SHORT', price, reason):
-            state['short_pos'] = {'entry': price, 'signal': reason, 'open_time': datetime.now().isoformat()}
+        else:
+            entry_price = do_open('SHORT', price, reason)
+            if entry_price:
+                state['short_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
 
     save_state(state)
     return closed
@@ -253,12 +257,12 @@ def do_open(direction, price, reason):
                f"{reason}")
         notify_alert(msg)
         work_log("开仓", f"{direction} | ${entry_price:.0f} | {reason}")
-        return True
+        return entry_price
 
     except Exception as e:
         log(f"❌ {direction}开仓失败: {e}")
         work_log("错误", f"开仓失败: {e}")
-        return False
+        return None
 
 # ========== 平仓执行 ==========
 def do_close(direction, price, pos_data, reason):
@@ -333,7 +337,17 @@ def ensure_sl_tp(state):
         except:
             existing = []
 
+        # 用交易所实际入场价（非信号触发价）
         entry = pos['entry']
+        for p in positions:
+            if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
+                side_ck = 'LONG' if p.get('side') == 'long' else 'SHORT'
+                if side_ck == direction:
+                    exchange_entry = float(p.get('entryPrice', 0))
+                    if exchange_entry > 0:
+                        entry = exchange_entry
+                    break
+
         if direction == 'LONG':
             sl_p = round(entry * (1 - STOP_LOSS_PCT), 1)
             tp_p = round(entry * (1 + TAKE_PROFIT_PCT), 1)
@@ -378,10 +392,15 @@ def sync_state(state):
         if qty <= 0:
             continue
         side = p.get('side', 'long')
+        exchange_entry = float(p.get('entryPrice', 0))
         if side == 'long':
             has_long = True
+            if state.get('long_pos') and exchange_entry > 0:
+                state['long_pos']['entry'] = exchange_entry  # 用交易所实际入场价
         elif side == 'short':
             has_short = True
+            if state.get('short_pos') and exchange_entry > 0:
+                state['short_pos']['entry'] = exchange_entry
 
     if not has_long and state.get('long_pos'):
         log("🔄 交易所LONG已消失，清除本地")
