@@ -15,12 +15,20 @@ import json
 import os
 from datetime import datetime
 
-# ========== API ==========
-from api_config import API_KEY, SECRET
+# ========== API 双Key架构 ==========
+from api_config import READ_API_KEY, READ_SECRET, TRADE_API_KEY, TRADE_SECRET
 
-binance = ccxt.binance({
-    'apiKey': API_KEY,
-    'secret': SECRET,
+# 行情分析实例（读取权限）
+read_binance = ccxt.binance({
+    'apiKey': READ_API_KEY,
+    'secret': READ_SECRET,
+    'options': {'defaultType': 'swap'}
+})
+
+# 交易执行实例（交易权限）
+trade_binance = ccxt.binance({
+    'apiKey': TRADE_API_KEY,
+    'secret': TRADE_SECRET,
     'options': {'defaultType': 'swap'}
 })
 
@@ -237,7 +245,7 @@ def manage_positions(state, price, signal, reason):
 def do_open(direction, price, reason):
     try:
         # ① 交易所级防护：查现有持仓，同方向已有则拒绝
-        positions = binance.fetch_positions()
+        positions = trade_binance.fetch_positions()
         for p in positions:
             if p.get('symbol') != SYMBOL:
                 continue
@@ -251,7 +259,7 @@ def do_open(direction, price, reason):
 
         # ② 市价开仓
         open_side = 'buy' if direction == 'LONG' else 'sell'
-        order = binance.create_order(SYMBOL, 'market', open_side, QTY,
+        order = trade_binance.create_order(SYMBOL, 'market', open_side, QTY,
                                      params={'positionSide': direction})
         entry_price = order.get('average', price)
 
@@ -276,7 +284,7 @@ def do_close(direction, price, pos_data, reason):
         close_side = 'sell' if direction == 'LONG' else 'buy'
 
         # 查当前持仓数量
-        positions = binance.fetch_positions()
+        positions = trade_binance.fetch_positions()
         qty = 0
         for p in positions:
             if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
@@ -289,7 +297,7 @@ def do_close(direction, price, pos_data, reason):
             log(f"⚠️ 未找到{direction}持仓，可能已被平")
             return
 
-        order = binance.create_order(SYMBOL, 'market', close_side, qty,
+        order = trade_binance.create_order(SYMBOL, 'market', close_side, qty,
                                      params={'positionSide': direction})
         close_price = order.get('average', price)
 
@@ -308,10 +316,10 @@ def do_close(direction, price, pos_data, reason):
 
         # 清理HYPE挂单
         try:
-            algos = binance.fapiprivate_get_openalgoorders({'symbol': 'HYPEUSDT'})
+            algos = trade_binance.fapiprivate_get_openalgoorders({'symbol': 'HYPEUSDT'})
             for o in algos:
                 if o.get('algoStatus') == 'NEW' and o.get('positionSide') == direction:
-                    binance.fapiPrivateDeleteAlgoOrder({'symbol': 'HYPEUSDT', 'algoId': int(o['algoId'])})
+                    trade_binance.fapiPrivateDeleteAlgoOrder({'symbol': 'HYPEUSDT', 'algoId': int(o['algoId'])})
         except:
             pass
 
@@ -326,7 +334,7 @@ def ensure_sl_tp(state):
         if not pos:
             continue
 
-        positions = binance.fetch_positions()
+        positions = trade_binance.fetch_positions()
         qty = 0
         for p in positions:
             if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
@@ -338,7 +346,7 @@ def ensure_sl_tp(state):
             continue
 
         try:
-            algos = binance.fapiprivate_get_openalgoorders({'symbol': 'HYPEUSDT'})
+            algos = trade_binance.fapiprivate_get_openalgoorders({'symbol': 'HYPEUSDT'})
             existing = [o for o in algos if o.get('algoStatus') == 'NEW' and o.get('positionSide') == direction]
         except:
             existing = []
@@ -366,7 +374,7 @@ def ensure_sl_tp(state):
         sl_exist = any(o.get('orderType') == 'STOP_MARKET' for o in existing)
         if not sl_exist:
             try:
-                binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
+                trade_binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                     params={'stopPrice': sl_p, 'positionSide': direction})
                 log(f"  挂SL: ${sl_p:.4f}")
             except Exception as e:
@@ -375,7 +383,7 @@ def ensure_sl_tp(state):
         tp_exist = any(o.get('orderType') == 'TAKE_PROFIT_MARKET' for o in existing)
         if not tp_exist:
             try:
-                binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
+                trade_binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                     params={'stopPrice': tp_p, 'positionSide': direction})
                 log(f"  挂TP: ${tp_p:.4f}")
             except Exception as e:
@@ -384,7 +392,7 @@ def ensure_sl_tp(state):
 # ========== 交易所→本地同步 ==========
 def sync_state(state):
     try:
-        positions = binance.fetch_positions()
+        positions = trade_binance.fetch_positions()
     except:
         return False
 
@@ -455,12 +463,12 @@ def main():
 
     # 设置杠杆 + 逐仓
     try:
-        binance.set_margin_mode('isolated', SYMBOL)
+        trade_binance.set_margin_mode('isolated', SYMBOL)
         log(f"保证金模式: 逐仓")
     except Exception as e:
         log(f"保证金模式: {e}")
     try:
-        binance.set_leverage(LEVERAGE, SYMBOL)
+        trade_binance.set_leverage(LEVERAGE, SYMBOL)
         log(f"杠杆设置: {LEVERAGE}x")
     except Exception as e:
         log(f"杠杆设置: {e}")
