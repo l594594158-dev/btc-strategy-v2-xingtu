@@ -157,8 +157,8 @@ def check_entry(data):
     sma1d = rd.get('sma_closed', rd['sma20'])
     d1_bull = d1_close > sma1d
 
-    # ③ 回调范围 ±1.0%
-    in_range = sma5m * 0.99 <= price <= sma5m * 1.01
+    # ③ 回调范围 ±1.5%
+    in_range = sma5m * 0.985 <= price <= sma5m * 1.015
 
     # ④ 1h ADX > 25
     if adx1h <= 25:
@@ -170,7 +170,7 @@ def check_entry(data):
 
     # ⑥ 回调范围
     if not in_range:
-        return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%"
+        return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.2f}%"
 
     # ⑦ 放量 ≥1.0（过滤缩量噪音）
     if vol_ratio < 1.0:
