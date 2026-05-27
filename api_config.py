@@ -1,0 +1,7 @@
+# 行情分析API（只读）
+READ_API_KEY = "Fihnuczl8Oahm5GtoVIbTi699lVYMoYdQIAd6EpSZYjX0HHrI1d5XsguckXT6drC"
+READ_SECRET = "iyoVG7pfUGoaorvqsa7I54ogSLUStNaCUB9g6iBjsNT0ztDRdkCiazaNxYiIsDfs"
+
+# 交易执行API（交易权限）
+TRADE_API_KEY = "IlPevOWyWpnC2FgpcRlk7kQX24AjjBh6hhD0l5ki5g43AebJy1GwNPH4D3fzZcI9"
+TRADE_SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF1I"
