@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-HYPE合约 趋势回调策略 v1.0
-- 与BTC v4.0策略逻辑完全一致，仅参数不同
+HYPE合约 趋势回调策略 v2.0
+- 信号逻辑与BTC v5.0一致: 4h单方向+6指标
 - TP 3.0% / SL 2.0% / 30x逐仓 / 5 HYPE/仓
 - 双向各1仓，同向信号跳过
-- HYPE专用K线独立计算指标，与BTC策略互不干预
+- 变更: 移除1d双周期, ADX放宽(1h>20/4h<55)
 """
 import ccxt
 import requests
@@ -42,8 +42,8 @@ WORK_LOG = f'{BASE_DIR}/logs/work_log_hype.txt'
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue_hype.json'
 
 # ========== 策略参数 ==========
-STOP_LOSS_PCT = 2.0 / 100    # HYPE: 2%止损
-TAKE_PROFIT_PCT = 3.0 / 100  # HYPE: 3%止盈
+STOP_LOSS_PCT = 1.0 / 100    # HYPE: 1%止损
+TAKE_PROFIT_PCT = 1.5 / 100  # HYPE: 1.5%止盈
 POLL_INTERVAL = 2             # 扫描间隔（秒）
 
 # ========== 日志 ==========
@@ -137,14 +137,14 @@ def calc(df):
         'adx_closed': adx_closed
     }
 
-# ========== 信号判断（7条件，与BTC v4.0完全一致）==========
+# ========== 信号判断（v2.0: 与BTC v5.0一致的6指标）==========
 def check_entry(data):
-    r5 = data['5m']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
+    r5 = data['5m']; r1 = data['1h']; r4 = data['4h']
 
     price = r5['price']
     rsi5m = r5['rsi']
-    adx1h = r1.get('adx_closed', r1['adx'])
-    adx4h = r4.get('adx_closed', r4['adx'])
+    adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
+    adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
     sma5m = r5['sma20']
 
@@ -152,41 +152,33 @@ def check_entry(data):
     h4_close = r4.get('close_closed', r4['price'])
     sma4h = r4.get('sma_closed', r4['sma20'])
     h4_bull = h4_close > sma4h
-    # ② 1d方向 (闭K收盘价 vs 闭K SMA20)
-    d1_close = rd.get('close_closed', rd['price'])
-    sma1d = rd.get('sma_closed', rd['sma20'])
-    d1_bull = d1_close > sma1d
 
-    # ③ 回调范围 ±1.5%
+    # ② 1h ADX > 20 （滤横盘）
+    if adx1h <= 20:
+        return None, f"观望 | 1hADX={adx1h:.1f}≤20"
+
+    # ③ 4h ADX < 55 （防追末端过热）
+    if adx4h >= 55:
+        return None, f"观望 | 4hADX={adx4h:.1f}≥55"
+
+    # ④ 回调范围 ±1.5%
     in_range = sma5m * 0.985 <= price <= sma5m * 1.015
-
-    # ④ 1h ADX > 25
-    if adx1h <= 25:
-        return None, f"观望 | 1hADX={adx1h:.1f}≤25"
-
-    # ⑤ 4h ADX < 40
-    if adx4h >= 40:
-        return None, f"观望 | 4hADX={adx4h:.1f}≥40"
-
-    # ⑥ 回调范围
     if not in_range:
         return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.2f}%"
 
-    # ⑦ 放量 ≥1.0（过滤缩量噪音）
+    # ⑤ 5m量比 ≥ 1.0
     if vol_ratio < 1.0:
         return None, f"观望 | 缩量 vol={vol_ratio:.1f}x"
 
-    # LONG 顺势追多
-    if h4_bull and d1_bull and rsi5m > 40:
+    # ⑥ RSI门控: LONG需>40 / SHORT需<60
+    if h4_bull and rsi5m > 40:
         return ('LONG', f"【LONG】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
-    # SHORT 顺势摸顶
-    if (not h4_bull) and (not d1_bull) and rsi5m < 60:
+    if (not h4_bull) and rsi5m < 60:
         return ('SHORT', f"【SHORT】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
     dir_4h = '多' if h4_bull else '空'
-    dir_1d = '多' if d1_bull else '空'
-    return None, f"观望 | 4h{dir_4h}/1d{dir_1d} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
+    return None, f"观望 | 4h{dir_4h} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
 
 # ========== 双向各1仓管理 ==========
 def manage_positions(state, price, signal, reason):
@@ -445,17 +437,16 @@ def sync_state(state):
 
 # ========== 状态显示 ==========
 def print_status(data, state):
-    r5 = data['5m']; r4 = data['4h']; rd = data['1d']; r1 = data['1h']
+    r5 = data['5m']; r4 = data['4h']; r1 = data['1h']
     price = r5['price']; rsi = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
     vol = r5['vol_ratio']
 
     dir_4h = '📈多' if r4['close_closed'] > r4['sma_closed'] else '📉空'
-    dir_1d = '📈多' if rd['close_closed'] > rd['sma_closed'] else '📉空'
 
     now = datetime.now().strftime('%H:%M:%S')
-    print(f"\n╔══ HYPE v1.0 趋势回调 {now} ═══")
+    print(f"\n╔══ HYPE v2.0 {now} ═══")
     print(f"║ 💰 {price:>10.4f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.4f}")
-    print(f"║ 4h{dir_4h} 1d{dir_1d} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
+    print(f"║ 4h{dir_4h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
     sp = state.get('short_pos')
@@ -473,10 +464,8 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 HYPE v1.0 趋势回调 启动 | {LEVERAGE}x | {QTY}HYPE/仓 | 逐仓")
-    log(f"策略: 全放宽+TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}%+双向各1仓")
-    log(f"回测: 370笔/45.4%胜率/+105%/回撤23%")
-    log(f"与BTC v4.0策略同逻辑，独立运行互不干预")
+    log(f"🚀 HYPE v2.0 启动 | {LEVERAGE}x | {QTY}HYPE/仓 | 逐仓")
+    log(f"策略: 4h方向+6指标+TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}%+双向各1仓")
 
     # 设置杠杆 + 逐仓
     try:
