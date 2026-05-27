@@ -478,7 +478,7 @@ def main():
     while True:
         try:
             k5m, k1h, k4h = get_data()
-            if not k5m:
+            if not k5m or not k1h or not k4h:
                 time.sleep(POLL_INTERVAL)
                 continue
 
