@@ -236,6 +236,9 @@ def manage_positions(state, price, signal, reason, sma5m):
             if signal:
                 log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
             return closed
+        else:
+            # K线已闭合，清除冷却，允许开仓
+            state['last_exit_time'] = 0
 
     # ── 新信号（单币种互斥，只允许一仓）──
     has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)
