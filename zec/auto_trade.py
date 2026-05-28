@@ -72,6 +72,8 @@ def load_state():
 def save_state(s):
     with open(STATE_FILE, 'w') as f:
         json.dump(s, f)
+        f.flush()
+        os.fsync(f.fileno())
 
 # ========== 通知 ==========
 def notify_alert(msg):
@@ -385,6 +387,8 @@ def ensure_sl_tp(state, retries=1):
                 state['long_pos'] = None
             else:
                 state['short_pos'] = None
+            # 保留 last_exit_time（manage_positions 已设置）
+            state.setdefault('last_exit_time', 0)
             save_state(state)
             continue
 
