@@ -227,13 +227,15 @@ def manage_positions(state, price, signal, reason, sma5m):
             state['last_exit_time'] = time.time()
             closed = True
 
-    # ── 冷却检查 ──
+    # ── 冷却检查：等平仓那根5m K线闭合后才能开新仓 ──
     last_exit = state.get('last_exit_time', 0)
-    if time.time() - last_exit < COOLDOWN_SEC:
-        remaining = int(COOLDOWN_SEC - (time.time() - last_exit))
-        if signal:  # 仅在有信号时打印，减少日志噪音
-            log(f"⏳ 冷却中 {remaining}s | 跳过{signal}")
-        return closed  # 冷却期内跳过所有信号
+    if last_exit > 0:
+        exit_kline_close = ((int(last_exit) // 300) + 1) * 300
+        remaining = exit_kline_close - int(time.time())
+        if remaining > 0 and remaining <= COOLDOWN_SEC:
+            if signal:
+                log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
+            return closed
 
     # ── 新信号（单币种互斥，只允许一仓）──
     has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)
@@ -475,11 +477,14 @@ def sync_state(state):
     if not has_long and state.get('long_pos'):
         log("🔄 交易所LONG已消失，清除本地")
         state['long_pos'] = None
+        changed = True
     if not has_short and state.get('short_pos'):
         log("🔄 交易所SHORT已消失，清除本地")
         state['short_pos'] = None
+        changed = True
 
-    save_state(state)
+    if changed:
+        save_state(state)
     return has_long or has_short
 
 # ========== 状态显示 ==========

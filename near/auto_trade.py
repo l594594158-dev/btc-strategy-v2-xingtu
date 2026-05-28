@@ -478,11 +478,14 @@ def sync_state(state):
     if not has_long and state.get('long_pos'):
         log("🔄 交易所LONG已消失，清除本地")
         state['long_pos'] = None
+        changed = True
     if not has_short and state.get('short_pos'):
         log("🔄 交易所SHORT已消失，清除本地")
         state['short_pos'] = None
+        changed = True
 
-    save_state(state)
+    if changed:
+        save_state(state)
     return has_long or has_short
 
 # ========== 状态显示 ==========
