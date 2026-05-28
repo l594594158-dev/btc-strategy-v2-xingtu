@@ -144,10 +144,10 @@ def check_entry(data):
     vol_ratio = r5['vol_ratio']
     sma5m = r5['sma20']
 
-    # ① 4h方向 (闭K收盘价 vs 闭K SMA20)
-    h4_close = r4.get('close_closed', r4['price'])
-    sma4h = r4.get('sma_closed', r4['sma20'])
-    h4_bull = h4_close > sma4h
+    # ① 1h方向 (闭K收盘价 vs 闭K SMA20)
+    h1_close = r1.get('close_closed', r1['price'])
+    sma1h = r1.get('sma_closed', r1['sma20'])
+    h1_bull = h1_close > sma1h
 
     # ② 1h ADX > 20 （滤横盘）
     if adx1h <= 20:
@@ -167,14 +167,14 @@ def check_entry(data):
         return None, f"观望 | 缩量 vol={vol_ratio:.1f}x"
 
     # ⑥ RSI门控: LONG需>40 / SHORT需<60
-    if h4_bull and rsi5m > 40:
+    if h1_bull and rsi5m > 40:
         return ('LONG', f"【LONG】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
-    if (not h4_bull) and rsi5m < 60:
+    if (not h1_bull) and rsi5m < 60:
         return ('SHORT', f"【SHORT】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
-    dir_4h = '多' if h4_bull else '空'
-    return None, f"观望 | 4h{dir_4h} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
+    dir_1h = '多' if h1_bull else '空'
+    return None, f"观望 | 1h{dir_1h} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
 
 # ========== 双向各1仓管理 ==========
 def manage_positions(state, price, signal, reason, kline_open_time):
@@ -454,12 +454,12 @@ def print_status(data, state):
     price = r5['price']; rsi = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
     vol = r5['vol_ratio']
 
-    dir_4h = '📈多' if price > r4['sma20'] else '📉空'
+    dir_1h = '📈多' if r1['close_closed'] > r1['sma_closed'] else '📉空'
 
     now = datetime.now().strftime('%H:%M:%S')
     print(f"\n╔══ BTC v5.0 {now} ═══")
     print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.0f}")
-    print(f"║ 4h{dir_4h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
+    print(f"║ 1h{dir_1h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
     sp = state.get('short_pos')
@@ -478,7 +478,7 @@ def print_status(data, state):
 # ========== 主循环 ==========
 def main():
     log(f"🚀 BTC v5.0 启动 | {LEVERAGE}x | {QTY}BTC/仓")
-    log(f"策略: 4h方向+6指标+TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}%+双向各1仓")
+    log(f"策略: 1h方向+6指标+TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}%+双向各1仓")
 
     # 设置杠杆
     try:
