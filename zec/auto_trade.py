@@ -475,6 +475,7 @@ def sync_state(state):
             elif exchange_entry > 0:
                 state['short_pos']['entry'] = exchange_entry
 
+    changed = False
     if not has_long and state.get('long_pos'):
         log("🔄 交易所LONG已消失，清除本地")
         state['long_pos'] = None
