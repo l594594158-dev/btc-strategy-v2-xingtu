@@ -51,7 +51,7 @@ RANGE_PCT = 1.5              # 回调范围 ±1.5%
 VOL_RATIO_MIN = 1.0          # 量比 ≥ 1.0x
 RSI_LONG_MIN = 40            # LONG RSI > 40
 RSI_SHORT_MAX = 60           # SHORT RSI < 60
-COOLDOWN_SEC = 300           # 平仓后5分钟冷却，防同根K线重开
+COOLDOWN_SEC = 300           # 平仓后等下一根5m K线闭合（最长300s兜底）
 
 # ========== 日志 ==========
 def log(msg):
@@ -227,13 +227,16 @@ def manage_positions(state, price, signal, reason, sma5m):
             state['last_exit_time'] = time.time()
             closed = True
 
-    # ── 冷却检查 ──
+    # ── 冷却检查：等平仓那根5m K线闭合后才能开新仓 ──
     last_exit = state.get('last_exit_time', 0)
-    if time.time() - last_exit < COOLDOWN_SEC:
-        remaining = int(COOLDOWN_SEC - (time.time() - last_exit))
-        if signal:
-            log(f"⏳ 冷却中 {remaining}s | 跳过{signal}")
-        return closed
+    if last_exit > 0:
+        # 计算平仓时所在5m K线的闭合时间
+        exit_kline_close = ((int(last_exit) // 300) + 1) * 300  # 下一个5分钟整点
+        remaining = exit_kline_close - int(time.time())
+        if remaining > 0 and remaining <= COOLDOWN_SEC:
+            if signal:
+                log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
+            return closed
 
     # ── 新信号（单币种互斥，只允许一仓）──
     has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)

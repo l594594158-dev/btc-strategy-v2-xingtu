@@ -51,7 +51,7 @@ RANGE_PCT = 1.5              # 回调范围 ±1.5%
 VOL_RATIO_MIN = 1.0          # 量比 ≥ 1.0x
 RSI_LONG_MIN = 40            # LONG RSI > 40
 RSI_SHORT_MAX = 60           # SHORT RSI < 60
-COOLDOWN_SEC = 300           # 平仓后5分钟冷却，防同根K线重开
+COOLDOWN_SEC = 300           # 平仓后等下一根5m K线闭合（最长300s兜底）
 
 # ========== 日志 ==========
 def log(msg):
