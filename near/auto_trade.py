@@ -396,17 +396,23 @@ def ensure_sl_tp(state):
             tp_p = round(entry * (1 - TAKE_PROFIT_PCT), 1)
             close_side = 'buy'
         
-        # 先查现有挂单，避免重复（用所有挂单，不限状态）
+        # 先查现有挂单，避免重复
         try:
             all_orders = trade_binance.fapiprivate_get_openalgoorders({'symbol': SYMBOL.replace(':USDT', '')})
         except:
             all_orders = []
         
-        existing_types = {o.get('type') or o.get('orderType', '') for o in all_orders 
-                         if o.get('positionSide') == direction}
+        has_sl = any(o.get('orderType') == 'STOP_MARKET' and o.get('positionSide') == direction for o in all_orders)
+        has_tp = any(o.get('orderType') == 'TAKE_PROFIT_MARKET' and o.get('positionSide') == direction for o in all_orders)
+        
+        # 如果SL和TP都已存在，直接标记跳过
+        if has_sl and has_tp:
+            state[mount_key] = True
+            save_state(state)
+            continue
         
         # 挂止损
-        if 'STOP_MARKET' not in existing_types:
+        if not has_sl:
             try:
                 trade_binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                     params={'stopPrice': sl_p, 'positionSide': direction})
@@ -415,7 +421,7 @@ def ensure_sl_tp(state):
                 log(f"  SL挂单失败: {e}")
         
         # 挂止盈
-        if 'TAKE_PROFIT_MARKET' not in existing_types:
+        if not has_tp:
             try:
                 trade_binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                     params={'stopPrice': tp_p, 'positionSide': direction})
