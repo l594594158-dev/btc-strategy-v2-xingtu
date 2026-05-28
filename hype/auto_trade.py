@@ -40,8 +40,8 @@ WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
 
 # ========== 策略参数 v1.1（同步BTC v4.3）==========
-STOP_LOSS_PCT = 1.5 / 100   # -1.5%止损
-TAKE_PROFIT_PCT = 2.0 / 100 # +2.0%止盈
+STOP_LOSS_PCT = 2.0 / 100   # -2.0%止损
+TAKE_PROFIT_PCT = 1.5 / 100 # +1.5%止盈
 POLL_INTERVAL = 2            # 扫描间隔（秒）
 
 # 6条件阈值
