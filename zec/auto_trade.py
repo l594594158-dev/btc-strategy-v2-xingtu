@@ -358,6 +358,11 @@ def ensure_sl_tp(state, retries=1):
     确保止盈止损单已挂。
     开仓后可能存在短暂延迟导致查不到持仓，重试 retries 次。
     """
+    # 频率控制：距上次检查不足30秒则跳过
+    now_ts = time.time()
+    if now_ts - state.get('last_sl_tp_check', 0) < 30:
+        return
+    state['last_sl_tp_check'] = now_ts
     for d_key, direction in [('long_pos', 'LONG'), ('short_pos', 'SHORT')]:
         pos = state.get(d_key)
         if not pos:
