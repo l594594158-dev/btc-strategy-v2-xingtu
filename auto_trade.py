@@ -33,7 +33,7 @@ trade_binance = ccxt.binance({
 
 SYMBOL = 'BTC/USDT:USDT'
 QTY = 0.02
-LEVERAGE = 50
+LEVERAGE = 30
 BASE_DIR = '/root/liucangyang'
 STATE_FILE = f'{BASE_DIR}/databases/state.json'
 WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
