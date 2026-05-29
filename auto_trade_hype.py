@@ -147,7 +147,7 @@ def check_entry(data):
     adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
     adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
-    sma5m = r5['sma20']
+    sma5m_closed = r5.get('sma_closed', r5['sma20'])  # 用前20根闭K的SMA20，不含当前K
 
     # ① 1h方向 (闭K收盘价 vs 闭K SMA20)
     h1_close = r1.get('close_closed', r1['price'])
@@ -162,10 +162,10 @@ def check_entry(data):
     if adx4h >= 55:
         return None, f"观望 | 4hADX={adx4h:.1f}≥55"
 
-    # ④ 回调范围 ±1.5%
-    in_range = sma5m * 0.985 <= price <= sma5m * 1.015
+    # ④ 回调范围 ±1.5%（用前20根闭K SMA20，不含当前K）
+    in_range = sma5m_closed * 0.985 <= price <= sma5m_closed * 1.015
     if not in_range:
-        return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.2f}%"
+        return None, f"观望 | 偏离闭K_SMA20 ±{abs(price/sma5m_closed-1)*100:.2f}%"
 
     # ⑤ 5m量比 ≥ 1.0
     if vol_ratio < 1.0:
