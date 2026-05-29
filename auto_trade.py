@@ -40,8 +40,8 @@ WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
 
 # ========== 策略参数（4年回测验证）==========
-STOP_LOSS_PCT = 2.0 / 100
-TAKE_PROFIT_PCT = 1.5 / 100
+STOP_LOSS_PCT = 1.2 / 100    # BTC: 1.2%止损
+TAKE_PROFIT_PCT = 1.0 / 100  # BTC: 1.0%止盈
 POLL_INTERVAL = 2          # 扫描间隔（秒）
 COOLDOWN_CANDLE = True      # 平仓冷却：等平仓那根5mK线收盘后才允许重开
 
