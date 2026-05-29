@@ -110,7 +110,7 @@ class HealthChecker:
                 self.add_ok('进程状态', f'PID={my_pid} 运行中')
                 return True
 
-            self.add_fail('进程状态', '进程未运行', fix='restart')
+            self.add_fail('进程状态', '进程未运行', fix='#restart_disabled')
             return False
         except Exception as e:
             self.add_fail('进程状态', f'检查失败: {e}')
@@ -248,7 +248,7 @@ class HealthChecker:
             self.add_fail('API-网络', f'网络错误: {e}', fix='network')
             return False
         except Exception as e:
-            self.add_fail('API-数据', f'获取失败: {e}', fix='restart')
+            self.add_fail('API-数据', f'获取失败: {e}', fix='#restart_disabled')
             import traceback; traceback.print_exc()
             return False
 
@@ -305,13 +305,54 @@ class HealthChecker:
                 mismatches.append('SHORT本地有但交易所无(幽灵)')
 
             if mismatches:
-                self.add_fail('持仓同步', '; '.join(mismatches), fix='restart')
+                self.add_fail('持仓同步', '; '.join(mismatches), fix='#restart_disabled')
             else:
                 total = len(actual_positions)
                 self.add_ok('持仓同步', f'一致 | {"无持仓" if total==0 else f"{total}仓"}')
             return True
         except Exception as e:
             self.add_fail('持仓同步', f'检查失败: {e}')
+            return False
+
+    # ========== 检查3b: 孤儿挂单清理 ==========
+    def check_orphan_orders(self):
+        """Clean orphan algo orders"""
+        try:
+            binance = get_binance()
+            symbol_raw = SYMBOL.replace(':USDT', '')
+            positions = binance.fetch_positions([SYMBOL])
+            has_long = any(float(p.get('contracts', 0)) > 0 and p.get('side') == 'long' for p in positions)
+            has_short = any(float(p.get('contracts', 0)) > 0 and p.get('side') == 'short' for p in positions)
+            try:
+                orders = binance.fapiprivate_get_openalgoorders({'symbol': symbol_raw})
+            except:
+                orders = []
+            if not orders:
+                self.add_ok('挂单清理', '无挂单')
+                return True
+            cleaned = 0
+            for o in orders:
+                algo_id = o.get('algoId')
+                pos_side = o.get('positionSide', '')
+                if not algo_id:
+                    continue
+                # 保护：只清理自己币种的挂单（防止API返回了其他币种）
+                if o.get('symbol') != symbol_raw:
+                    continue
+                should_exist = (pos_side == 'LONG' and has_long) or (pos_side == 'SHORT' and has_short)
+                if not should_exist:
+                    try:
+                        binance.fapiPrivateDeleteAlgoOrder({'symbol': symbol_raw, 'algoId': int(algo_id)})
+                        cleaned += 1
+                    except:
+                        pass
+            if cleaned > 0:
+                self.add_ok('挂单清理', f'清理{cleaned}条孤儿挂单')
+            else:
+                self.add_ok('挂单清理', f'{len(orders)}条挂单均有效')
+            return True
+        except Exception as e:
+            self.add_fail('挂单清理', str(e))
             return False
 
     # ========== 检查4: 策略文件状态 ==========
@@ -349,7 +390,7 @@ class HealthChecker:
 
             return True
         except Exception as e:
-            self.add_fail('策略状态', f'检查失败: {e}', fix='restart')
+            self.add_fail('策略状态', f'检查失败: {e}', fix='#restart_disabled')
             return False
 
     # ========== 检查5: 通知队列（仅检查积压，不发送）==========
@@ -465,6 +506,7 @@ class HealthChecker:
         self.check_process()
         self.check_api_data()
         self.check_position_sync()
+        self.check_orphan_orders()
         self.check_strategy()
         self.check_notify_queue()
 

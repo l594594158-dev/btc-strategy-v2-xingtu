@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-BTC合约 趋势回调策略 v4.3
-- 6条件简化 + TP1.2%/SL1.0% + 双向各1仓
-- ADX1h>20滤横盘 / ADX4h<55防过热 / 回调±1.5% / RSI门控
-- 现货K线计算 + 合约执行
+BTC合约 趋势回调策略 v4.2
+- 全放宽 + TP2.5%/SL1.5% + 双向各1仓
+- 4年回测: 765笔/51.6%胜率/+371%/回撤12.3%
+- 2022-2026每年正收益
 """
 import ccxt
 import requests
@@ -32,26 +32,17 @@ trade_binance = ccxt.binance({
 })
 
 SYMBOL = 'BTC/USDT:USDT'
-QTY = 0.03
+QTY = 0.05
 LEVERAGE = 20
 BASE_DIR = '/root/liucangyang'
 STATE_FILE = f'{BASE_DIR}/databases/state.json'
 WORK_LOG = f'{BASE_DIR}/logs/work_log.txt'
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
 
-# ========== 策略参数 v4.3 ==========
-STOP_LOSS_PCT = 1.2 / 100   # -1.2%止损
-TAKE_PROFIT_PCT = 1.0 / 100 # +1.0%止盈
-POLL_INTERVAL = 2            # 扫描间隔（秒）
-
-# 6条件阈值
-ADX_1H_MIN = 20              # 1h ADX > 20 (滤横盘)
-ADX_4H_MAX = 55              # 4h ADX < 55 (防追末端过热)
-RANGE_PCT = 1.5              # 回调范围 ±1.5%
-VOL_RATIO_MIN = 1.0          # 量比 ≥ 1.0x
-RSI_LONG_MIN = 40            # LONG RSI > 40
-RSI_SHORT_MAX = 60           # SHORT RSI < 60
-COOLDOWN_SEC = 300           # 平仓后等下一根5m K线闭合（最长300s兜底）
+# ========== 策略参数（4年回测验证）==========
+STOP_LOSS_PCT = 1.5 / 100
+TAKE_PROFIT_PCT = 2.5 / 100
+POLL_INTERVAL = 2          # 扫描间隔（秒）
 
 # ========== 日志 ==========
 def log(msg):
@@ -72,8 +63,6 @@ def load_state():
 def save_state(s):
     with open(STATE_FILE, 'w') as f:
         json.dump(s, f)
-        f.flush()
-        os.fsync(f.fileno())
 
 # ========== 通知 ==========
 def notify_alert(msg):
@@ -120,8 +109,10 @@ def calc(df):
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
         adx = adx_ind.adx().iloc[lv]
+        adx_pos = adx_ind.adx_pos().iloc[lv]
+        adx_neg = adx_ind.adx_neg().iloc[lv]
     except:
-        adx = 25
+        adx = 25; adx_pos = 25; adx_neg = 25
 
     # 闭K指标 (与回测一致)
     closed_lv = max(0, lv - 1)
@@ -135,12 +126,13 @@ def calc(df):
 
     return {
         'price': price, 'sma20': sma20, 'rsi': rsi,
-        'adx': adx, 'vol_ratio': vol_ratio,
+        'adx': adx, 'adx_pos': adx_pos, 'adx_neg': adx_neg,
+        'vol_ratio': vol_ratio,
         'close_closed': close_closed, 'sma_closed': sma_closed,
         'adx_closed': adx_closed
     }
 
-# ========== 信号判断 v4.3（6条件）==========
+# ========== 信号判断（全放宽7条件）==========
 def check_entry(data):
     r5 = data['5m']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
 
@@ -149,48 +141,56 @@ def check_entry(data):
     adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
     adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
-    sma5m = r5['sma_closed']  # 前20根闭K的SMA20（不含当前未闭K线）
+    sma5m = r5['sma20']
 
-    # 条件①: 1h方向 (闭K收盘价 vs 闭K SMA20)
-    h1_close = r1.get('close_closed', r1['price'])
-    sma1h = r1.get('sma_closed', r1['sma20'])
-    h4_bull = h1_close > sma1h
+    # ① 4h方向 (闭K收盘价 vs 闭K SMA20 → 同回测+603%版)
+    h4_close = r4.get('close_closed', r4['price'])
+    sma4h = r4.get('sma_closed', r4['sma20'])
+    h4_bull = h4_close > sma4h
+    # ② 1d方向 (闭K收盘价 vs 闭K SMA20)
+    d1_close = rd.get('close_closed', rd['price'])
+    sma1d = rd.get('sma_closed', rd['sma20'])
+    d1_bull = d1_close > sma1d
 
-    # 条件②: 1h ADX > 20 (滤横盘)
-    if adx1h <= ADX_1H_MIN:
-        return None, f"观望 | 1hADX={adx1h:.1f}≤{ADX_1H_MIN}"
+    # ③ 回调范围 ±1.0%
+    in_range = sma5m * 0.99 <= price <= sma5m * 1.01
 
-    # 条件③: 4h ADX < 55 (防追末端过热)
-    if adx4h >= ADX_4H_MAX:
-        return None, f"观望 | 4hADX={adx4h:.1f}≥{ADX_4H_MAX}"
+    # 1️⃣ 4h方向与1d方向必须同向 (短路门控第1关)
+    if h4_bull != d1_bull:
+        dir_4h = '多' if h4_bull else '空'
+        dir_1d = '多' if d1_bull else '空'
+        return None, f"观望 | 4h{dir_4h}/1d{dir_1d}不同向"
 
-    # 条件④: 回调范围 ±1.5%
-    deviation = abs(price / sma5m - 1) * 100
-    if deviation > RANGE_PCT:
-        return None, f"观望 | 偏离SMA20 ±{deviation:.1f}%"
+    # 2️⃣ 1h ADX > 25
+    if adx1h <= 25:
+        return None, f"观望 | 1hADX={adx1h:.1f}≤25"
 
-    # 条件⑤: 量比 ≥ 1.0x
-    if vol_ratio < VOL_RATIO_MIN:
+    # 3️⃣ 4h ADX < 40
+    if adx4h >= 40:
+        return None, f"观望 | 4hADX={adx4h:.1f}≥40"
+
+    # 4️⃣ 回调范围
+    if not in_range:
+        return None, f"观望 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%"
+
+    # 5️⃣ 放量 ≥1.0（过滤缩量噪音）
+    if vol_ratio < 1.0:
         return None, f"观望 | 缩量 vol={vol_ratio:.1f}x"
 
-    # 条件⑥: RSI门控（只看1h方向）
-    if h4_bull:
-        # 4h多头 → LONG
-        if rsi5m > RSI_LONG_MIN:
-            return ('LONG', f"【LONG顺势追多】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
-        else:
-            return None, f"观望 | RSI={rsi5m:.1f}≤{RSI_LONG_MIN} 不触发LONG"
-    else:
-        # 4h空头 → SHORT
-        if rsi5m < RSI_SHORT_MAX:
-            return ('SHORT', f"【SHORT顺势摸顶】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
-        else:
-            return None, f"观望 | RSI={rsi5m:.1f}≥{RSI_SHORT_MAX} 不触发SHORT"
+    # 6️⃣ LONG 顺势追多
+    if h4_bull and d1_bull and rsi5m > 40:
+        return ('LONG', f"【LONG顺势追多】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
-    return None, f"观望 | 4h{'多' if h4_bull else '空'} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
+    # 7️⃣ SHORT 顺势摸顶
+    if (not h4_bull) and (not d1_bull) and rsi5m < 60:
+        return ('SHORT', f"【SHORT顺势摸顶】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
 
-# ========== 仓位管理（互斥+保护） ==========
-def manage_positions(state, price, signal, reason, sma5m, data=None):
+    dir_4h = '多' if h4_bull else '空'
+    dir_1d = '多' if d1_bull else '空'
+    return None, f"观望 | 4h{dir_4h}/1d{dir_1d} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
+
+# ========== 双向各1仓管理 ==========
+def manage_positions(state, price, signal, reason):
     closed = False
 
     # ── LONG止盈止损 ──
@@ -201,13 +201,11 @@ def manage_positions(state, price, signal, reason, sma5m, data=None):
             log(f"🛑 LONG止损 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('LONG', price, lp, '止损')
             state['long_pos'] = None
-            state['last_exit_time'] = time.time()
             closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ LONG止盈 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('LONG', price, lp, '止盈')
             state['long_pos'] = None
-            state['last_exit_time'] = time.time()
             closed = True
 
     # ── SHORT止盈止损 ──
@@ -218,61 +216,36 @@ def manage_positions(state, price, signal, reason, sma5m, data=None):
             log(f"🛑 SHORT止损 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('SHORT', price, sp, '止损')
             state['short_pos'] = None
-            state['last_exit_time'] = time.time()
             closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ SHORT止盈 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('SHORT', price, sp, '止盈')
             state['short_pos'] = None
-            state['last_exit_time'] = time.time()
             closed = True
 
-    # ── 冷却检查：等平仓那根5m K线闭合后才能开新仓 ──
-    last_exit = state.get('last_exit_time', 0)
-    if last_exit > 0:
-        exit_kline_close = ((int(last_exit) // 300) + 1) * 300
-        remaining = exit_kline_close - int(time.time())
-        if remaining > 0 and remaining <= COOLDOWN_SEC:
-            if signal:
-                log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
-            return closed
-        else:
-            # K线已闭合，清除冷却，允许开仓
-            state['last_exit_time'] = 0
-
-    # ── 新信号（单币种互斥，只允许一仓）──
-    has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)
+    # ── 新信号（双向各1仓，同方向1仓保护）──
     if signal == 'LONG':
-        if has_any:
-            existing = 'LONG' if state.get('long_pos') else 'SHORT'
-            log(f"⏭ LONG信号跳过 | 已有{existing}仓（互斥）")
+        if state.get('long_pos') is not None:
+            log(f"⏭ LONG信号跳过 | 已有LONG仓")
         else:
-            # 开仓前二次验价：实时价距5m SMA20 ≤±1.5%
-            if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-                log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
-            else:
-                entry_price = do_open('LONG', price, reason, data)
-                if entry_price:
-                    state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
+            entry_price = do_open('LONG', price, reason)
+            if entry_price:
+                state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
-        if has_any:
-            existing = 'LONG' if state.get('long_pos') else 'SHORT'
-            log(f"⏭ SHORT信号跳过 | 已有{existing}仓（互斥）")
+        if state.get('short_pos') is not None:
+            log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
         else:
-            if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-                log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
-            else:
-                entry_price = do_open('SHORT', price, reason, data)
-                if entry_price:
-                    state['short_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
+            entry_price = do_open('SHORT', price, reason)
+            if entry_price:
+                state['short_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
 
     save_state(state)
     return closed
 
 # ========== 开仓执行（交易所级单方向单仓保护） ==========
-def do_open(direction, price, reason, data=None):
+def do_open(direction, price, reason):
     try:
-        # ① 仓位安全锁：查现有持仓，同方向 ≥ QTY 则跳过信号
+        # ① 交易所级防护：查现有持仓，同方向已有则拒绝
         positions = trade_binance.fetch_positions()
         for p in positions:
             if p.get('symbol') != SYMBOL:
@@ -281,8 +254,8 @@ def do_open(direction, price, reason, data=None):
             if existing_qty <= 0:
                 continue
             side = 'LONG' if p.get('side') == 'long' else 'SHORT'
-            if side == direction and existing_qty >= QTY:
-                log(f"🛡 仓位安全锁 | 已有{direction}仓{existing_qty}BTC≥{QTY}BTC | 跳过信号")
+            if side == direction:
+                log(f"🛡 交易所防护 | 已有{direction}仓{existing_qty}BTC | 拒绝开仓")
                 return False
 
         # ② 市价开仓
@@ -291,51 +264,13 @@ def do_open(direction, price, reason, data=None):
                                      params={'positionSide': direction})
         entry_price = order.get('average', price)
 
-        # 计算SL/TP价格
-        if direction == 'LONG':
-            sl_p = round(entry_price * (1 - STOP_LOSS_PCT), 1)
-            tp_p = round(entry_price * (1 + TAKE_PROFIT_PCT), 1)
-        else:
-            sl_p = round(entry_price * (1 + STOP_LOSS_PCT), 1)
-            tp_p = round(entry_price * (1 - TAKE_PROFIT_PCT), 1)
+        log(f"🚀 {direction}市价开仓 | {reason} | ${entry_price:.0f}")
 
-        log(f"🚀 {direction}市价开仓 | {reason} | ${entry_price:.0f} | SL:{sl_p} TP:{tp_p}")
-
-        # 清除挂单标记，触发 ensure_sl_tp 重新挂单
-        state = load_state()
-        state.pop('sl_tp_mounted', None)
-        save_state(state)
-
-        # ── 结构化交易日志 ──
-        r5 = data['5m'] if data else {}
-        r1 = data['1h'] if data else {}
-        r4 = data['4h'] if data else {}
-        rd = data['1d'] if data else {}
-        h4_close = r4.get('close_closed', r4.get('price', 0))
-        h4_sma = r4.get('sma_closed', r4.get('sma20', 0))
-        d_close = rd.get('close_closed', rd.get('price', 0))
-        d_sma = rd.get('sma_closed', rd.get('sma20', 0))
-        dir_4h = '多' if h4_close > h4_sma else '空'
-        dir_1d = '多' if d_close > d_sma else '空'
-
-        trade_csv = os.path.join(BASE_DIR, 'logs', 'trade_log.csv')
-        csv_row = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')},{SYMBOL.split(':')[0].replace('/','')},{direction},{entry_price:.1f},{QTY},{sl_p},{tp_p},{reason},{dir_4h},{dir_1d},{r5.get('rsi',0):.1f},{r1.get('adx',0):.1f},{r4.get('adx',0):.1f},{r5.get('sma20',0):.0f},{r5.get('vol_ratio',0):.1f},{r5.get('price',0):.0f}"
-        with open(trade_csv, 'a') as f:
-            f.write(csv_row)
-
-        # 详细文本日志
-        detail = (f"{direction} | ${entry_price:.0f} | SL:{sl_p} TP:{tp_p}\n"
-                  f"  信号:{reason}\n"
-                  f"  指标: 4h{dir_4h} 1d{dir_1d} | 5mRSI={r5.get('rsi',0):.1f} 1hADX={r1.get('adx',0):.1f} 4hADX={r4.get('adx',0):.1f} | "
-                  f"SMA20={r5.get('sma20',0):.0f} vol={r5.get('vol_ratio',0):.1f}x | 实时价={price:.0f}")
-        work_log("开仓", detail)
-
-        msg = (f"{'🟢' if direction=='LONG' else '🔴'} BTC开仓\n"
+        msg = (f"🟢 BTC开仓\n"
                f"{direction} @ ${entry_price:,.0f}\n"
-               f"SL:{sl_p} TP:{tp_p}\n"
-               f"{reason}\n"
-               f"4h{dir_4h} 1d{dir_1d} | RSI={r5.get('rsi',0):.0f} ADX1h={r1.get('adx',0):.0f}")
+               f"{reason}")
         notify_alert(msg)
+        work_log("开仓", f"{direction} | ${entry_price:.0f} | {reason}")
         return entry_price
 
     except Exception as e:
@@ -352,7 +287,7 @@ def do_close(direction, price, pos_data, reason):
         positions = trade_binance.fetch_positions()
         qty = 0
         for p in positions:
-            if float(p.get('contracts', 0)) > 0:
+            if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
                 side_check = 'LONG' if p.get('side') == 'long' else 'SHORT'
                 if side_check == direction:
                     qty = float(p['contracts'])
@@ -393,37 +328,52 @@ def do_close(direction, price, pos_data, reason):
         work_log("错误", f"平仓失败: {e}")
 
 # ========== 挂止盈止损单 ==========
-def ensure_sl_tp(state):
-    """始终确保止盈止损挂单存在，缺失则补挂"""
-    mount_key = 'sl_tp_mounted'
-    
+def ensure_sl_tp(state, retries=1):
+    """
+    确保止盈止损单已挂。
+    开仓后可能存在短暂延迟导致查不到持仓，重试 retries 次。
+    """
     for d_key, direction in [('long_pos', 'LONG'), ('short_pos', 'SHORT')]:
         pos = state.get(d_key)
         if not pos:
             continue
-        
-        try:
-            positions = trade_binance.fetch_positions(symbols=[SYMBOL])
-        except:
-            return
-        
+
+        # 带重试的持仓查询
         qty = 0
         entry = pos['entry']
-        for p in positions:
-            if p.get('symbol') != SYMBOL:
-                continue
-            if float(p.get('contracts', 0)) > 0:
-                side_check = 'LONG' if p.get('side') == 'long' else 'SHORT'
-                if side_check == direction:
-                    qty = float(p['contracts'])
-                    ep = float(p.get('entryPrice', 0))
-                    if ep > 0:
-                        entry = ep
-                    break
-        
+        for attempt in range(retries + 1):
+            positions = trade_binance.fetch_positions()
+            for p in positions:
+                if p.get('symbol') == SYMBOL and float(p.get('contracts', 0)) > 0:
+                    side_check = 'LONG' if p.get('side') == 'long' else 'SHORT'
+                    if side_check == direction:
+                        qty = float(p['contracts'])
+                        exchange_entry = float(p.get('entryPrice', 0))
+                        if exchange_entry > 0:
+                            entry = exchange_entry
+                        break
+            if qty > 0:
+                break
+            if attempt < retries:
+                time.sleep(1)
+                log(f"  等待持仓确认... ({attempt+1}/{retries})")
+
         if qty == 0:
-            return
-        
+            # state 有记录但交易所查不到，说明可能已被平，清除 ghost
+            log(f"⚠️ {direction}本地有记录但交易所无持仓，清除")
+            if direction == 'LONG':
+                state['long_pos'] = None
+            else:
+                state['short_pos'] = None
+            save_state(state)
+            continue
+
+        try:
+            algos = trade_binance.fapiprivate_get_openalgoorders({'symbol': 'BTCUSDT'})
+            existing = [o for o in algos if o.get('algoStatus') == 'NEW' and o.get('positionSide') == direction]
+        except:
+            existing = []
+
         if direction == 'LONG':
             sl_p = round(entry * (1 - STOP_LOSS_PCT), 1)
             tp_p = round(entry * (1 + TAKE_PROFIT_PCT), 1)
@@ -432,79 +382,26 @@ def ensure_sl_tp(state):
             sl_p = round(entry * (1 + STOP_LOSS_PCT), 1)
             tp_p = round(entry * (1 - TAKE_PROFIT_PCT), 1)
             close_side = 'buy'
-        
-        # 查交易所现有挂单
-        symbol_raw = SYMBOL.split(':')[0].replace('/', '')
-        try:
-            all_orders = trade_binance.fapiprivate_get_openalgoorders({'symbol': symbol_raw})
-        except:
-            all_orders = []
-        
-        # 过滤：只匹配当前symbol + 当前方向的algo订单
-        own_orders = [o for o in all_orders
-                      if o.get('symbol') == symbol_raw
-                      and o.get('positionSide') == direction]
-        
-        # 找到现有的 SL/TP 挂单
-        existing_sl_orders = [o for o in own_orders if o.get('orderType') == 'STOP_MARKET']
-        existing_tp_orders = [o for o in own_orders if o.get('orderType') == 'TAKE_PROFIT_MARKET']
-        
-        # 检查SL价格是否匹配
-        sl_matched = any(abs(float(o.get('triggerPrice', 0)) - sl_p) < 0.01 for o in existing_sl_orders)
-        tp_matched = any(abs(float(o.get('triggerPrice', 0)) - tp_p) < 0.01 for o in existing_tp_orders)
-        
-        # 清理不匹配的旧挂单（价格变了）
-        for o in existing_sl_orders:
-            if abs(float(o.get('triggerPrice', 0)) - sl_p) >= 0.01:
-                try:
-                    trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
-                    log(f"  取消旧SL: ${o.get('triggerPrice')} (→ ${sl_p})")
-                except:
-                    pass
-        for o in existing_tp_orders:
-            if abs(float(o.get('triggerPrice', 0)) - tp_p) >= 0.01:
-                try:
-                    trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
-                    log(f"  取消旧TP: ${o.get('triggerPrice')} (→ ${tp_p})")
-                except:
-                    pass
-        
-        # 清理多余的同类型挂单（去重，只保留1条）
-        sl_remaining = existing_sl_orders[1:] if sl_matched else existing_sl_orders
-        tp_remaining = existing_tp_orders[1:] if tp_matched else existing_tp_orders
-        for o in sl_remaining + tp_remaining:
-            try:
-                trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
-            except:
-                pass
-        
-        if sl_matched and tp_matched and len(existing_sl_orders) <= 1 and len(existing_tp_orders) <= 1:
-            state[mount_key] = True
-            save_state(state)
-            return
-        
-        # 补挂缺失的
-        if not sl_matched or len(existing_sl_orders) == 0:
+
+        sl_exist = any(o.get('orderType') == 'STOP_MARKET' for o in existing)
+        if not sl_exist:
             try:
                 trade_binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                     params={'stopPrice': sl_p, 'positionSide': direction})
                 log(f"  挂SL: ${sl_p}")
             except Exception as e:
                 log(f"  SL挂单失败: {e}")
-        
-        if not tp_matched or len(existing_tp_orders) == 0:
+
+        tp_exist = any(o.get('orderType') == 'TAKE_PROFIT_MARKET' for o in existing)
+        if not tp_exist:
             try:
                 trade_binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                     params={'stopPrice': tp_p, 'positionSide': direction})
                 log(f"  挂TP: ${tp_p}")
             except Exception as e:
                 log(f"  TP挂单失败: {e}")
-        
-        state[mount_key] = True
-        save_state(state)
-        return
 
-
+# ========== 交易所→本地同步 ==========
 def sync_state(state):
     """
     以交易所为准同步本地状态：
@@ -552,37 +449,34 @@ def sync_state(state):
             elif exchange_entry > 0:
                 state['short_pos']['entry'] = exchange_entry
 
-    changed = False
     if not has_long and state.get('long_pos'):
         log("🔄 交易所LONG已消失，清除本地")
         state['long_pos'] = None
-        state['last_exit_time'] = time.time()
-        changed = True
     if not has_short and state.get('short_pos'):
         log("🔄 交易所SHORT已消失，清除本地")
         state['short_pos'] = None
-        state['last_exit_time'] = time.time()
-        changed = True
 
-    if changed:
-        save_state(state)
+    save_state(state)
     return has_long or has_short
 
 # ========== 状态显示 ==========
 def print_status(data, state):
-    r5 = data['5m']; r4 = data['4h']; r1 = data['1h']
+    r5 = data['5m']; r4 = data['4h']; rd = data['1d']; r1 = data['1h']
     price = r5['price']; rsi = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
     vol = r5['vol_ratio']
 
-    # 用闭K收盘价判断方向，与 check_entry 信号逻辑一致（只看4h）
+    # 用闭K收盘价判断方向，与 check_entry 信号逻辑一致
     h4_close = r4.get('close_closed', price)
     h4_sma = r4.get('sma_closed', r4['sma20'])
+    d1_close = rd.get('close_closed', price)
+    d1_sma = rd.get('sma_closed', rd['sma20'])
     dir_4h = '📈多' if h4_close > h4_sma else '📉空'
+    dir_1d = '📈多' if d1_close > d1_sma else '📉空'
 
     now = datetime.now().strftime('%H:%M:%S')
-    print(f"\n╔══ BTC v4.3趋势回调 {now} ═══")
+    print(f"\n╔══ BTC v4.2趋势回调 {now} ═══")
     print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.0f}")
-    print(f"║ 4h{dir_4h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
+    print(f"║ 4h{dir_4h} 1d{dir_1d} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
     sp = state.get('short_pos')
@@ -600,9 +494,9 @@ def print_status(data, state):
 
 # ========== 主循环 ==========
 def main():
-    log(f"🚀 BTC v4.3 趋势回调 启动 | {LEVERAGE}x逐仓 | {QTY}BTC/仓")
-    log(f"策略: 6条件 TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}% 双向各1仓")
-    log(f"参数: ADX1h>{ADX_1H_MIN} ADX4h<{ADX_4H_MAX} 回调±{RANGE_PCT}% 量比≥{VOL_RATIO_MIN}x RSI_LONG>{RSI_LONG_MIN} RSI_SHORT<{RSI_SHORT_MAX}")
+    log(f"🚀 BTC v4.2 趋势回调 启动 | {LEVERAGE}x逐仓 | {QTY}BTC/仓")
+    log(f"策略: 全放宽+TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}%+双向各1仓")
+    log(f"4年回测: 765笔/51.6%胜率/+371%/回撤12.3%")
 
     # 设置杠杆 + 逐仓模式
     try:
@@ -615,7 +509,6 @@ def main():
     state = load_state()
     if 'long_pos' not in state: state['long_pos'] = None
     if 'short_pos' not in state: state['short_pos'] = None
-    if 'last_exit_time' not in state: state['last_exit_time'] = 0
 
     sync_state(state)
     log("📊 API Key已配置 | 现货K线分析+合约执行")
@@ -642,7 +535,6 @@ def main():
             state = load_state()
             if 'long_pos' not in state: state['long_pos'] = None
             if 'short_pos' not in state: state['short_pos'] = None
-            if 'last_exit_time' not in state: state['last_exit_time'] = 0
 
             price = data['5m']['price']
             sig, reason = check_entry(data)
@@ -650,13 +542,12 @@ def main():
             # 先查交易所实际持仓做交叉验证，防止本地状态过期
             sync_state(state)
 
-            manage_positions(state, price, sig, reason, data['5m']['sma20'], data)
+            manage_positions(state, price, sig, reason)
 
             # 重新加载 state（manage_positions 内部已 save）
             state = load_state()
             if 'long_pos' not in state: state['long_pos'] = None
             if 'short_pos' not in state: state['short_pos'] = None
-            if 'last_exit_time' not in state: state['last_exit_time'] = 0
 
             has_pos = bool(state.get('long_pos') or state.get('short_pos'))
             if has_pos:
