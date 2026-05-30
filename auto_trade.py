@@ -82,14 +82,12 @@ def notify_alert(msg):
 
 # ========== 数据获取 ==========
 def get_data():
-    """用现货K线做指标计算，合约做执行"""
+    """用合约K线做指标计算"""
     result = []
     for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200)]:
         try:
-            url = f'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval={tf}&limit={limit}'
-            resp = requests.get(url, timeout=5)
-            klines = resp.json()
-            data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
+            ohlcv = read_binance.fetch_ohlcv('BTC/USDT:USDT', tf, limit=limit)
+            data = [[int(o[0]), o[1], o[2], o[3], o[4], o[5]] for o in ohlcv]
             result.append(data)
         except Exception as e:
             log(f'获取{tf}失败: {e}')
@@ -105,7 +103,7 @@ def calc(df):
 
     price = close.iloc[lv]
     sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
-    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
+    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
 
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
@@ -221,14 +219,10 @@ def manage_positions(state, price, signal, reason, kline_open_time):
             log(f"⏳ 平仓冷却 | 等当前5mK线收盘后重开")
         return closed  # 同一根K线内，跳过信号检测
 
-    # ── 新信号（多空互斥：任一方有仓则跳过）──
-    has_any_pos = bool(state.get('long_pos') or state.get('short_pos'))
+    # ── 新信号（双向共存：各自独立判断）──
     if signal == 'LONG':
-        if has_any_pos:
-            if state.get('long_pos'):
-                log(f"⏭ LONG信号跳过 | 已有LONG仓")
-            else:
-                log(f"⏭ LONG信号跳过 | 已有SHORT仓，多空互斥")
+        if state.get('long_pos'):
+            log(f"⏭ LONG信号跳过 | 已有LONG仓")
         elif get_exchange_qty('LONG') >= QTY:
             log(f"⏭ LONG信号跳过 | 交易所已有≥{QTY}BTC")
         else:
@@ -236,11 +230,8 @@ def manage_positions(state, price, signal, reason, kline_open_time):
             if entry_price:
                 state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
-        if has_any_pos:
-            if state.get('short_pos'):
-                log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
-            else:
-                log(f"⏭ SHORT信号跳过 | 已有LONG仓，多空互斥")
+        if state.get('short_pos'):
+            log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
         elif get_exchange_qty('SHORT') >= QTY:
             log(f"⏭ SHORT信号跳过 | 交易所已有≥{QTY}BTC")
         else:

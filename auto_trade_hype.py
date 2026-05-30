@@ -110,7 +110,7 @@ def calc(df):
 
     price = close.iloc[lv]
     sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
-    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
+    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
 
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
@@ -226,14 +226,10 @@ def manage_positions(state, price, signal, reason, kline_open_time):
             log(f"⏳ 平仓冷却 | 等当前5mK线收盘后重开")
         return closed  # 同一根K线内，跳过信号检测
 
-    # ── 新信号（多空互斥：任一方有仓则跳过）──
-    has_any_pos = bool(state.get('long_pos') or state.get('short_pos'))
+    # ── 新信号（双向共存：各自独立判断）──
     if signal == 'LONG':
-        if has_any_pos:
-            if state.get('long_pos'):
-                log(f"⏭ LONG信号跳过 | 已有LONG仓")
-            else:
-                log(f"⏭ LONG信号跳过 | 已有SHORT仓，多空互斥")
+        if state.get('long_pos'):
+            log(f"⏭ LONG信号跳过 | 已有LONG仓")
         elif get_exchange_qty('LONG') >= QTY:
             log(f"⏭ LONG信号跳过 | 交易所已有≥{QTY}HYPE")
         else:
@@ -241,11 +237,8 @@ def manage_positions(state, price, signal, reason, kline_open_time):
             if entry_price:
                 state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
-        if has_any_pos:
-            if state.get('short_pos'):
-                log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
-            else:
-                log(f"⏭ SHORT信号跳过 | 已有LONG仓，多空互斥")
+        if state.get('short_pos'):
+            log(f"⏭ SHORT信号跳过 | 已有SHORT仓")
         elif get_exchange_qty('SHORT') >= QTY:
             log(f"⏭ SHORT信号跳过 | 交易所已有≥{QTY}HYPE")
         else:
