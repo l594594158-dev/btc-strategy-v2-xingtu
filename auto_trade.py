@@ -103,7 +103,6 @@ def calc(df):
 
     price = close.iloc[lv]
     sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
-    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
 
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
@@ -115,6 +114,7 @@ def calc(df):
 
     # 闭K指标 (与回测一致)
     closed_lv = max(0, lv - 1)
+    rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
     avg_vol = volume.iloc[max(0, closed_lv-19):closed_lv+1].mean()
     cur_vol = volume.iloc[closed_lv]
     vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
