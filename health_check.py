@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-BTC合约任务自检脚本 v4.2
-- 适配liucangyang v4.2策略（long_pos/short_pos格式 + 7条件门控信号）
+HYPE合约任务自检脚本 v4.3
+- 适配liucangyang_hype v1.1策略（long_pos/short_pos格式 + 6条件门控信号）
 - 每5分钟执行一次自动检查
 - 检查进程运行、API数据、持仓同步、策略状态
 - 发现问题自动修复（重启进程/清幽灵仓）
@@ -34,7 +34,7 @@ NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 from api_config import TRADE_API_KEY, TRADE_SECRET
 
 SYMBOL = 'HYPE/USDT:USDT'
-QTY = 30
+QTY = 16
 POLL_INTERVAL = 2
 
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -110,25 +110,27 @@ class HealthChecker:
                 self.add_ok('进程状态', f'PID={my_pid} 运行中')
                 return True
 
-            self.add_fail('进程状态', '进程未运行', fix='restart')
+            self.add_fail('进程状态', '进程未运行', fix='#restart_disabled')
             return False
         except Exception as e:
             self.add_fail('进程状态', f'检查失败: {e}')
             return False
 
-    # ========== 检查2: API数据 + v4.2信号 ==========
+    # ========== 检查2: API数据 + v4.3信号 ==========
     def check_api_data(self):
-        """检查API数据获取 + v4.2 7条件门控信号状态"""
+        """检查API数据获取 + v4.3 6条件门控信号状态"""
         try:
-            # 用现货K线（与auto_trade.py一致）
-            result = []
-            for tf, limit in [('5m', 100), ('1h', 200), ('4h', 200), ('1d', 200)]:
-                url = f'https://fapi.binance.com/fapi/v1/klines?symbol=HYPEUSDT&interval={tf}&limit={limit}'
-                r = req.get(url, timeout=5)
-                klines = r.json()
-                data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
-                result.append(data)
-            k5m, k1h, k4h, k1d = result
+            # 用ccxt合约K线（与auto_trade.py一致）
+            binance = get_binance()
+            # 逐个拉取
+            k5m_all = binance.fetch_ohlcv(SYMBOL, '5m', limit=100)
+            k1h_all = binance.fetch_ohlcv(SYMBOL, '1h', limit=200)
+            k4h_all = binance.fetch_ohlcv(SYMBOL, '4h', limit=200)
+            k1d_all = binance.fetch_ohlcv(SYMBOL, '1d', limit=200)
+            k5m = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in k5m_all]
+            k1h = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in k1h_all]
+            k4h = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in k4h_all]
+            k1d = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in k1d_all]
 
             for name, data in [('5分钟', k5m), ('1小时', k1h), ('4小时', k4h), ('1天', k1d)]:
                 if len(data) < 50:
@@ -138,7 +140,7 @@ class HealthChecker:
                     self.add_fail(f'API-{name}', '最新K线收盘价为0/None', fix='retry')
                     return False
 
-            # ===== 计算指标（与v4.2 calc()一致，用闭K） =====
+            # ===== 计算指标（与v4.3 calc()一致，用闭K） =====
             def calc_v4(df_data):
                 df = pd.DataFrame(df_data, columns=['t','o','h','l','c','v'])
                 close = df['c']; high = df['h']; low = df['l']; volume = df['v']
@@ -158,6 +160,7 @@ class HealthChecker:
                 vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
                 close_closed = close.iloc[closed_lv]
                 sma_closed = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[closed_lv]
+                rsi_closed = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
                 try:
                     adx_closed = adx_ind.adx().iloc[closed_lv]
                 except:
@@ -165,7 +168,7 @@ class HealthChecker:
                 return {
                     'price': price, 'sma20': sma20, 'rsi': rsi, 'adx': adx,
                     'vol_ratio': vol_ratio,
-                    'close_closed': close_closed, 'sma_closed': sma_closed, 'adx_closed': adx_closed
+                    'close_closed': close_closed, 'sma_closed': sma_closed, 'adx_closed': adx_closed, 'rsi_closed': rsi_closed
                 }
 
             r5 = calc_v4(k5m)
@@ -174,81 +177,78 @@ class HealthChecker:
             rd = calc_v4(k1d)
 
             price = r5['price']
-            rsi5m = r5['rsi']
+            rsi5m = r5.get('rsi_closed', r5['rsi'])  # 闭K RSI
             adx1h = r1.get('adx_closed', r1['adx'])
             adx4h = r4.get('adx_closed', r4['adx'])
             vol_ratio = r5['vol_ratio']
             sma5m = r5['sma20']
 
-            # 4h方向（闭K）
-            h4_close = r4.get('close_closed', r4['price'])
-            sma4h = r4.get('sma_closed', r4['sma20'])
-            h4_bull = h4_close > sma4h
+            # 1h方向（闭K，与auto_trade check_entry一致）
+            h1_close = r1.get('close_closed', r1['price'])
+            sma1h = r1.get('sma_closed', r1['sma20'])
+            h1_bull = h1_close > sma1h
             # 1d方向（闭K）
             d1_close = rd.get('close_closed', rd['price'])
             sma1d = rd.get('sma_closed', rd['sma20'])
             d1_bull = d1_close > sma1d
 
             # SMA20 ±1%回调范围
-            in_range = sma5m * 0.99 <= price <= sma5m * 1.01
-
-            # ===== v4.2 7条件门控逐级判断 =====
+            # ===== v4.3 6条件门控逐级判断 =====
             gate = []
-            # 第1关：方向同向
-            if h4_bull == d1_bull:
-                gate.append(f'✅ 1/7 方向同向')
+            # 第1关：1h方向
+            gate.append(f'✅ 1/6 1h方向: {"📈多" if h1_bull else "📉空"}')
+            # 第2关：1h ADX > 20
+            if adx1h > 20:
+                gate.append(f'✅ 2/6 1hADX={adx1h:.1f}>20')
             else:
-                gate.append(f'❌ 1/7 4h{"多" if h4_bull else "空"}/1d{"多" if d1_bull else "空"}不同向')
-            # 第2关：1h ADX > 25
-            if adx1h > 25:
-                gate.append(f'✅ 2/7 1hADX={adx1h:.1f}>25')
+                gate.append(f'❌ 2/6 1hADX={adx1h:.1f}≤20')
+            # 第3关：4h ADX < 55
+            if adx4h < 55:
+                gate.append(f'✅ 3/6 4hADX={adx4h:.1f}<55')
             else:
-                gate.append(f'❌ 2/7 1hADX={adx1h:.1f}≤25')
-            # 第3关：4h ADX < 40
-            if adx4h < 40:
-                gate.append(f'✅ 3/7 4hADX={adx4h:.1f}<40')
-            else:
-                gate.append(f'❌ 3/7 4hADX={adx4h:.1f}≥40')
-            # 第4关：SMA20 ±1%
+                gate.append(f'❌ 3/6 4hADX={adx4h:.1f}≥55')
+            # 第4关：SMA20 ±1.5%
+            in_range = sma5m * 0.985 <= price <= sma5m * 1.015
             if in_range:
-                gate.append(f'✅ 4/7 SMA20±1%内')
+                gate.append(f'✅ 4/6 SMA20±1.5%内')
             else:
-                gate.append(f'❌ 4/7 偏离{abs(price/sma5m-1)*100:.1f}%')
+                gate.append(f'❌ 4/6 偏离{abs(price/sma5m-1)*100:.1f}%')
             # 第5关：放量≥1.0
             if vol_ratio >= 1.0:
-                gate.append(f'✅ 5/7 vol={vol_ratio:.1f}x≥1.0')
+                gate.append(f'✅ 5/6 vol={vol_ratio:.1f}x≥1.0')
             else:
-                gate.append(f'❌ 5/7 缩量vol={vol_ratio:.1f}x')
-            # 第6关：LONG条件
-            if h4_bull and d1_bull and rsi5m > 40:
-                gate.append(f'✅ 6/7 LONG | RSI={rsi5m:.1f}>40')
+                gate.append(f'❌ 5/6 缩量vol={vol_ratio:.1f}x')
+            # 第6关：RSI门控（只看1h方向，与auto_trade一致）
+            if h1_bull:
+                if rsi5m >= 40:
+                    gate.append(f'✅ 6/6 RSI={rsi5m:.1f}>=40 → LONG')
+                else:
+                    gate.append(f'❌ 6/6 RSI={rsi5m:.1f}<40 → LONG不触发')
             else:
-                gate.append(f'❌ 6/7 LONG不满足')
-            # 第7关：SHORT条件
-            if (not h4_bull) and (not d1_bull) and rsi5m < 60:
-                gate.append(f'✅ 7/7 SHORT | RSI={rsi5m:.1f}<60')
-            else:
-                gate.append(f'❌ 7/7 SHORT不满足')
+                if rsi5m <= 60:
+                    gate.append(f'✅ 6/6 RSI={rsi5m:.1f}<=60 → SHORT')
+                else:
+                    gate.append(f'❌ 6/6 RSI={rsi5m:.1f}>60 → SHORT不触发')
 
             # 决定最终状态
             all_pass = all('✅' in g for g in gate)
             if all_pass:
-                dir_str = '多' if h4_bull else '空'
-                sig_str = f'LONG(RSI>{rsi5m:.1f})' if (h4_bull and d1_bull) else f'SHORT(RSI<{rsi5m:.1f})'
-                self.add_ok('API数据', f'各周期正常 | ${price:,.0f} | 7条件全通→{sig_str}')
+                dir_str = '多' if h1_bull else '空'
+                sig_str = f'LONG(RSI>{rsi5m:.1f})' if (h1_bull and d1_bull) else f'SHORT(RSI<{rsi5m:.1f})'
+                self.add_ok('API数据', f'各周期正常 | ${price:,.0f} | 6条件全通→{sig_str}')
             else:
                 fail_count = sum(1 for g in gate if '❌' in g)
-                self.add_ok('API数据', f'各周期正常 | ${price:,.0f} | 7条件中{fail_count}项未通过')
+                self.add_ok('API数据', f'各周期正常 | ${price:,.0f} | 6条件中{fail_count}项未通过')
 
-            self.add_ok('7条件门控', ' | '.join(gate[:5]))
-            self.add_ok('趋势状态', f'4h:{"📈多" if h4_bull else "📉空"} | 1d:{"📈多" if d1_bull else "📉空"} | ADX1h={adx1h:.1f} ADX4h={adx4h:.1f} vol={vol_ratio:.1f}x')
+            self.add_ok('6条件门控', ' | '.join(gate[:6]))
+            self.add_ok('趋势状态', f'1h:{"📈多" if h1_bull else "📉空"} | 1d:{"📈多" if d1_bull else "📉空"} | ADX1h={adx1h:.1f} ADX4h={adx4h:.1f} vol={vol_ratio:.1f}x')
             return True
 
         except req.exceptions.RequestException as e:
             self.add_fail('API-网络', f'网络错误: {e}', fix='network')
             return False
         except Exception as e:
-            self.add_fail('API-数据', f'获取失败: {e}', fix='restart')
+            self.add_fail('API-数据', f'获取失败: {e}', fix='#restart_disabled')
             import traceback; traceback.print_exc()
             return False
 
@@ -260,7 +260,7 @@ class HealthChecker:
             exchange_pos = binance.fetch_positions([SYMBOL])
             actual_positions = [p for p in exchange_pos if float(p.get('contracts', 0)) != 0]
 
-            # 读取本地state（v4.2格式）
+            # 读取本地state（v4.3格式）
             state_long_pos = None
             state_short_pos = None
             if os.path.exists(STATE_FILE):
@@ -279,19 +279,21 @@ class HealthChecker:
                 side = p['side']
                 if side == 'long':
                     if not state_long_pos:
-                        mismatches.append(f'LONG仓({qty}BTC)本地缺失')
+                        mismatches.append(f'LONG仓({qty}HYPE)本地缺失')
                     else:
                         diff = abs(float(state_long_pos['entry']) - entry)
-                        if diff > 50:
+                        diff_pct = abs(diff / entry) if entry > 0 else 0
+                        if diff_pct > 0.1:
                             mismatches.append(f'LONG入场价偏差${diff:.0f}')
                         if qty > QTY * 1.1:
                             mismatches.append(f'LONG数量({qty})超过QTY({QTY})')
                 elif side == 'short':
                     if not state_short_pos:
-                        mismatches.append(f'SHORT仓({qty}BTC)本地缺失')
+                        mismatches.append(f'SHORT仓({qty}HYPE)本地缺失')
                     else:
                         diff = abs(float(state_short_pos['entry']) - entry)
-                        if diff > 50:
+                        diff_pct = abs(diff / entry) if entry > 0 else 0
+                        if diff_pct > 0.1:
                             mismatches.append(f'SHORT入场价偏差${diff:.0f}')
                         if qty > QTY * 1.1:
                             mismatches.append(f'SHORT数量({qty})超过QTY({QTY})')
@@ -300,12 +302,24 @@ class HealthChecker:
             ex_long = any(p['side'] == 'long' for p in actual_positions)
             ex_short = any(p['side'] == 'short' for p in actual_positions)
             if not ex_long and state_long_pos:
-                mismatches.append('LONG本地有但交易所无(幽灵)')
+                mismatches.append('LONG本地有但交易所无(幽灵)→自动清除')
+                state['long_pos'] = None
+                state['last_exit_time'] = time.time()
+                state.pop('sl_tp_mounted', None)
+                with open(STATE_FILE, 'w') as _f:
+                    json.dump(state, _f)
+                # 幽灵仓已自动清除
             if not ex_short and state_short_pos:
-                mismatches.append('SHORT本地有但交易所无(幽灵)')
+                mismatches.append('SHORT本地有但交易所无(幽灵)→自动清除')
+                state['short_pos'] = None
+                state['last_exit_time'] = time.time()
+                state.pop('sl_tp_mounted', None)
+                with open(STATE_FILE, 'w') as _f:
+                    json.dump(state, _f)
+                # 幽灵仓已自动清除
 
             if mismatches:
-                self.add_fail('持仓同步', '; '.join(mismatches), fix='restart')
+                self.add_fail('持仓同步', '; '.join(mismatches), fix='#restart_disabled')
             else:
                 total = len(actual_positions)
                 self.add_ok('持仓同步', f'一致 | {"无持仓" if total==0 else f"{total}仓"}')
@@ -314,10 +328,51 @@ class HealthChecker:
             self.add_fail('持仓同步', f'检查失败: {e}')
             return False
 
+    # ========== 检查3b: 孤儿挂单清理 ==========
+    def check_orphan_orders(self):
+        """Clean orphan algo orders"""
+        try:
+            binance = get_binance()
+            symbol_raw = SYMBOL.split(':')[0].replace('/', '')
+            positions = binance.fetch_positions([SYMBOL])
+            has_long = any(float(p.get('contracts', 0)) > 0 and p.get('side') == 'long' for p in positions)
+            has_short = any(float(p.get('contracts', 0)) > 0 and p.get('side') == 'short' for p in positions)
+            try:
+                orders = binance.fapiprivate_get_openalgoorders({'symbol': symbol_raw})
+            except:
+                orders = []
+            if not orders:
+                self.add_ok('挂单清理', '无挂单')
+                return True
+            cleaned = 0
+            for o in orders:
+                algo_id = o.get('algoId')
+                pos_side = o.get('positionSide', '')
+                if not algo_id:
+                    continue
+                # 保护：只清理自己币种的挂单（防止API返回了其他币种）
+                if o.get('symbol') != symbol_raw:
+                    continue
+                should_exist = (pos_side == 'LONG' and has_long) or (pos_side == 'SHORT' and has_short)
+                if not should_exist:
+                    try:
+                        binance.fapiPrivateDeleteAlgoOrder({'symbol': symbol_raw, 'algoId': int(algo_id)})
+                        cleaned += 1
+                    except:
+                        pass
+            if cleaned > 0:
+                self.add_ok('挂单清理', f'清理{cleaned}条孤儿挂单')
+            else:
+                self.add_ok('挂单清理', f'{len(orders)}条挂单均有效')
+            return True
+        except Exception as e:
+            self.add_fail('挂单清理', str(e))
+            return False
+
     # ========== 检查4: 策略文件状态 ==========
     def check_strategy(self):
         try:
-            # state.json（v4.2格式）
+            # state.json（v4.3格式）
             if os.path.exists(STATE_FILE):
                 with open(STATE_FILE) as f:
                     state = json.load(f)
@@ -349,7 +404,7 @@ class HealthChecker:
 
             return True
         except Exception as e:
-            self.add_fail('策略状态', f'检查失败: {e}', fix='restart')
+            self.add_fail('策略状态', f'检查失败: {e}', fix='#restart_disabled')
             return False
 
     # ========== 检查5: 通知队列（仅检查积压，不发送）==========
@@ -399,14 +454,17 @@ class HealthChecker:
             if fix_action == 'restart':
                 log('🔧 执行修复: 重启auto_trade.py...')
                 for attempt in range(1, 4):
+                    # 先杀旧进程
                     subprocess.run(['pkill', '-f', f'{TASK_DIR}/auto_trade.py'], capture_output=True)
                     time.sleep(2)
+                    # 启动新进程
                     subprocess.Popen(
                         f'cd {TASK_DIR} && nohup python3 -B -u auto_trade.py >> logs/auto_trade.log 2>&1 &',
                         shell=True,
                         preexec_fn=os.setsid
                     )
                     time.sleep(3)
+                    # 验证是否成功启动
                     if self._is_process_running():
                         log(f'✅ auto_trade.py 已重启 (第{attempt}次)')
                         return f'已重启auto_trade.py (第{attempt}次)'
@@ -454,7 +512,7 @@ class HealthChecker:
 
     def run(self):
         log('=' * 60)
-        log('🔍 HYPE自检 v1.0 开始')
+        log('🔍 HYPE自检 v4.3 开始')
         log('=' * 60)
 
         self._fixes_to_apply = []
@@ -462,6 +520,7 @@ class HealthChecker:
         self.check_process()
         self.check_api_data()
         self.check_position_sync()
+        self.check_orphan_orders()
         self.check_strategy()
         self.check_notify_queue()
 
