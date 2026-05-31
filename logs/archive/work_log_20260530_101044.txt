@@ -1,0 +1,435 @@
+[2026-05-28 03:55:03] [开仓] LONG | $3 | 【LONG顺势追多】RSI=63.0 ADX1h=20.5 vol=1.3x
+[2026-05-28 04:16:48] [止损] LONG | PnL:-2.09%
+[2026-05-28 06:00:07] [开仓] LONG | $3 | 【LONG顺势追多】RSI=41.9 ADX1h=21.5 vol=1.1x
+[2026-05-28 07:16:39] [止损] LONG | PnL:-2.15%
+[2026-05-28 21:10:05] [开仓] SHORT | $2 | 【SHORT顺势摸顶】RSI=33.9 ADX1h=20.5 vol=1.0x
+[2026-05-28 22:25:02] [开仓] SHORT | $2 | 【SHORT顺势摸顶】RSI=42.3 ADX1h=21.7 vol=2.0x
+[2026-05-28 22:40:09] [开仓] SHORT | $2 | 【SHORT顺势摸顶】RSI=33.8 ADX1h=21.7 vol=1.0x
+[2026-05-28 23:40:08] [开仓] SHORT | $2 | 【SHORT顺势摸顶】RSI=54.1 ADX1h=23.4 vol=1.1x
+[2026-05-29 02:10:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:24] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:27] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:30] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:33] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:41] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:44] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:10:47] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:09] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:12] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:15] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:18] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:24] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:29] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:32] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:38] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:41] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:43] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:52] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:55] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:11:57] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:00] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:03] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:06] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:09] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:12] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:15] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:18] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:24] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:27] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:30] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:32] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:38] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:41] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:44] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:47] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:52] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:55] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:12:58] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:01] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:04] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:10] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:13] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:16] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:41] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:44] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:52] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:55] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:13:58] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:00] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:03] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:29] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:32] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:40] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:43] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:52] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:55] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:14:57] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:01] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:04] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:16] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:30] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:33] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:36] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:44] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:47] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:50] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:15:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:01] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:04] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:16] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:33] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:36] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:16:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:36] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:17:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:18:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:40] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:43] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:54] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:57] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:19:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:36] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:54] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:20:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 02:21:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 03:05:04] [开仓] LONG | $2 | 【LONG顺势追多】RSI=67.7 ADX1h=24.8 vol=1.1x
+[2026-05-29 04:06:27] [止损] LONG | PnL:-2.03%
+[2026-05-29 04:10:43] [开仓] LONG | $2 | 【LONG顺势追多】RSI=40.8 ADX1h=23.3 vol=2.8x
+[2026-05-29 04:37:32] [止盈] LONG | PnL:+1.47%
+[2026-05-29 04:45:05] [开仓] LONG | $2 | 【LONG顺势追多】RSI=64.9 ADX1h=23.3 vol=1.3x
+[2026-05-29 05:41:35] [止盈] LONG | PnL:+1.69%
+[2026-05-29 06:20:06] [开仓] LONG | $2 | 【LONG顺势追多】RSI=47.7 ADX1h=21.2 vol=1.0x
+[2026-05-29 08:36:40] [止盈] LONG | PnL:+1.52%
+[2026-05-29 18:10:06] [开仓] LONG | $3 | SL:2.5 TP:2.6
+  信号:【LONG顺势追多】RSI=51.4 ADX1h=21.0 vol=1.3x
+  指标: 4h空 1d多 | 5mRSI=51.4 1hADX=22.2 4hADX=34.3 | SMA20=3 vol=1.3x | 实时价=3
+[2026-05-29 18:20:02] [开仓] LONG | $2 | SL:2.4 TP:2.5
+  信号:【LONG顺势追多】RSI=44.9 ADX1h=21.0 vol=1.9x
+  指标: 4h空 1d多 | 5mRSI=44.9 1hADX=22.2 4hADX=34.3 | SMA20=3 vol=1.9x | 实时价=2
+[2026-05-29 18:30:07] [开仓] LONG | $2 | SL:2.4 TP:2.5
+  信号:【LONG顺势追多】RSI=41.5 ADX1h=21.0 vol=1.2x
+  指标: 4h空 1d多 | 5mRSI=41.5 1hADX=22.2 4hADX=34.3 | SMA20=3 vol=1.2x | 实时价=2
+[2026-05-29 18:35:03] [开仓] LONG | $2 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=49.0 ADX1h=21.0 vol=1.2x
+  指标: 4h空 1d多 | 5mRSI=49.0 1hADX=22.2 4hADX=34.3 | SMA20=3 vol=1.2x | 实时价=3
+[2026-05-29 19:00:10] [开仓] LONG | $2 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=48.2 ADX1h=22.2 vol=1.3x
+  指标: 4h空 1d多 | 5mRSI=48.2 1hADX=23.4 4hADX=34.3 | SMA20=3 vol=1.3x | 实时价=2
+[2026-05-29 19:05:03] [开仓] LONG | $2 | SL:2.4 TP:2.5
+  信号:【LONG顺势追多】RSI=41.4 ADX1h=22.2 vol=1.3x
+  指标: 4h空 1d多 | 5mRSI=41.4 1hADX=23.2 4hADX=34.3 | SMA20=3 vol=1.3x | 实时价=2
+[2026-05-29 19:20:03] [开仓] LONG | $3 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=51.4 ADX1h=22.2 vol=1.4x
+  指标: 4h空 1d多 | 5mRSI=51.4 1hADX=23.2 4hADX=34.3 | SMA20=2 vol=1.4x | 实时价=3
+[2026-05-29 19:25:02] [开仓] LONG | $3 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=54.0 ADX1h=22.2 vol=2.0x
+  指标: 4h空 1d多 | 5mRSI=54.0 1hADX=23.2 4hADX=34.3 | SMA20=2 vol=2.0x | 实时价=3
+[2026-05-29 19:30:04] [开仓] LONG | $2 | SL:2.4 TP:2.5
+  信号:【LONG顺势追多】RSI=46.4 ADX1h=22.2 vol=1.0x
+  指标: 4h空 1d多 | 5mRSI=46.4 1hADX=23.2 4hADX=34.3 | SMA20=2 vol=1.0x | 实时价=2
+[2026-05-29 20:06:26] [止损] LONG | PnL:-2.37%
+[2026-05-29 21:35:06] [开仓] SHORT | $2 | SL:2.5 TP:2.4
+  信号:【SHORT顺势摸顶】RSI=37.0 ADX1h=22.0 vol=2.0x
+  指标: 4h空 1d多 | 5mRSI=37.0 1hADX=20.8 4hADX=32.7 | SMA20=2 vol=2.0x | 实时价=2
+[2026-05-29 21:38:03] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:38:06] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:43:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:43:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:43:29] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:56:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 21:56:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:00:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:00:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:00:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:00:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:34] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:50] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:53] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:56] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:02:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:04] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:10] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:13] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:16] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:24] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:27] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:30] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:33] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:03:38] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:00] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:03] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:10] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:12] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:15] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:18] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:24] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:29] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:32] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:40] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:43] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:54] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:04:57] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:00] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:04] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:07] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:10] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:12] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:15] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:18] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:21] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:29] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:32] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:35] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:37] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:40] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:43] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:48] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:51] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:54] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:57] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:05:59] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:02] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:05] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:08] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:31] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:33] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:36] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:06:39] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:15:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:15:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:44] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:46] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:49] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:52] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:55] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:28:58] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:00] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:03] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:06] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:09] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:12] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:15] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:17] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:20] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:23] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:26] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:42] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 22:29:45] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:11] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:14] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:16] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:19] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:22] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:25] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:28] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-29 23:07:30] [错误] 平仓失败: binance amount of NEAR/USDT:USDT must be greater than minimum amount precision of 1
+[2026-05-30 00:35:05] [开仓] LONG | $3 | SL:2.5 TP:2.6
+  信号:【LONG顺势追多】RSI=60.0 ADX1h=21.2 vol=1.6x
+  指标: 4h多 1d多 | 5mRSI=60.0 1hADX=22.5 4hADX=31.4 | SMA20=3 vol=1.6x | 实时价=3
+[2026-05-30 01:15:06] [开仓] LONG | $3 | SL:2.5 TP:2.6
+  信号:【LONG顺势追多】RSI=59.9 ADX1h=22.7 vol=1.4x
+  指标: 4h多 1d多 | 5mRSI=59.9 1hADX=24.1 4hADX=31.6 | SMA20=3 vol=1.4x | 实时价=3
+[2026-05-30 01:20:02] [开仓] LONG | $3 | SL:2.5 TP:2.6
+  信号:【LONG顺势追多】RSI=59.1 ADX1h=22.7 vol=1.4x
+  指标: 4h多 1d多 | 5mRSI=59.1 1hADX=24.1 4hADX=31.6 | SMA20=3 vol=1.4x | 实时价=3
+[2026-05-30 01:30:06] [开仓] LONG | $3 | SL:2.6 TP:2.7
+  信号:【LONG顺势追多】RSI=63.0 ADX1h=22.7 vol=1.0x
+  指标: 4h多 1d多 | 5mRSI=63.0 1hADX=24.1 4hADX=31.6 | SMA20=3 vol=1.0x | 实时价=3
+[2026-05-30 02:40:10] [开仓] LONG | $3 | SL:2.6 TP:2.6
+  信号:【LONG顺势追多】RSI=58.1 ADX1h=24.1 vol=1.0x
+  指标: 4h多 1d多 | 5mRSI=58.1 1hADX=25.2 4hADX=31.6 | SMA20=3 vol=1.0x | 实时价=3
+[2026-05-30 02:50:05] [开仓] LONG | $3 | SL:2.5 TP:2.6
+  信号:【LONG顺势追多】RSI=44.3 ADX1h=24.1 vol=1.6x
+  指标: 4h多 1d多 | 5mRSI=44.3 1hADX=24.9 4hADX=31.6 | SMA20=3 vol=1.6x | 实时价=3
+[2026-05-30 04:51:08] [开仓] LONG | $3 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=40.0 ADX1h=24.6 vol=2.1x
+  指标: 4h多 1d多 | 5mRSI=40.0 1hADX=23.9 4hADX=30.2 | SMA20=3 vol=2.1x | 实时价=3
+[2026-05-30 04:59:22] [开仓] LONG | $3 | SL:2.5 TP:2.5
+  信号:【LONG顺势追多】RSI=40.2 ADX1h=24.6 vol=2.1x
+  指标: 4h多 1d多 | 5mRSI=40.2 1hADX=23.7 4hADX=30.1 | SMA20=3 vol=2.1x | 实时价=3
+[2026-05-30 05:15:07] [开仓] SHORT | $3 | SL:2.6 TP:2.5
+  信号:【SHORT顺势摸顶】RSI=42.6 ADX1h=23.7 vol=1.0x
+  指标: 4h多 1d多 | 5mRSI=42.6 1hADX=22.6 4hADX=30.0 | SMA20=3 vol=1.0x | 实时价=3
+[2026-05-30 07:00:05] [开仓] SHORT | $2 | SL:2.4 TP:2.4
+  信号:【SHORT顺势摸顶】RSI=42.7 ADX1h=23.3 vol=1.5x
+  指标: 4h多 1d多 | 5mRSI=42.7 1hADX=22.8 4hADX=29.7 | SMA20=2 vol=1.5x | 实时价=2
+[2026-05-30 07:05:02] [开仓] SHORT | $2 | SL:2.5 TP:2.4
+  信号:【SHORT顺势摸顶】RSI=43.9 ADX1h=22.8 vol=1.5x
+  指标: 4h多 1d多 | 5mRSI=43.9 1hADX=22.4 4hADX=29.7 | SMA20=2 vol=1.5x | 实时价=2
+[2026-05-30 07:25:09] [开仓] SHORT | $2 | SL:2.4 TP:2.3
+  信号:【SHORT顺势摸顶】RSI=37.8 ADX1h=22.8 vol=1.9x
+  指标: 4h多 1d多 | 5mRSI=37.8 1hADX=22.3 4hADX=29.7 | SMA20=2 vol=1.9x | 实时价=2
+[2026-05-30 07:30:04] [开仓] SHORT | $2 | SL:2.4 TP:2.4
+  信号:【SHORT顺势摸顶】RSI=43.0 ADX1h=22.8 vol=1.9x
+  指标: 4h多 1d多 | 5mRSI=43.0 1hADX=22.3 4hADX=29.7 | SMA20=2 vol=1.9x | 实时价=2
+[2026-05-30 08:10:02] [开仓] SHORT | $2 | SL:2.4 TP:2.4
+  信号:【SHORT顺势摸顶】RSI=46.4 ADX1h=22.3 vol=1.0x
+  指标: 4h空 1d多 | 5mRSI=46.4 1hADX=21.8 4hADX=28.0 | SMA20=2 vol=1.0x | 实时价=2
+[2026-05-30 08:55:33] [开仓] SHORT | $2 | SL:2.4 TP:2.3
+  信号:【SHORT顺势摸顶】RSI=38.4 ADX1h=22.3 vol=1.5x
+  指标: 4h空 1d多 | 5mRSI=38.4 1hADX=22.0 4hADX=28.1 | SMA20=2 vol=1.5x | 实时价=2
