@@ -2,7 +2,6 @@
 """
 BTC合约 趋势回调策略 v4.3
 - 6条件简化 + TP1.2%/SL1.0% + 双向共存
-- ADX1h>20滤横盘 / ADX4h<55防过热 / 回调±1.5% / RSI门控
 - 现货K线计算 + 合约执行
 """
 import ccxt
@@ -45,10 +44,10 @@ STOP_LOSS_PCT = 1.2 / 100   # -1.2%止损
 TAKE_PROFIT_PCT = 1.0 / 100 # +1.0%止盈
 POLL_INTERVAL = 1            # 扫描间隔（秒）
 
-# 6条件阈值
+# 5条件阈值
 ADX_1H_MIN = 20              # 1h ADX > 20 (滤横盘)
 ADX_4H_MAX = 55              # 4h ADX < 55 (防追末端过热)
-RANGE_PCT = 1.5              # 回调范围 ±1.5%
+RANGE_PCT = 1.0              # 回调范围 ±1.0%
 VOL_RATIO_MIN = 1.0          # 量比 ≥ 1.0x
 RSI_LONG_MIN = 40            # LONG RSI > 40
 RSI_SHORT_MAX = 60           # SHORT RSI < 60
@@ -115,7 +114,7 @@ def calc(df):
     lv = len(df) - 1
 
     price = close.iloc[lv]
-    sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
+    sma10 = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[lv]
     rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
 
     try:
@@ -131,31 +130,31 @@ def calc(df):
     vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
 
     close_closed = close.iloc[closed_lv]
-    sma_closed = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[closed_lv]
+    sma_closed = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[closed_lv]
     adx_closed = adx_ind.adx().iloc[closed_lv]
     rsi_closed = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
 
     return {
-        'price': price, 'sma20': sma20, 'rsi': rsi,
+        'price': price, 'sma10': sma10, 'rsi': rsi,
         'adx': adx, 'vol_ratio': vol_ratio,
         'close_closed': close_closed, 'sma_closed': sma_closed,
         'adx_closed': adx_closed, 'rsi_closed': rsi_closed
     }
 
-# ========== 信号判断 v4.3（6条件）==========
+# ========== 信号判断 v4.3（5条件）==========
 def check_entry(data):
-    r5 = data['5m']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
+    r5 = data['5m']; r4 = data['4h']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
 
     price = r5['price']
     rsi5m = r5.get('rsi_closed', r5['rsi'])  # 闭K RSI，与量比同源
     adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
     adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
-    sma5m = r5['sma_closed']  # 前20根闭K的SMA20（不含当前未闭K线）
+    sma5m = r5['sma_closed']  # 前10根闭K的SMA10（不含当前未闭K线）
 
-    # 条件①: 1h方向 (闭K收盘价 vs 闭K SMA20)
+    # 条件①: 1h方向 (闭K收盘价 vs 闭K SMA10)
     h1_close = r1.get('close_closed', r1['price'])
-    sma1h = r1.get('sma_closed', r1['sma20'])
+    sma1h = r1.get('sma_closed', r1['sma10'])
     h1_bull = h1_close > sma1h
 
     # 条件②: 1h ADX > 20 (滤横盘)
@@ -166,10 +165,10 @@ def check_entry(data):
     if adx4h >= ADX_4H_MAX:
         return None, f"观望 | 4hADX={adx4h:.1f}≥{ADX_4H_MAX}"
 
-    # 条件④: 回调范围 ±1.5%
+    # 条件④: 回调范围 ±1.0%
     deviation = abs(price / sma5m - 1) * 100
     if deviation > RANGE_PCT:
-        return None, f"观望 | 偏离SMA20 ±{deviation:.1f}%"
+        return None, f"观望 | 偏离SMA10 ±{deviation:.1f}%"
 
     # 条件⑤: 量比 ≥ 1.0x
     if vol_ratio < VOL_RATIO_MIN:
@@ -244,16 +243,16 @@ def manage_positions(state, price, signal, reason, sma5m, data=None):
 
     # ── 新信号（双向共存，各方向独立管理）──
     if signal == 'LONG':
-        # 开仓前二次验价：实时价距5m SMA20 ≤±1.5%
+        # 开仓前二次验价：实时价距5m SMA10 ≤±1.0%
         if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-            log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
+            log(f"🛡 开仓验价拦截 | 偏离SMA10 ±{abs(price/sma5m-1)*100:.1f}%")
         else:
             entry_price = do_open('LONG', price, reason, data)
             if entry_price:
                 state['long_pos'] = {'entry': entry_price, 'signal': reason, 'open_time': datetime.now().isoformat()}
     elif signal == 'SHORT':
         if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-            log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
+            log(f"🛡 开仓验价拦截 | 偏离SMA10 ±{abs(price/sma5m-1)*100:.1f}%")
         else:
             entry_price = do_open('SHORT', price, reason, data)
             if entry_price:
@@ -312,25 +311,24 @@ def do_open(direction, price, reason, data=None):
         # ── 结构化交易日志 ──
         r5 = data['5m'] if data else {}
         r1 = data['1h'] if data else {}
-        r4 = data['4h'] if data else {}
         rd = data['1d'] if data else {}
         h1_close_val = r1.get('close_closed', r1.get('price', 0))
-        h1_sma_val = r1.get('sma_closed', r1.get('sma20', 0))
+        h1_sma_val = r1.get('sma_closed', r1.get('sma10', 0))
         d_close = rd.get('close_closed', rd.get('price', 0))
-        d_sma = rd.get('sma_closed', rd.get('sma20', 0))
+        d_sma = rd.get('sma_closed', rd.get('sma10', 0))
         dir_1h = '多' if h1_close_val > h1_sma_val else '空'
         dir_1d = '多' if d_close > d_sma else '空'
 
         trade_csv = os.path.join(BASE_DIR, 'logs', 'trade_log.csv')
-        csv_row = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')},{SYMBOL.split(':')[0].replace('/','')},{direction},{entry_price:.1f},{QTY},{sl_p},{tp_p},{reason},{dir_1h},{dir_1d},{r5.get('rsi',0):.1f},{r1.get('adx',0):.1f},{r4.get('adx',0):.1f},{r5.get('sma20',0):.0f},{r5.get('vol_ratio',0):.1f},{r5.get('price',0):.0f}"
+        csv_row = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')},{SYMBOL.split(':')[0].replace('/','')},{direction},{entry_price:.1f},{QTY},{sl_p},{tp_p},{reason},{dir_1h},{dir_1d},{r5.get('rsi',0):.1f},{r1.get('adx',0):.1f},{r4.get('adx',0):.1f},{r5.get('sma10',0):.0f},{r5.get('vol_ratio',0):.1f},{r5.get('price',0):.0f}"
         with open(trade_csv, 'a') as f:
             f.write(csv_row + '\n')
 
         # 详细文本日志
         detail = (f"{direction} | ${entry_price:.0f} | SL:{sl_p} TP:{tp_p}\n"
                   f"  信号:{reason}\n"
-                  f"  指标: 1h{dir_1h} 1d{dir_1d} | 5mRSI={r5.get('rsi',0):.1f} 1hADX={r1.get('adx',0):.1f} 4hADX={r4.get('adx',0):.1f} | "
-                  f"SMA20={r5.get('sma20',0):.0f} vol={r5.get('vol_ratio',0):.1f}x | 实时价={price:.0f}")
+                  f"  指标: 1h{dir_1h} 1d{dir_1d} | 5mRSI={r5.get('rsi',0):.1f} 1hADX={r1.get('adx',0):.1f} "
+                  f"SMA10={r5.get('sma10',0):.0f} vol={r5.get('vol_ratio',0):.1f}x | 实时价={price:.0f}")
         work_log("开仓", detail)
 
         msg = (f"{'🟢' if direction=='LONG' else '🔴'} BTC开仓\n"
@@ -587,12 +585,12 @@ def print_status(data, state):
 
     # 用闭K收盘价判断方向，与 check_entry 信号逻辑一致（只看1h）
     h1_close_val = r1.get('close_closed', price)
-    h1_sma_val = r1.get('sma_closed', r1['sma20'])
+    h1_sma_val = r1.get('sma_closed', r1['sma10'])
     dir_1h = '📈多' if h1_close_val > h1_sma_val else '📉空'
 
     now = datetime.now().strftime('%H:%M:%S')
     print(f"\n╔══ BTC v4.3趋势回调 {now} ═══")
-    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.0f}")
+    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA10:{r5['sma10']:.0f}")
     print(f"║ 1h{dir_1h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
@@ -613,7 +611,6 @@ def print_status(data, state):
 def main():
     log(f"🚀 BTC v4.3 趋势回调 启动 | {LEVERAGE}x逐仓 | {QTY}BTC/仓")
     log(f"策略: 6条件 TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}% 双向共存")
-    log(f"参数: ADX1h>{ADX_1H_MIN} ADX4h<{ADX_4H_MAX} 回调±{RANGE_PCT}% 量比≥{VOL_RATIO_MIN}x RSI_LONG>{RSI_LONG_MIN} RSI_SHORT<{RSI_SHORT_MAX}")
 
     # 设置杠杆 + 逐仓模式
     try:
@@ -661,7 +658,7 @@ def main():
             # 先查交易所实际持仓做交叉验证，防止本地状态过期
             sync_state(state)
 
-            manage_positions(state, price, sig, reason, data['5m']['sma20'], data)
+            manage_positions(state, price, sig, reason, data['5m']['sma10'], data)
 
             # 重新加载 state（manage_positions 内部已 save）
             state = load_state()
