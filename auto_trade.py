@@ -43,6 +43,7 @@ NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
 STOP_LOSS_PCT = 2.0 / 100   # -2.0%止损
 TAKE_PROFIT_PCT = 2.5 / 100 # +2.5%止盈
 POLL_INTERVAL = 2            # 扫描间隔（秒）
+COOLDOWN_SEC = 300           # 平仓后等下一根5m K线闭合（最长300s兜底）
 
 # 6条件阈值
 ADX_1H_MIN = 20              # 1h ADX > 20 (滤横盘)
@@ -198,11 +199,13 @@ def manage_positions(state, price, signal, reason, sma5m):
             log(f"🛑 LONG止损 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('LONG', price, lp, '止损')
             state['long_pos'] = None
+            state['last_exit_time'] = time.time()
             closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ LONG止盈 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('LONG', price, lp, '止盈')
             state['long_pos'] = None
+            state['last_exit_time'] = time.time()
             closed = True
 
     # ── SHORT止盈止损 ──
@@ -213,12 +216,26 @@ def manage_positions(state, price, signal, reason, sma5m):
             log(f"🛑 SHORT止损 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('SHORT', price, sp, '止损')
             state['short_pos'] = None
+            state['last_exit_time'] = time.time()
             closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ SHORT止盈 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
             do_close('SHORT', price, sp, '止盈')
             state['short_pos'] = None
+            state['last_exit_time'] = time.time()
             closed = True
+
+    # ── 冷却检查：等平仓那根5m K线闭合后才能开新仓 ──
+    last_exit = state.get('last_exit_time', 0)
+    if last_exit > 0:
+        exit_kline_close = ((int(last_exit) // 300) + 1) * 300
+        remaining = exit_kline_close - int(time.time())
+        if remaining > 0 and remaining <= COOLDOWN_SEC:
+            if signal:
+                log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
+            return closed
+        else:
+            state['last_exit_time'] = 0
 
     # ── 新信号（单币种互斥，只允许一仓）──
     has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)
@@ -375,23 +392,65 @@ def ensure_sl_tp(state, retries=1):
             save_state(state)
             continue
 
-        try:
-            algos = trade_binance.fapiprivate_get_openalgoorders({'symbol': 'NEARUSDT'})
-            existing = [o for o in algos if o.get('algoStatus') == 'NEW' and o.get('positionSide') == direction]
-        except:
-            existing = []
-
         if direction == 'LONG':
-            sl_p = round(entry * (1 - STOP_LOSS_PCT), 1)
-            tp_p = round(entry * (1 + TAKE_PROFIT_PCT), 1)
+            sl_p = round(entry * (1 - STOP_LOSS_PCT), 2)
+            tp_p = round(entry * (1 + TAKE_PROFIT_PCT), 2)
+            if entry - sl_p < 0.01:
+                sl_p = round(entry - 0.01, 2)
             close_side = 'sell'
         else:
-            sl_p = round(entry * (1 + STOP_LOSS_PCT), 1)
-            tp_p = round(entry * (1 - TAKE_PROFIT_PCT), 1)
+            sl_p = round(entry * (1 + STOP_LOSS_PCT), 2)
+            tp_p = round(entry * (1 - TAKE_PROFIT_PCT), 2)
+            if sl_p - entry < 0.01:
+                sl_p = round(entry + 0.01, 2)
             close_side = 'buy'
 
-        sl_exist = any(o.get('orderType') == 'STOP_MARKET' for o in existing)
-        if not sl_exist:
+        # 查交易所现有挂单
+        symbol_raw = SYMBOL.split(':')[0].replace('/', '')
+        try:
+            all_orders = trade_binance.fapiprivate_get_openalgoorders({'symbol': symbol_raw})
+        except:
+            all_orders = []
+
+        own_orders = [o for o in all_orders
+                      if o.get('symbol') == symbol_raw
+                      and o.get('positionSide') == direction]
+
+        existing_sl_orders = [o for o in own_orders if o.get('orderType') == 'STOP_MARKET']
+        existing_tp_orders = [o for o in own_orders if o.get('orderType') == 'TAKE_PROFIT_MARKET']
+
+        sl_matched = any(abs(float(o.get('triggerPrice', 0)) - sl_p) < 0.01 for o in existing_sl_orders)
+        tp_matched = any(abs(float(o.get('triggerPrice', 0)) - tp_p) < 0.01 for o in existing_tp_orders)
+
+        # 清理不匹配的旧挂单
+        for o in existing_sl_orders:
+            if abs(float(o.get('triggerPrice', 0)) - sl_p) >= 0.01:
+                try:
+                    trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
+                    log(f"  取消旧SL: ${o.get('triggerPrice')} (→ ${sl_p})")
+                except:
+                    pass
+        for o in existing_tp_orders:
+            if abs(float(o.get('triggerPrice', 0)) - tp_p) >= 0.01:
+                try:
+                    trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
+                    log(f"  取消旧TP: ${o.get('triggerPrice')} (→ ${tp_p})")
+                except:
+                    pass
+
+        # 去重：多余的同类型挂单
+        sl_remaining = existing_sl_orders[1:] if sl_matched else []
+        tp_remaining = existing_tp_orders[1:] if tp_matched else []
+        for o in sl_remaining + tp_remaining:
+            try:
+                trade_binance.fapiprivate_delete_algoorder({'symbol': symbol_raw, 'algoId': o['algoId']})
+            except:
+                pass
+
+        if sl_matched and tp_matched and len(existing_sl_orders) <= 1 and len(existing_tp_orders) <= 1:
+            continue
+
+        if not sl_matched or len(existing_sl_orders) == 0:
             try:
                 trade_binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                     params={'stopPrice': sl_p, 'positionSide': direction})
@@ -399,8 +458,7 @@ def ensure_sl_tp(state, retries=1):
             except Exception as e:
                 log(f"  SL挂单失败: {e}")
 
-        tp_exist = any(o.get('orderType') == 'TAKE_PROFIT_MARKET' for o in existing)
-        if not tp_exist:
+        if not tp_matched or len(existing_tp_orders) == 0:
             try:
                 trade_binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                     params={'stopPrice': tp_p, 'positionSide': direction})
@@ -457,13 +515,11 @@ def sync_state(state):
                 state['short_pos']['entry'] = exchange_entry
 
     if not has_long and state.get('long_pos'):
-        log("🔄 交易所LONG已消失，清除本地")
-        state['long_pos'] = None
+        log(f"⚠️ 交易所LONG已消失，本地保留等止损触发清除 | entry={state['long_pos']['entry']}")
     if not has_short and state.get('short_pos'):
-        log("🔄 交易所SHORT已消失，清除本地")
-        state['short_pos'] = None
+        log(f"⚠️ 交易所SHORT已消失，本地保留等止损触发清除 | entry={state['short_pos']['entry']}")
 
-    save_state(state)
+    # 不再主动save_state（交给manage_positions统一保存）
     return has_long or has_short
 
 # ========== 状态显示 ==========
