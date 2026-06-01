@@ -2,7 +2,6 @@
 """
 NEAR合约 趋势回调策略 v1.0（同步BTC v4.3）
 - 6条件简化 + TP2.5%/SL2.0% + 双向各1仓
-- ADX1h>20滤横盘 / ADX4h<55防过热 / 回调±1.5% / RSI门控
 - 合约K线计算 + 合约执行
 """
 import ccxt
@@ -10,6 +9,7 @@ import requests
 import pandas as pd
 import ta
 import time
+import math
 import json
 import os
 from datetime import datetime
@@ -45,10 +45,10 @@ TAKE_PROFIT_PCT = 2.5 / 100 # +2.5%止盈
 POLL_INTERVAL = 2            # 扫描间隔（秒）
 COOLDOWN_SEC = 300           # 平仓后等下一根5m K线闭合（最长300s兜底）
 
-# 6条件阈值
+# 5条件阈值
 ADX_1H_MIN = 20              # 1h ADX > 20 (滤横盘)
 ADX_4H_MAX = 55              # 4h ADX < 55 (防追末端过热)
-RANGE_PCT = 1.5              # 回调范围 ±1.5%
+RANGE_PCT = 1.0              # 回调范围 ±1.0%
 VOL_RATIO_MIN = 1.0          # 量比 ≥ 1.0x
 RSI_LONG_MIN = 40            # LONG RSI > 40
 RSI_SHORT_MAX = 60           # SHORT RSI < 60
@@ -71,6 +71,8 @@ def load_state():
 
 def save_state(s):
     with open(STATE_FILE, 'w') as f:
+        f.flush()
+        os.fdatasync(f.fileno())
         json.dump(s, f)
 
 # ========== 通知 ==========
@@ -85,6 +87,7 @@ def notify_alert(msg):
         queue = queue[-50:]
         with open(NOTIFY_QUEUE, 'w') as f:
             json.dump(queue, f, ensure_ascii=False, indent=2)
+
     except Exception as e:
         log(f'⚠️ 通知写入失败: {e}')
 
@@ -99,6 +102,7 @@ def get_data():
             klines = resp.json()
             data = [[int(k[0]), float(k[1]), float(k[2]), float(k[3]), float(k[4]), float(k[5])] for k in klines]
             result.append(data)
+
         except Exception as e:
             log(f'获取{tf}失败: {e}')
             result.append([])
@@ -112,7 +116,7 @@ def calc(df):
     lv = len(df) - 1
 
     price = close.iloc[lv]
-    sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
+    sma10 = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[lv]
     rsi = ta.momentum.RSIIndicator(close, 14).rsi().iloc[lv]
 
     try:
@@ -128,31 +132,33 @@ def calc(df):
     vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
 
     close_closed = close.iloc[closed_lv]
-    sma_closed = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[closed_lv]
+    sma_closed = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[closed_lv]
     adx_closed = adx_ind.adx().iloc[closed_lv]
+    rsi_closed = ta.momentum.RSIIndicator(close, 14).rsi().iloc[closed_lv]
 
     return {
-        'price': price, 'sma20': sma20, 'rsi': rsi,
+        'price': price, 'sma10': sma10, 'rsi': rsi,
         'adx': adx, 'vol_ratio': vol_ratio,
         'close_closed': close_closed, 'sma_closed': sma_closed,
-        'adx_closed': adx_closed
+        'adx_closed': adx_closed,
+        'rsi_closed': rsi_closed
     }
 
-# ========== 信号判断 v1.0（6条件，同步BTC v4.3）==========
+# ========== 信号判断 v1.0（5条件，同步BTC v4.3）==========
 def check_entry(data):
-    r5 = data['5m']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
+    r5 = data['5m']; r4 = data['4h']; r1 = data['1h']; r4 = data['4h']; rd = data['1d']
 
     price = r5['price']
-    rsi5m = r5['rsi']
+    rsi5m = r5.get('rsi_closed', r5['rsi'])
     adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
     adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
-    sma5m = r5['sma20']
+    sma5m = r5['sma10']
 
-    # 条件①: 4h方向 (闭K收盘价 vs 闭K SMA20)
-    h4_close = r4.get('close_closed', r4['price'])
-    sma4h = r4.get('sma_closed', r4['sma20'])
-    h4_bull = h4_close > sma4h
+    # 条件①: 1h方向 (闭K收盘价 vs 闭K SMA10)
+    h1_close = r1.get('close_closed', r1['price'])
+    sma1h = r1.get('sma_closed', r1['sma10'])
+    h1_bull = h1_close > sma1h
 
     # 条件②: 1h ADX > 20 (滤横盘)
     if adx1h <= ADX_1H_MIN:
@@ -162,33 +168,35 @@ def check_entry(data):
     if adx4h >= ADX_4H_MAX:
         return None, f"观望 | 4hADX={adx4h:.1f}≥{ADX_4H_MAX}"
 
-    # 条件④: 回调范围 ±1.5%
+    # 条件④: 回调范围 ±1.0%
     deviation = abs(price / sma5m - 1) * 100
     if deviation > RANGE_PCT:
-        return None, f"观望 | 偏离SMA20 ±{deviation:.1f}%"
+        return None, f"观望 | 偏离SMA10 ±{deviation:.1f}%"
 
     # 条件⑤: 量比 ≥ 1.0x
     if vol_ratio < VOL_RATIO_MIN:
         return None, f"观望 | 缩量 vol={vol_ratio:.1f}x"
 
-    # 条件⑥: RSI门控（只看4h方向）
-    if h4_bull:
-        # 4h多头 → LONG
+    # 条件⑥: RSI门控（只看1h方向）
+    if h1_bull:
+        # 1h多头 → LONG
         if rsi5m > RSI_LONG_MIN:
             return ('LONG', f"【LONG顺势追多】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
         else:
             return None, f"观望 | RSI={rsi5m:.1f}≤{RSI_LONG_MIN} 不触发LONG"
     else:
-        # 4h空头 → SHORT
+        # 1h空头 → SHORT
         if rsi5m < RSI_SHORT_MAX:
             return ('SHORT', f"【SHORT顺势摸顶】RSI={rsi5m:.1f} ADX1h={adx1h:.1f} vol={vol_ratio:.1f}x")
         else:
             return None, f"观望 | RSI={rsi5m:.1f}≥{RSI_SHORT_MAX} 不触发SHORT"
 
-    return None, f"观望 | 4h{'多' if h4_bull else '空'} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
+    return None, f"观望 | 1h{'多' if h1_bull else '空'} RSI={rsi5m:.1f} ADX1h={adx1h:.1f}"
 
 # ========== 仓位管理（互斥+保护） ==========
 def manage_positions(state, price, signal, reason, sma5m):
+    closed = False
+
     closed = False
 
     # ── LONG止盈止损 ──
@@ -197,16 +205,16 @@ def manage_positions(state, price, signal, reason, sma5m):
         pnl = (price - lp['entry']) / lp['entry']
         if pnl <= -STOP_LOSS_PCT:
             log(f"🛑 LONG止损 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
-            do_close('LONG', price, lp, '止损')
-            state['long_pos'] = None
-            state['last_exit_time'] = time.time()
-            closed = True
+            if do_close('LONG', price, lp, '止损'):
+                state['long_pos'] = None
+                state['last_exit_time'] = time.time()
+                closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ LONG止盈 | ${lp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
-            do_close('LONG', price, lp, '止盈')
-            state['long_pos'] = None
-            state['last_exit_time'] = time.time()
-            closed = True
+            if do_close('LONG', price, lp, '止盈'):
+                state['long_pos'] = None
+                state['last_exit_time'] = time.time()
+                closed = True
 
     # ── SHORT止盈止损 ──
     sp = state.get('short_pos')
@@ -214,29 +222,18 @@ def manage_positions(state, price, signal, reason, sma5m):
         pnl = (sp['entry'] - price) / sp['entry']
         if pnl <= -STOP_LOSS_PCT:
             log(f"🛑 SHORT止损 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
-            do_close('SHORT', price, sp, '止损')
-            state['short_pos'] = None
-            state['last_exit_time'] = time.time()
-            closed = True
+            if do_close('SHORT', price, sp, '止损'):
+                state['short_pos'] = None
+                state['last_exit_time'] = time.time()
+                closed = True
         elif pnl >= TAKE_PROFIT_PCT:
             log(f"✅ SHORT止盈 | ${sp['entry']:.0f} → ${price:.0f} ({pnl*100:+.2f}%)")
-            do_close('SHORT', price, sp, '止盈')
-            state['short_pos'] = None
-            state['last_exit_time'] = time.time()
-            closed = True
+            if do_close('SHORT', price, sp, '止盈'):
+                state['short_pos'] = None
+                state['last_exit_time'] = time.time()
+                closed = True
 
     # ── 冷却检查：等平仓那根5m K线闭合后才能开新仓 ──
-    last_exit = state.get('last_exit_time', 0)
-    if last_exit > 0:
-        exit_kline_close = ((int(last_exit) // 300) + 1) * 300
-        remaining = exit_kline_close - int(time.time())
-        if remaining > 0 and remaining <= COOLDOWN_SEC:
-            if signal:
-                log(f"⏳ 等K线闭合 {remaining}s | 跳过{signal}")
-            return closed
-        else:
-            state['last_exit_time'] = 0
-
     # ── 新信号（单币种互斥，只允许一仓）──
     has_any = (state.get('long_pos') is not None) or (state.get('short_pos') is not None)
     if signal == 'LONG':
@@ -244,9 +241,9 @@ def manage_positions(state, price, signal, reason, sma5m):
             existing = 'LONG' if state.get('long_pos') else 'SHORT'
             log(f"⏭ LONG信号跳过 | 已有{existing}仓（互斥）")
         else:
-            # 开仓前二次验价：实时价距5m SMA20 ≤±1.5%
+            # 开仓前二次验价：实时价距5m SMA10 ≤±1.0%
             if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-                log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
+                log(f"🛡 开仓验价拦截 | 偏离SMA10 ±{abs(price/sma5m-1)*100:.1f}%")
             else:
                 entry_price = do_open('LONG', price, reason)
                 if entry_price:
@@ -257,7 +254,7 @@ def manage_positions(state, price, signal, reason, sma5m):
             log(f"⏭ SHORT信号跳过 | 已有{existing}仓（互斥）")
         else:
             if abs(price / sma5m - 1) * 100 > RANGE_PCT:
-                log(f"🛡 开仓验价拦截 | 偏离SMA20 ±{abs(price/sma5m-1)*100:.1f}%")
+                log(f"🛡 开仓验价拦截 | 偏离SMA10 ±{abs(price/sma5m-1)*100:.1f}%")
             else:
                 entry_price = do_open('SHORT', price, reason)
                 if entry_price:
@@ -297,6 +294,7 @@ def do_open(direction, price, reason):
         work_log("开仓", f"{direction} | ${entry_price:.0f} | {reason}")
         return entry_price
 
+
     except Exception as e:
         log(f"❌ {direction}开仓失败: {e}")
         work_log("错误", f"开仓失败: {e}")
@@ -319,6 +317,14 @@ def do_close(direction, price, pos_data, reason):
 
         if qty == 0:
             log(f"⚠️ 未找到{direction}持仓，可能已被平")
+            return False
+
+        # ⚠️ 精度修复：整数币种ceil取整
+        if QTY >= 1:
+            qty_ceil = math.ceil(qty)
+            if qty != qty_ceil:
+                log(f"🔧 平仓数量修正: {qty} → {qty_ceil}")
+                qty = qty_ceil
             return
 
         order = trade_binance.create_order(SYMBOL, 'market', close_side, qty,
@@ -346,6 +352,7 @@ def do_close(direction, price, pos_data, reason):
                     trade_binance.fapiPrivateDeleteAlgoOrder({'symbol': 'NEARUSDT', 'algoId': int(o['algoId'])})
         except:
             pass
+
 
     except Exception as e:
         log(f"❌ 平仓失败: {e}")
@@ -455,6 +462,7 @@ def ensure_sl_tp(state, retries=1):
                 trade_binance.create_order(SYMBOL, 'STOP_MARKET', close_side, qty,
                     params={'stopPrice': sl_p, 'positionSide': direction})
                 log(f"  挂SL: ${sl_p}")
+
             except Exception as e:
                 log(f"  SL挂单失败: {e}")
 
@@ -463,6 +471,7 @@ def ensure_sl_tp(state, retries=1):
                 trade_binance.create_order(SYMBOL, 'TAKE_PROFIT_MARKET', close_side, qty,
                     params={'stopPrice': tp_p, 'positionSide': direction})
                 log(f"  挂TP: ${tp_p}")
+
             except Exception as e:
                 log(f"  TP挂单失败: {e}")
 
@@ -528,15 +537,15 @@ def print_status(data, state):
     price = r5['price']; rsi = r5['rsi']; adx1h = r1['adx']; adx4h = r4['adx']
     vol = r5['vol_ratio']
 
-    # 用闭K收盘价判断方向，与 check_entry 信号逻辑一致（只看4h）
-    h4_close = r4.get('close_closed', price)
-    h4_sma = r4.get('sma_closed', r4['sma20'])
-    dir_4h = '📈多' if h4_close > h4_sma else '📉空'
+    # 用闭K收盘价判断方向，与 check_entry 信号逻辑一致（只看1h））
+    h1_close = r1.get('close_closed', price)
+    h1_sma = r1.get('sma_closed', r1['sma10'])
+    dir_1h = '📈多' if h1_close > h1_sma else '📉空'
 
     now = datetime.now().strftime('%H:%M:%S')
     print(f"\n╔══ NEAR v1.0趋势回调 {now} ═══")
-    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.4f}")
-    print(f"║ 4h{dir_4h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
+    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA10:{r5['sma10']:.4f}")
+    print(f"║ 1h{dir_1h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
     sp = state.get('short_pos')
@@ -556,13 +565,13 @@ def print_status(data, state):
 def main():
     log(f"🚀 NEAR v1.0 趋势回调 启动 | {LEVERAGE}x逐仓 | {QTY}NEAR/仓")
     log(f"策略: 6条件 TP{TAKE_PROFIT_PCT*100}%/SL{STOP_LOSS_PCT*100}% 双向各1仓")
-    log(f"参数: ADX1h>{ADX_1H_MIN} ADX4h<{ADX_4H_MAX} 回调±{RANGE_PCT}% 量比≥{VOL_RATIO_MIN}x RSI_LONG>{RSI_LONG_MIN} RSI_SHORT<{RSI_SHORT_MAX}")
 
     # 设置杠杆 + 逐仓模式
     try:
         trade_binance.set_leverage(LEVERAGE, SYMBOL)
         trade_binance.set_margin_mode('isolated', SYMBOL)
         log(f"杠杆设置: {LEVERAGE}x | 逐仓模式")
+
     except Exception as e:
         log(f"杠杆/保证金设置: {e}")
 
@@ -602,7 +611,7 @@ def main():
             # 先查交易所实际持仓做交叉验证，防止本地状态过期
             sync_state(state)
 
-            manage_positions(state, price, sig, reason, data['5m']['sma20'])
+            manage_positions(state, price, sig, reason, data['5m']['sma10'])
 
             # 重新加载 state（manage_positions 内部已 save）
             state = load_state()
@@ -619,6 +628,7 @@ def main():
         except KeyboardInterrupt:
             log("🛑 停止")
             break
+
         except Exception as e:
             log(f"❌ {e}")
             import traceback; traceback.print_exc()
