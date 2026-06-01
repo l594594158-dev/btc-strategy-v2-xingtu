@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 BTC合约 趋势回调策略 v5.0
-- 4h单周期方向 + 6指标 + TP1.2%/SL1.0% + 双向各1仓
-- 变更: 去掉1d确认, ADX放宽(1h>20/4h<55), SMA20±1.5%, 止盈止损收窄
+- 4h单周期方向 + 6指标 + TP1.0%/SL1.2% + 双向各1仓
+- 变更: 去掉1d确认, ADX放宽(1h>20/4h<55), SMA10±1.0%, 1h/5m均SMA10
 """
 import ccxt
 import requests
@@ -102,7 +102,7 @@ def calc(df):
     lv = len(df) - 1
 
     price = close.iloc[lv]
-    sma20 = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[lv]
+    sma10 = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[lv]
 
     try:
         adx_ind = ta.trend.ADXIndicator(high, low, close, window=14)
@@ -120,11 +120,11 @@ def calc(df):
     vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 1
 
     close_closed = close.iloc[closed_lv]
-    sma_closed = ta.trend.SMAIndicator(close, 20).sma_indicator().iloc[closed_lv]
+    sma_closed = ta.trend.SMAIndicator(close, 10).sma_indicator().iloc[closed_lv]
     adx_closed = adx_ind.adx().iloc[closed_lv] if 'adx_ind' in dir() else 25
 
     return {
-        'price': price, 'sma20': sma20, 'rsi': rsi,
+        'price': price, 'sma10': sma10, 'rsi': rsi,
         'adx': adx, 'adx_pos': adx_pos, 'adx_neg': adx_neg,
         'vol_ratio': vol_ratio,
         'close_closed': close_closed, 'sma_closed': sma_closed,
@@ -140,11 +140,11 @@ def check_entry(data):
     adx1h = r1.get('adx_closed', r1['adx'])  # 闭K ADX
     adx4h = r4.get('adx_closed', r4['adx'])  # 闭K ADX
     vol_ratio = r5['vol_ratio']
-    sma5m_closed = r5.get('sma_closed', r5['sma20'])  # 用前20根闭K的SMA20，不含当前K
+    sma5m_closed = r5.get('sma_closed', r5['sma10'])  # 用前10根闭K的SMA10，不含当前K
 
-    # ① 1h方向 (闭K收盘价 vs 闭K SMA20)
+    # ① 1h方向 (闭K收盘价 vs 闭K SMA10)
     h1_close = r1.get('close_closed', r1['price'])
-    sma1h = r1.get('sma_closed', r1['sma20'])
+    sma1h = r1.get('sma_closed', r1['sma10'])
     h1_bull = h1_close > sma1h
 
     # ② 1h ADX > 20 （滤横盘）
@@ -155,10 +155,10 @@ def check_entry(data):
     if adx4h >= 55:
         return None, f"观望 | 4hADX={adx4h:.1f}≥55"
 
-    # ④ 回调范围 ±1.5%（用前20根闭K SMA20，不含当前K）
-    in_range = sma5m_closed * 0.985 <= price <= sma5m_closed * 1.015
+    # ④ 回调范围 ±1.0%（用前10根闭K SMA10，不含当前K）
+    in_range = sma5m_closed * 0.99 <= price <= sma5m_closed * 1.01
     if not in_range:
-        return None, f"观望 | 偏离闭K_SMA20 ±{abs(price/sma5m_closed-1)*100:.2f}%"
+        return None, f"观望 | 偏离闭K_SMA10 ±{abs(price/sma5m_closed-1)*100:.2f}%"
 
     # ⑤ 5m量比 ≥ 1.0
     if vol_ratio < 1.0:
@@ -449,7 +449,7 @@ def print_status(data, state):
 
     now = datetime.now().strftime('%H:%M:%S')
     print(f"\n╔══ BTC v5.0 {now} ═══")
-    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA20:{r5['sma20']:.0f}")
+    print(f"║ 💰 {price:>10,.0f} | RSI:{rsi:.1f} | SMA10:{r5['sma10']:.0f}")
     print(f"║ 1h{dir_1h} | ADX1h:{adx1h:.1f} ADX4h:{adx4h:.1f} | vol:{vol:.1f}x")
 
     lp = state.get('long_pos')
