@@ -31,7 +31,7 @@ exchange = ccxt.binance({
 })
 
 SYMBOL = 'HYPE/USDT:USDT'
-QTY = 20               # HYPE合约 minQty=0.01, 20张=0.2 HYPE
+QTY = 3                # HYPE合约 1张=1HYPE, 3张名义价值≈$218
 LEVERAGE = 25
 
 BASE_DIR = '/root/liucangyang_hype'
