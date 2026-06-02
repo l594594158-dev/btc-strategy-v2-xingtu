@@ -68,16 +68,13 @@ def get_exchange_positions(sym):
 def clean_orphan_orders(sym, has_long, has_short):
     """
     清理幽灵挂单:
-    - 如果 BOTH has_long=False AND has_short=False → 全撤
-    - 如果只有 LONG 无 SHORT → 撤全部 SHORT 方向挂单
-    - 如果只有 SHORT 无 LONG → 撤全部 LONG 方向挂单
-    直接 cancel_all_orders + 依赖策略开仓时重挂条件单
+    - 无持仓 → 用 fapiPrivateDeleteAllOpenOrders 全撤 (含条件委托)
+    - 有持仓 → 保留挂单 (策略管理)
     """
     try:
         if not has_long and not has_short:
-            # 完全无持仓 → 全撤
-            exchange.cancel_all_orders(sym)
-            log(f"[{sym}] 无持仓, 全撤挂单")
+            exchange.fapiPrivateDeleteAllOpenOrders(params={'symbol': sym.replace('/USDT:USDT', 'USDT')})
+            log(f"[{sym}] 无持仓, 全撤挂单(含条件委托)")
             return 1
     except:
         pass
