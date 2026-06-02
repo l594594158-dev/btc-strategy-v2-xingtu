@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-NEAR v3.0 EMA5/EMA10 5m金叉死叉策略 — Binance合约
+XLM v6.1 EMA3/10 15m方向锚定策略 — Binance合约
 ========================================================
-标的:     NEAR/USDT:USDT
+标的:     XLM/USDT:USDT
 交易所:   Binance (合约 fapi)
-周期:     5m扫描, 每秒轮询
-方向:     5m EMA5/EMA10 纯方向锚定 (lv-1闭K, 非交叉事件)
-入场:     六条件AND → 市价单
-仓位:     双向各2仓
-TP/SL:    +2.0% / -4.0%
+周期:     15m扫描, 每秒轮询
+方向:     15m EMA3 vs EMA10 纯方向锚定 (lv-1闭K)
+入场:     四条件AND → 市价单
+仓位:     双向各3仓
+TP/SL:    +2.5% / -4.0%
 杠杆:     25x 逐仓
 """
 
@@ -28,25 +28,23 @@ exchange = ccxt.binance({
     'enableRateLimit': True,
 })
 
-SYMBOL = 'NEAR/USDT:USDT'
-QTY = 150              # NEAR合约 1张=1 NEAR, 150张≈$404
+SYMBOL = 'XLM/USDT:USDT'
+QTY = 1000             # XLM合约 1张=1 XLM, 1000张≈$220
 LEVERAGE = 25
 
-BASE_DIR = '/root/liucangyang/near'
-STATE_FILE = f'{BASE_DIR}/databases/state_near.json'
-PAUSE_FILE = f'{BASE_DIR}/databases/near_pause.flag'
+BASE_DIR = '/root/liucangyang/xlm'
+STATE_FILE = f'{BASE_DIR}/databases/state_xlm.json'
+PAUSE_FILE = f'{BASE_DIR}/databases/xlm_pause.flag'
 NOTIFY_QUEUE = f'{BASE_DIR}/databases/notify_queue.json'
-WORK_LOG = f'{BASE_DIR}/logs/near_work_log.txt'
+WORK_LOG = f'{BASE_DIR}/logs/xlm_work_log.txt'
 
 # ========== 策略参数 ==========
-TP_PCT = 0.02
+TP_PCT = 0.025
 SL_PCT = 0.04
-MAX_POS = 2
+MAX_POS = 3
 
-ADX_1H_MIN = 25
-ADX_4H_MAX = 45
-VOL_RATIO_MIN = 2.5
-SMA_DEVIATION_MAX = 0.015
+ADX_1H_MIN = 23
+VOL_RATIO_MIN = 3.0
 RSI_LONG_MIN = 40
 RSI_SHORT_MAX = 60
 
@@ -77,7 +75,7 @@ def load_state():
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE) as f:
             return json.load(f)
-    return {'longposs': [], 'shortposs': [], 'lastexitkl_time': 0, 'lastentrykl_time': 0}
+    return {'longpos': [], 'shortpos': [], 'lastexitkl_time': 0, 'lastentrykl_time': 0}
 
 def save_state(s):
     tmp = STATE_FILE + '.tmp'
@@ -87,22 +85,13 @@ def save_state(s):
         os.fsync(f.fileno())
     os.rename(tmp, STATE_FILE)
 
-# ========== 指标计算 (Wilder平滑) ==========
+# ========== 指标计算 ==========
 def ema(series, period):
     if not series: return []
     k = 2.0 / (period + 1)
     r = [series[0]]
     for v in series[1:]:
         r.append(r[-1] + k * (v - r[-1]))
-    return r
-
-def sma(series, period):
-    r = []
-    w = []
-    for v in series:
-        w.append(v)
-        if len(w) > period: w.pop(0)
-        r.append(sum(w) / len(w))
     return r
 
 def rsi(series, period=14):
@@ -164,33 +153,30 @@ def extract(k):
             'l': float(k[3]), 'c': float(k[4]), 'v': float(k[5])}
 
 # ========== 信号检查 ==========
-def check_signal(kl_5m, kl_1h, kl_4h, live_price):
+def check_signal(kl_15m, kl_1h):
     """
-    六条件AND, 纯方向锚定
-    EMA5/EMA10 lv-1闭K直接比较: ema5>ema10→LONG, ema5<ema10→SHORT
-    偏移: EMA lv-1 | ADX1h searchsorted | ADX4h searchsorted
-          量比 lv-1 | SMA10闭K+实时价 | RSI lv-1
+    四条件AND (lv-1闭K)
+    ① EMA3/EMA10方向  ② ADX1h>23  ③ 量比>3.0  ④ RSI(Long>40/Short<60)
     """
-    n5 = len(kl_5m)
-    if n5 < 50: return None
+    n = len(kl_15m)
+    if n < 50: return None
 
-    closes = [k['c'] for k in kl_5m]
-    vols   = [k['v'] for k in kl_5m]
+    closes = [k['c'] for k in kl_15m]
+    vols   = [k['v'] for k in kl_15m]
 
-    ema5  = ema(closes, 5)
+    ema3  = ema(closes, 3)
     ema10 = ema(closes, 10)
-    sma10 = sma(closes, 10)
     rsi_v = rsi(closes, 14)
     vr    = vol_ratio(vols, 20)
 
-    pi = n5 - 2      # lv-1 刚闭K
+    pi = n - 2  # lv-1 闭K
 
-    # ① EMA5/EMA10 纯方向锚定
-    long_dir  = ema5[pi] > ema10[pi]
-    short_dir = ema5[pi] < ema10[pi]
+    # ① EMA3/EMA10 纯方向锚定
+    long_dir  = ema3[pi] > ema10[pi]
+    short_dir = ema3[pi] < ema10[pi]
 
-    # ② ADX1h > 25 (searchsorted: t_5m - 3600000ms → 1h bar)
-    t_signal = kl_5m[pi]['t']
+    # ② ADX1h > 23 (searchsorted: t_15m - 3600000ms)
+    t_signal = kl_15m[pi]['t']
     t_1h = [k['t'] for k in kl_1h]
     idx_1h = 0
     for i in range(len(t_1h)):
@@ -202,36 +188,17 @@ def check_signal(kl_5m, kl_1h, kl_4h, live_price):
     a1h = adx(h1h, l1h, c1h, 14)
     cond_adx1h = (idx_1h < len(a1h) and a1h[idx_1h] > ADX_1H_MIN)
 
-    # ③ ADX4h < 45
-    t_4h = [k['t'] for k in kl_4h]
-    idx_4h = 0
-    for i in range(len(t_4h)):
-        if t_4h[i] + 14400000 <= t_signal: idx_4h = i
-        else: break
-    h4 = [k['h'] for k in kl_4h]
-    l4 = [k['l'] for k in kl_4h]
-    c4 = [k['c'] for k in kl_4h]
-    a4h = adx(h4, l4, c4, 14)
-    cond_adx4h = (idx_4h < len(a4h) and a4h[idx_4h] < ADX_4H_MAX)
-
-    # ④ 量比 > 2.5 (lv-1闭K, 含自身20周期)
+    # ③ 量比 > 3.0 (lv-1闭K, 含自身20周期)
     cond_vol = vr[pi] > VOL_RATIO_MIN if pi < len(vr) else False
 
-    # ⑤ SMA10偏离 ≤ 1.5% (闭K值 + 实时价)
-    sv = sma10[pi]
-    cv = closes[pi]
-    cond_sma_closed = abs(cv - sv) / sv <= SMA_DEVIATION_MAX if sv > 0 else False
-    cond_sma_live  = abs(live_price - sv) / sv <= SMA_DEVIATION_MAX if sv > 0 else False
-    cond_sma = cond_sma_closed and cond_sma_live
-
-    # ⑥ RSI (lv-1闭K)
+    # ④ RSI (lv-1闭K)
     rv = rsi_v[pi] if pi < len(rsi_v) else 50
     cond_rsi_long  = rv > RSI_LONG_MIN
     cond_rsi_short = rv < RSI_SHORT_MAX
 
-    if long_dir and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_long:
+    if long_dir and cond_adx1h and cond_vol and cond_rsi_long:
         return 'long'
-    if short_dir and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_short:
+    if short_dir and cond_adx1h and cond_vol and cond_rsi_short:
         return 'short'
     return None
 
@@ -244,11 +211,11 @@ def manage_positions(state):
         log("获取实时价失败")
         return False
 
-    exit_kl = int(time.time() // 300) * 300 * 1000  # 当前5m K线毫秒时间戳
+    exit_kl = int(time.time() // 900) * 900 * 1000  # 当前15m K线毫秒时间戳
 
     # LONG平仓
     surviving = []
-    for pos in state.get('longposs', []):
+    for pos in state.get('longpos', []):
         entry = pos['entry']
         pnl = (price - entry) / entry
         if pnl >= TP_PCT:
@@ -260,11 +227,11 @@ def manage_positions(state):
                 state['lastexitkl_time'] = exit_kl
                 continue
         surviving.append(pos)
-    state['longposs'] = surviving
+    state['longpos'] = surviving
 
     # SHORT平仓
     surviving = []
-    for pos in state.get('shortposs', []):
+    for pos in state.get('shortpos', []):
         entry = pos['entry']
         pnl = (entry - price) / entry
         if pnl >= TP_PCT:
@@ -276,7 +243,7 @@ def manage_positions(state):
                 state['lastexitkl_time'] = exit_kl
                 continue
         surviving.append(pos)
-    state['shortposs'] = surviving
+    state['shortpos'] = surviving
 
     return True
 
@@ -291,7 +258,7 @@ def close_position(side, pos, price, reason):
         )
         entry = pos['entry']
         pnl = (price-entry)/entry if side == 'LONG' else (entry-price)/entry
-        msg = f"NEAR {side}平仓{reason}: entry={entry:.4f} exit={price:.4f} PnL={pnl*100:+.2f}%"
+        msg = f"XLM {side}平仓{reason}: entry={entry:.6f} exit={price:.6f} PnL={pnl*100:+.2f}%"
         log(msg)
         work_log(reason, msg)
         notify(msg)
@@ -315,18 +282,18 @@ def open_position(side, price, state):
 
         new_pos = {
             'entry': fill_price,
-            'signal': f'EMA5/EMA10{"金叉" if side=="LONG" else "死叉"}',
+            'signal': f'EMA3/10纯方向锚定',
             'open_time': ts
         }
         if side == 'LONG':
-            state['longposs'].append(new_pos)
+            state['longpos'].append(new_pos)
         else:
-            state['shortposs'].append(new_pos)
+            state['shortpos'].append(new_pos)
 
-        state['lastentrykl_time'] = int(time.time() // 300) * 300 * 1000
+        state['lastentrykl_time'] = int(time.time() // 900) * 900 * 1000
         save_state(state)
 
-        msg = f"NEAR {side}开仓: entry={fill_price:.4f} qty={QTY}"
+        msg = f"XLM {side}开仓: entry={fill_price:.6f} qty={QTY}"
         log(msg)
         work_log('开仓', msg)
         notify(msg)
@@ -351,8 +318,8 @@ def sync_state():
     try:
         pos = exchange.fetch_positions([SYMBOL])
         state = load_state()
-        state['longposs'] = []
-        state['shortposs'] = []
+        state['longpos'] = []
+        state['shortpos'] = []
         for p in pos:
             amt = float(p.get('contracts', 0) or 0)
             if amt == 0: continue
@@ -360,15 +327,15 @@ def sync_state():
             entry = float(p.get('entryPrice', 0) or 0)
             for _ in range(int(amt / QTY)):
                 if side == 'long':
-                    state['longposs'].append(
+                    state['longpos'].append(
                         {'entry': entry, 'signal': '从交易所恢复',
                          'open_time': datetime.now(timezone.utc).isoformat()})
                 else:
-                    state['shortposs'].append(
+                    state['shortpos'].append(
                         {'entry': entry, 'signal': '从交易所恢复',
                          'open_time': datetime.now(timezone.utc).isoformat()})
         save_state(state)
-        log(f"同步: L{len(state['longposs'])} S{len(state['shortposs'])}")
+        log(f"同步: L{len(state['longpos'])} S{len(state['shortpos'])}")
     except Exception as e:
         log(f"同步失败: {e}")
 
@@ -383,13 +350,12 @@ def setup():
 # ========== 主循环 ==========
 def main():
     log("="*50)
-    log("NEAR v3.0 EMA5/10 5m金叉死叉策略启动")
+    log("XLM v6.1 EMA3/10 15m策略启动")
     log(f"QTY={QTY} | LEV={LEVERAGE}x | TP={TP_PCT*100}% | SL={SL_PCT*100}%")
-    log(f"EMA5/10金叉死叉 + ADX1h>{ADX_1H_MIN} + ADX4h<{ADX_4H_MAX}")
-    log(f"量比>{VOL_RATIO_MIN}x | SMA10±{SMA_DEVIATION_MAX*100}% | RSI>{RSI_LONG_MIN}/<{RSI_SHORT_MAX}")
+    log(f"EMA3/10方向 + ADX1h>{ADX_1H_MIN} | 量比>{VOL_RATIO_MIN}x | RSI>{RSI_LONG_MIN}/<{RSI_SHORT_MAX}")
     log(f"仓位: {MAX_POS}仓/边")
     log("="*50)
-    notify("NEAR v3.0 EMA5/10策略已启动")
+    notify("XLM v6.1 EMA3/10策略已启动")
 
     setup()
     sync_state()
@@ -402,17 +368,16 @@ def main():
                 time.sleep(5)
                 continue
 
-            kl_5m = [extract(k) for k in fetch_klines('5m', 100)]
-            kl_1h = [extract(k) for k in fetch_klines('1h', 200)]
-            kl_4h = [extract(k) for k in fetch_klines('4h', 200)]
+            kl_15m = [extract(k) for k in fetch_klines('15m', 100)]
+            kl_1h  = [extract(k) for k in fetch_klines('1h', 200)]
 
-            if len(kl_5m) < 50 or len(kl_1h) < 50 or len(kl_4h) < 50:
+            if len(kl_15m) < 50 or len(kl_1h) < 50:
                 time.sleep(10)
                 continue
 
             state = load_state()
-            state.setdefault('longposs', [])
-            state.setdefault('shortposs', [])
+            state.setdefault('longpos', [])
+            state.setdefault('shortpos', [])
             state.setdefault('lastexitkl_time', 0)
             state.setdefault('lastentrykl_time', 0)
 
@@ -423,8 +388,8 @@ def main():
                 time.sleep(1)
                 continue
 
-            # 同K线冷却: 当前5m K线时间
-            current_kl = int(kl_5m[-1]['t'])
+            # 同K线冷却: 当前15m K线时间
+            current_kl = int(kl_15m[-1]['t'])
             if state['lastexitkl_time'] >= current_kl:
                 time.sleep(1)
                 continue
@@ -436,11 +401,11 @@ def main():
             ticker = exchange.fetch_ticker(SYMBOL)
             live_price = ticker['last']
 
-            signal = check_signal(kl_5m, kl_1h, kl_4h, live_price)
+            signal = check_signal(kl_15m, kl_1h)
 
-            if signal == 'long' and len(state['longposs']) < MAX_POS:
+            if signal == 'long' and len(state['longpos']) < MAX_POS:
                 open_position('LONG', live_price, state)
-            elif signal == 'short' and len(state['shortposs']) < MAX_POS:
+            elif signal == 'short' and len(state['shortpos']) < MAX_POS:
                 open_position('SHORT', live_price, state)
 
         except Exception as e:
