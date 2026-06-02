@@ -218,6 +218,8 @@ def manage_positions(state):
         log("获取实时价失败")
         return False
 
+    exit_kl = int(time.time() // 3600) * 3600 * 1000  # 当前1h K线毫秒时间戳
+
     # LONG平仓
     surviving = []
     for pos in state.get('longpos', []):
@@ -225,9 +227,11 @@ def manage_positions(state):
         pnl = (price - entry) / entry
         if pnl >= TP_PCT:
             if close_position('LONG', pos, price, '止盈'):
+                state['lastexitkl_time'] = exit_kl
                 continue
         if pnl <= -SL_PCT:
             if close_position('LONG', pos, price, '止损'):
+                state['lastexitkl_time'] = exit_kl
                 continue
         surviving.append(pos)
     state['longpos'] = surviving
@@ -239,9 +243,11 @@ def manage_positions(state):
         pnl = (entry - price) / entry
         if pnl >= TP_PCT:
             if close_position('SHORT', pos, price, '止盈'):
+                state['lastexitkl_time'] = exit_kl
                 continue
         if pnl <= -SL_PCT:
             if close_position('SHORT', pos, price, '止损'):
+                state['lastexitkl_time'] = exit_kl
                 continue
         surviving.append(pos)
     state['shortpos'] = surviving
