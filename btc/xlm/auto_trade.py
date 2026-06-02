@@ -16,6 +16,7 @@ import ccxt
 import json
 import os
 import time
+import random
 from datetime import datetime, timezone
 
 # ========== API ==========
@@ -262,6 +263,10 @@ def close_position(side, pos, price, reason):
         log(msg)
         work_log(reason, msg)
         notify(msg)
+
+        # 取消所有挂单
+        _cancel_all_orders()
+
         return True
     except Exception as e:
         log(f"平仓失败: {e}")
@@ -279,8 +284,10 @@ def open_position(side, price, state):
         )
         fill_price = float(order.get('price', price) or price)
         ts = datetime.now(timezone.utc).isoformat()
+        pid = random.randint(1000, 9999)
 
         new_pos = {
+            'id': pid,
             'entry': fill_price,
             'signal': f'EMA3/10纯方向锚定',
             'open_time': ts
@@ -292,6 +299,9 @@ def open_position(side, price, state):
 
         state['lastentrykl_time'] = int(time.time() // 900) * 900 * 1000
         save_state(state)
+
+        # 挂SL/TP条件单
+        _place_sl_tp(side, fill_price, pid)
 
         msg = f"XLM {side}开仓: entry={fill_price:.6f} qty={QTY}"
         log(msg)

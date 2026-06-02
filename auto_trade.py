@@ -17,6 +17,7 @@ import ccxt
 import json
 import os
 import time
+import random
 from datetime import datetime, timezone
 
 # ========== API ==========
@@ -293,10 +294,21 @@ def close_position(side, pos, price, reason):
         log(msg)
         work_log(reason, msg)
         notify(msg)
+
+        # 取消所有挂单
+        _cancel_all_orders()
+
         return True
     except Exception as e:
         log(f"平仓失败: {e}")
         return False
+
+def _cancel_all_orders():
+    """取消该品种全部挂单"""
+    try:
+        exchange.cancel_all_orders(SYMBOL)
+    except:
+        pass
 
 def open_position(side, price):
     """市价开仓"""
@@ -311,9 +323,11 @@ def open_position(side, price):
         )
         fill_price = float(order.get('price', price) or price)
         ts = datetime.now(timezone.utc).isoformat()
+        pid = random.randint(1000, 9999)
 
         state = load_state()
         new_pos = {
+            'id': pid,
             'entry': fill_price,
             'signal': f'EMA5/10{"金叉" if side=="LONG" else "死叉"}',
             'opentime': ts
@@ -329,11 +343,55 @@ def open_position(side, price):
         log(msg)
         work_log('开仓', msg)
         notify(msg)
+
+        # 挂SL/TP条件单
+        _place_sl_tp(side, fill_price, pid)
+
         return True
     except Exception as e:
         log(f"开仓失败: {e}")
         work_log('开仓失败', str(e))
         return False
+
+def _place_sl_tp(side, entry, pid):
+    """开仓后挂SL/TP条件单"""
+    try:
+        if side == 'LONG':
+            sl_price = round(entry * (1 - SL_PCT), 2)
+            tp_price = round(entry * (1 + TP_PCT), 2)
+            # SL
+            exchange.create_order(
+                symbol=SYMBOL, type='limit', side='sell', amount=QTY,
+                price=sl_price,
+                params={'reduceOnly': True, 'positionSide': 'LONG',
+                        'stopPrice': sl_price, 'timeInForce': 'GTC'}
+            )
+            # TP
+            exchange.create_order(
+                symbol=SYMBOL, type='limit', side='sell', amount=QTY,
+                price=tp_price,
+                params={'reduceOnly': True, 'positionSide': 'LONG',
+                        'stopPrice': tp_price, 'timeInForce': 'GTC'}
+            )
+            log(f"  SL={sl_price} TP={tp_price} (PID={pid})")
+        else:
+            sl_price = round(entry * (1 + SL_PCT), 2)
+            tp_price = round(entry * (1 - TP_PCT), 2)
+            exchange.create_order(
+                symbol=SYMBOL, type='limit', side='buy', amount=QTY,
+                price=sl_price,
+                params={'reduceOnly': True, 'positionSide': 'SHORT',
+                        'stopPrice': sl_price, 'timeInForce': 'GTC'}
+            )
+            exchange.create_order(
+                symbol=SYMBOL, type='limit', side='buy', amount=QTY,
+                price=tp_price,
+                params={'reduceOnly': True, 'positionSide': 'SHORT',
+                        'stopPrice': tp_price, 'timeInForce': 'GTC'}
+            )
+            log(f"  SL={sl_price} TP={tp_price} (PID={pid})")
+    except Exception as e:
+        log(f"  挂SL/TP失败: {e}")
 
 def check_position_lock():
     """交易所仓位保护: 同边≥3*QTY则拒绝"""
