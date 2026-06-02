@@ -29,7 +29,7 @@ exchange = ccxt.binance({
 })
 
 SYMBOL = 'ZEC/USDT:USDT'
-QTY = 1                # ZEC合约 1张=1 ZEC
+QTY = 0.8              # ZEC合约 1张=1 ZEC, 0.8张名义价值≈$XX
 LEVERAGE = 25
 
 BASE_DIR = '/root/liucangyang/zec'
