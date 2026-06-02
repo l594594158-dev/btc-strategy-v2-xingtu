@@ -453,10 +453,6 @@ def main():
             if 'shortpos' not in state:
                 state['shortpos'] = []
 
-            # 平仓管理 (实时价)
-            manage_positions(state)
-            save_state(state)
-
             # 仓位锁
             if check_position_lock():
                 time.sleep(1)
@@ -496,8 +492,8 @@ def main():
 
         # 每秒扫描
         elapsed = time.time() - start
-        if elapsed < 30:
-            time.sleep(30 - elapsed)
+        if elapsed < 60:
+            time.sleep(60 - elapsed)
 
 if __name__ == '__main__':
     main()

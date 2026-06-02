@@ -204,7 +204,6 @@ def check_signal(kl_15m, kl_1h):
     return None
 
 # ========== 仓位管理 ==========
-def manage_positions(state):
     try:
         ticker = exchange.fetch_ticker(SYMBOL)
         price = ticker['last']
@@ -432,7 +431,6 @@ def main():
             state.setdefault('lastexitkl_time', 0)
             state.setdefault('lastentrykl_time', 0)
 
-            manage_positions(state)
             save_state(state)
 
             if check_position_lock():
@@ -468,8 +466,8 @@ def main():
             work_log('异常', str(e))
 
         elapsed = time.time() - start
-        if elapsed < 30:
-            time.sleep(30 - elapsed)
+        if elapsed < 60:
+            time.sleep(60 - elapsed)
 
 if __name__ == '__main__':
     main()
