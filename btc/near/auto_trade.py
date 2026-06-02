@@ -5,7 +5,7 @@ NEAR v3.0 EMA5/EMA10 5m金叉死叉策略 — Binance合约
 标的:     NEAR/USDT:USDT
 交易所:   Binance (合约 fapi)
 周期:     5m扫描, 每秒轮询
-方向:     5m EMA5/EMA10 金叉做多/死叉做空 (交叉事件检测, lv-1闭K)
+方向:     5m EMA5/EMA10 纯方向锚定 (lv-1闭K, 非交叉事件)
 入场:     六条件AND → 市价单
 仓位:     双向各2仓
 TP/SL:    +2.0% / -4.0%
@@ -166,9 +166,9 @@ def extract(k):
 # ========== 信号检查 ==========
 def check_signal(kl_5m, kl_1h, kl_4h, live_price):
     """
-    六条件AND, 金叉/死叉检测
-    EMA5/EMA10 交叉事件: pi-1<=pi-1的ema比较, pi处反转
-    偏移: EMA lv-1 vs lv-2交叉检测 | ADX1h searchsorted | ADX4h searchsorted
+    六条件AND, 纯方向锚定
+    EMA5/EMA10 lv-1闭K直接比较: ema5>ema10→LONG, ema5<ema10→SHORT
+    偏移: EMA lv-1 | ADX1h searchsorted | ADX4h searchsorted
           量比 lv-1 | SMA10闭K+实时价 | RSI lv-1
     """
     n5 = len(kl_5m)
@@ -184,11 +184,10 @@ def check_signal(kl_5m, kl_1h, kl_4h, live_price):
     vr    = vol_ratio(vols, 20)
 
     pi = n5 - 2      # lv-1 刚闭K
-    pi_prev = n5 - 3 # lv-2 前一闭K
 
-    # ① EMA5/EMA10 交叉: 金叉(ema5从下穿上) / 死叉(ema5从上穿下)
-    golden = (ema5[pi_prev] <= ema10[pi_prev]) and (ema5[pi] > ema10[pi])
-    dead   = (ema5[pi_prev] >= ema10[pi_prev]) and (ema5[pi] < ema10[pi])
+    # ① EMA5/EMA10 纯方向锚定
+    long_dir  = ema5[pi] > ema10[pi]
+    short_dir = ema5[pi] < ema10[pi]
 
     # ② ADX1h > 25 (searchsorted: t_5m - 3600000ms → 1h bar)
     t_signal = kl_5m[pi]['t']
@@ -230,9 +229,9 @@ def check_signal(kl_5m, kl_1h, kl_4h, live_price):
     cond_rsi_long  = rv > RSI_LONG_MIN
     cond_rsi_short = rv < RSI_SHORT_MAX
 
-    if golden and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_long:
+    if long_dir and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_long:
         return 'long'
-    if dead and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_short:
+    if short_dir and cond_adx1h and cond_adx4h and cond_vol and cond_sma and cond_rsi_short:
         return 'short'
     return None
 
