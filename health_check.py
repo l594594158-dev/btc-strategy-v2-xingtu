@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-HYPE合约任务自检脚本 v4.3
-- 适配liucangyang_hype v1.1策略（long_pos/short_pos格式 + 6条件门控信号）
+NEAR合约任务自检脚本 v4.3
+- 适配liucangyang_near v1.0策略（long_pos/short_pos格式 + 6条件门控信号）
 - 每5分钟执行一次自动检查
 - 检查进程运行、API数据、持仓同步、策略状态
 - 发现问题自动修复（重启进程/清幽灵仓）
@@ -20,7 +20,7 @@ from datetime import datetime
 from pathlib import Path
 
 # ========== 路径配置 ==========
-TASK_DIR = '/root/liucangyang_hype'
+TASK_DIR = '/root/liucangyang_near'
 AUTO_TRADE_SCRIPT = f'{TASK_DIR}/auto_trade.py'
 STATE_FILE = f'{TASK_DIR}/databases/state.json'
 WORK_LOG = f'{TASK_DIR}/logs/work_log.txt'
@@ -33,8 +33,8 @@ NOTIFY_QUEUE = f'{TASK_DIR}/databases/notify_queue.json'
 # API配置（双Key架构）
 from api_config import TRADE_API_KEY, TRADE_SECRET
 
-SYMBOL = 'HYPE/USDT:USDT'
-QTY = 16
+SYMBOL = 'NEAR/USDT:USDT'
+QTY = 450
 POLL_INTERVAL = 2
 
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -122,7 +122,6 @@ class HealthChecker:
         try:
             # 用ccxt合约K线（与auto_trade.py一致）
             binance = get_binance()
-            # 逐个拉取
             k5m_all = binance.fetch_ohlcv(SYMBOL, '5m', limit=100)
             k1h_all = binance.fetch_ohlcv(SYMBOL, '1h', limit=200)
             k4h_all = binance.fetch_ohlcv(SYMBOL, '4h', limit=200)
@@ -218,7 +217,7 @@ class HealthChecker:
                 gate.append(f'✅ 5/6 vol={vol_ratio:.1f}x≥1.0')
             else:
                 gate.append(f'❌ 5/6 缩量vol={vol_ratio:.1f}x')
-            # 第6关：RSI门控（只看1h方向，与auto_trade一致）
+            # 第6关：RSI门控（LONG/Short按方向自动判断）
             if h1_bull:
                 if rsi5m >= 40:
                     gate.append(f'✅ 6/6 RSI={rsi5m:.1f}>=40 → LONG')
@@ -279,7 +278,7 @@ class HealthChecker:
                 side = p['side']
                 if side == 'long':
                     if not state_long_pos:
-                        mismatches.append(f'LONG仓({qty}HYPE)本地缺失')
+                        mismatches.append(f'LONG仓({qty}NEAR)本地缺失')
                     else:
                         diff = abs(float(state_long_pos['entry']) - entry)
                         diff_pct = abs(diff / entry) if entry > 0 else 0
@@ -289,7 +288,7 @@ class HealthChecker:
                             mismatches.append(f'LONG数量({qty})超过QTY({QTY})')
                 elif side == 'short':
                     if not state_short_pos:
-                        mismatches.append(f'SHORT仓({qty}HYPE)本地缺失')
+                        mismatches.append(f'SHORT仓({qty}NEAR)本地缺失')
                     else:
                         diff = abs(float(state_short_pos['entry']) - entry)
                         diff_pct = abs(diff / entry) if entry > 0 else 0
@@ -512,7 +511,7 @@ class HealthChecker:
 
     def run(self):
         log('=' * 60)
-        log('🔍 HYPE自检 v4.3 开始')
+        log('🔍 NEAR自检 v4.3 开始')
         log('=' * 60)
 
         self._fixes_to_apply = []

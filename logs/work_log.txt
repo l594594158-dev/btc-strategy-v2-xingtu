@@ -1,767 +1,105 @@
-[2026-05-30 16:10:05] [开仓] LONG | $66 | SL:64.8 TP:67.1
-  信号:【LONG顺势追多】RSI=59.7 ADX1h=32.5 vol=1.1x
-  指标: 1h多 1d多 | 5mRSI=59.7 1hADX=32.1 4hADX=29.1 | SMA20=66 vol=1.1x | 实时价=66
-[2026-05-30 21:24:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:24:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:24:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:24:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:25:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:26:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:27:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:28:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:29:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:30:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:31:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:32:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:33:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:34:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:35:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:36:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:37:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:38:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:39:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:40:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:41:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:42:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:43:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:44:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:45:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:46:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:47:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:48:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:51] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:49:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:50:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:51:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:52:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:38] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:44] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:50] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:53:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:54:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:02] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:11] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:20] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:55:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:14] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:17] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:56:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:57:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:42] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:58:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:13] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:16] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:19] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:22] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:25] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:28] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:34] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:43] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 21:59:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:15] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:18] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:21] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:24] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:27] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:56] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:00:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-30 22:15:08] [开仓] LONG | $68 | SL:66.2 TP:68.6
-  信号:【LONG顺势追多】RSI=46.8 ADX1h=35.6 vol=1.1x
-  指标: 1h多 1d多 | 5mRSI=46.8 1hADX=36.7 4hADX=30.9 | SMA20=68 vol=1.1x | 实时价=68
-[2026-05-31 00:51:47] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-31 01:05:07] [开仓] LONG | $67 | SL:65.4 TP:67.8
-  信号:【LONG顺势追多】RSI=42.9 ADX1h=35.2 vol=1.1x RSI闭K=42.9
-  指标: 1h多 1d多 | 5mRSI=43.0 1hADX=34.4 4hADX=31.8 | SMA20=67 vol=1.1x | 实时价=67
-[2026-05-31 01:06:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 02:10:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-31 02:30:07] [开仓] LONG | $68 | SL:66.7 TP:69.1
-  信号:【LONG顺势追多】RSI=67.2 ADX1h=34.7 vol=1.4x RSI闭K=67.2
-  指标: 1h多 1d多 | 5mRSI=67.2 1hADX=34.5 4hADX=31.8 | SMA20=67 vol=1.4x | 实时价=68
-[2026-05-31 02:30:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 02:47:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 03:35:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 03:36:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-30 15:52:01] [开仓] SHORT | $2 | SL:2.44 TP:2.35
+  信号:【SHORT顺势摸顶】RSI=59.4 ADX1h=24.4 vol=1.1x
+  指标: 1h空 1d多 | 5mRSI=59.4 1hADX=24.6 4hADX=27.4 | SMA20=2 vol=1.1x | 实时价=2
+[2026-05-30 17:33:17] [止损] SHORT | PnL:-2.05%
+[2026-05-30 17:33:21] [止损] SHORT | PnL:-1.76%
+[2026-05-30 18:05:23] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 18:05:26] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 18:05:29] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 18:05:32] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 22:00:27] [开仓] SHORT | $2 | SL:2.45 TP:2.36
+  信号:【SHORT顺势摸顶】RSI=49.2 ADX1h=21.3 vol=2.5x
+  指标: 1h空 1d多 | 5mRSI=49.2 1hADX=20.9 4hADX=25.4 | SMA20=2 vol=2.5x | 实时价=2
+[2026-05-30 23:05:08] [开仓] LONG | $2 | SL:2.35 TP:2.43
+  信号:【LONG顺势追多】RSI=44.5 ADX1h=20.9 vol=1.1x
+  指标: 1h多 1d多 | 5mRSI=44.5 1hADX=20.5 4hADX=25.4 | SMA20=2 vol=1.1x | 实时价=2
+[2026-05-30 23:32:54] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:32:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:33:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:33:06] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:39:46] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:39:49] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:39:52] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:39:55] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:39:58] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:40:04] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-30 23:40:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 00:05:05] [开仓] SHORT | $2 | SL:2.4 TP:2.32
+  信号:【SHORT顺势摸顶】RSI=37.5 ADX1h=21.5 vol=1.2x RSI闭K=37.5
+  指标: 1h空 1d多 | 5mRSI=37.5 1hADX=22.2 4hADX=25.3 | SMA20=2 vol=1.2x | 实时价=2
+[2026-05-31 00:05:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 01:50:19] [开仓] SHORT | $2 | SL:2.35 TP:2.27
+  信号:【SHORT顺势摸顶】RSI=31.2 ADX1h=22.2 vol=1.1x RSI闭K=31.2
+  指标: 1h空 1d多 | 5mRSI=31.9 1hADX=23.7 4hADX=25.7 | SMA20=2 vol=1.1x | 实时价=2
+[2026-05-31 01:53:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 02:48:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 02:49:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
 [2026-05-31 03:38:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 05:17:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:21:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:26:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:28:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:29:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:30:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:32:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:33:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:34:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 03:42:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 04:26:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 04:29:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 04:46:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 05:19:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 05:45:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:18:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:21:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:22:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:23:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
 [2026-05-31 06:42:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:45:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 06:46:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:45:03] [开仓] SHORT | $2 | SL:2.31 TP:2.23
+  信号:【SHORT顺势摸顶】RSI=29.6 ADX1h=29.3 vol=1.1x RSI闭K=29.6
+  指标: 1h空 1d多 | 5mRSI=24.8 1hADX=31.0 4hADX=25.7 | SMA20=2 vol=1.1x | 实时价=2
+[2026-05-31 06:47:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:48:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
 [2026-05-31 06:49:54] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 07:19:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 07:24:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 07:59:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 08:07:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 08:08:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 08:21:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 08:28:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 08:32:36] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-31 08:32:40] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
-[2026-05-31 08:35:04] [开仓] LONG | $69 | SL:67.4 TP:69.8
-  信号:【LONG顺势追多】RSI=70.0 ADX1h=32.9 vol=4.1x RSI闭K=70.0
-  指标: 1h多 1d多 | 5mRSI=67.8 1hADX=33.7 4hADX=33.7 | SMA20=68 vol=4.1x | 实时价=69
-[2026-05-31 08:35:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 09:05:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 11:27:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 12:45:03] [开仓] LONG | $70 | SL:68.1 TP:70.6
-  信号:【LONG顺势追多】RSI=67.2 ADX1h=33.3 vol=2.8x RSI闭K=67.2
-  指标: 1h多 1d多 | 5mRSI=68.7 1hADX=33.4 4hADX=34.9 | SMA20=69 vol=2.8x | 实时价=70
-[2026-05-31 13:02:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 13:03:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 13:17:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 13:20:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 13:24:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 14:33:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 14:37:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 15:07:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 06:54:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 07:37:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 07:43:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 07:44:48] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 07:45:00] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 07:45:08] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 07:45:10] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 07:45:12] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 07:50:15] [开仓] SHORT | $2 | SL:2.28 TP:2.2
+  信号:【SHORT顺势摸顶】RSI=27.7 ADX1h=31.3 vol=2.2x RSI闭K=27.7
+  指标: 1h空 1d多 | 5mRSI=29.3 1hADX=33.3 4hADX=26.0 | SMA20=2 vol=2.2x | 实时价=2
+[2026-05-31 08:25:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 08:29:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 09:32:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 09:33:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 09:34:59] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 09:35:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 09:36:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 10:17:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 10:22:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 10:36:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 11:51:30] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:31] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:33] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:35] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:37] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:39] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:41] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:45] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:53] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:57] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:51:59] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:52:01] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:52:03] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:52:05] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:52:07] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 11:52:09] [错误] 平仓失败: binance {"code":-2022,"msg":"ReduceOnly Order is rejected."}
+[2026-05-31 13:00:23] [开仓] LONG | $2 | SL:2.28 TP:2.36
+  信号:【LONG顺势追多】RSI=73.7 ADX1h=36.9 vol=1.3x RSI闭K=73.7
+  指标: 1h多 1d多 | 5mRSI=71.1 1hADX=35.7 4hADX=25.9 | SMA20=2 vol=1.3x | 实时价=2
+[2026-05-31 13:08:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 13:09:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 13:11:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 13:14:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 13:38:58] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 14:45:09] [开仓] SHORT | $2 | SL:2.36 TP:2.28
+  信号:【SHORT顺势摸顶】RSI=53.5 ADX1h=35.4 vol=1.3x RSI闭K=53.5
+  指标: 1h空 1d多 | 5mRSI=51.6 1hADX=34.1 4hADX=25.8 | SMA20=2 vol=1.3x | 实时价=2
 [2026-05-31 15:08:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 15:09:56] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 15:10:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 15:18:57] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
-[2026-05-31 17:02:51] [止损] LONG | PnL:-1.16%
-[2026-05-31 17:07:59] [开仓] LONG | $69 | 【LONG顺势追多】RSI=40.1 ADX1h=33.7 vol=4.0x
+[2026-05-31 15:14:55] [错误] 开仓失败: binance 429 Too Many Requests {"code":-1003,"msg":"Too many requests; current limit of IP(43.156.137.182) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API."}
+[2026-05-31 16:40:04] [开仓] SHORT | $2 | 【SHORT顺势摸顶】RSI=33.8 ADX1h=33.3 vol=2.2x
