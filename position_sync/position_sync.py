@@ -65,6 +65,7 @@ GATE_TO_BINANCE = {
     'AVAX/USDT:USDT': 'AVAX/USDT:USDT',
     'ARB/USDT:USDT': 'ARB/USDT:USDT',
     'OP/USDT:USDT': 'OP/USDT:USDT',
+    'ENA/USDT:USDT': 'ENA/USDT:USDT',
 }
 
 
@@ -161,6 +162,17 @@ def binance_open(symbol, side, target_qty):
         qty = float(target_qty)
         if qty <= 0:
             return False
+
+        # 最小名义价值检查: 不够则扩展张数
+        try:
+            market = binance.market(symbol)
+            min_cost = market.get('limits', {}).get('cost', {}).get('min', 5) or 5
+        except:
+            min_cost = 5
+        ticker = binance.fetch_ticker(symbol)
+        price = ticker.get('last', 0)
+        if price > 0 and qty * price < min_cost:
+            qty = math.ceil(min_cost / price)
 
         ps = 'LONG' if side == 'LONG' else 'SHORT'
         order_side = 'buy' if side == 'LONG' else 'sell'
@@ -298,37 +310,61 @@ def sync_positions(gate_positions, binance_positions, state):
                 continue
 
             # 检测Gate仓位变化
-            if gpos['qty'] != prev_qty:
+            gate_changed = gpos['qty'] != prev_qty
+            if gate_changed:
                 log(f"📊 Gate {gate_sym} {side}: {prev_qty:.1f}→{gpos['qty']:.1f}张")
-                # 仓位变化时重置失败标记
+                # 重置失败标记，重算目标张数
                 if 'last_sync_fail' in prev:
                     del prev['last_sync_fail']
+                # 只在变动时更新 target_qty
+                prev_target = target_qty
+            else:
+                # 未变动时沿用之前的目标张数，不受价格波动影响
+                prev_target = prev.get('target_binance_qty', target_qty)
 
             # 决策: Gate有仓位 → 币安同步到target_qty
             if gpos['qty'] > 0:
-                if current_binance_qty == target_qty:
+                if current_binance_qty == prev_target:
                     pass  # 数量一致，跳过
-                elif current_binance_qty < target_qty:
-                    # 需要补仓（只在Gate仓位首次变动时操作，避免无限重试）
-                    delta = target_qty - current_binance_qty
-                    last_fail = prev.get('last_sync_fail', False)
-                    if not last_fail:
-                        log(f"🟢 补仓 {bin_sym} {side} +{delta}张 → 目标{target_qty}张")
-                        success = binance_open(bin_sym, side, delta)
-                        if not success:
-                            recorded[gkey] = dict(prev, **{'last_sync_fail': True, 'qty': gpos['qty'], 'side': side,
-                                'entry': gpos['entry'], 'notional': gpos['notional'], 'target_binance_qty': target_qty,
-                                'last_update': datetime.now().strftime('%H:%M:%S')})
-                            state['gate_positions'] = recorded
-                            save_state(state)
-                            continue  # 跳过正常更新，已手写了
+                elif current_binance_qty < prev_target:
+                    # 需要补仓
+                    delta_raw = prev_target - current_binance_qty
+                    # 按精度取整delta
+                    if precision >= 1:
+                        delta = int(delta_raw + 0.5)
+                    else:
+                        ndigits = abs(int(math.log10(precision))) if precision > 0 else 3
+                        delta = round(delta_raw, ndigits)
+                    # delta必须达到精度才执行
+                    if delta <= 0:
+                        pass
+                    else:
+                        last_fail = prev.get('last_sync_fail', False)
+                        if not last_fail:
+                            log(f"🟢 补仓 {bin_sym} {side} +{delta}张 → 目标{prev_target}张")
+                            success = binance_open(bin_sym, side, delta)
+                            if not success:
+                                recorded[gkey] = dict(prev, **{'last_sync_fail': True, 'qty': gpos['qty'], 'side': side,
+                                    'entry': gpos['entry'], 'notional': gpos['notional'], 'target_binance_qty': prev_target,
+                                    'last_update': datetime.now().strftime('%H:%M:%S')})
+                                state['gate_positions'] = recorded
+                                save_state(state)
+                                continue
+                            changed = True
+                elif current_binance_qty > prev_target:
+                    # 需要减仓（只在Gate变动时触发）
+                    if gate_changed:
+                        delta_raw = current_binance_qty - prev_target
+                        if precision >= 1:
+                            delta = int(delta_raw + 0.5)
+                        else:
+                            ndigits = abs(int(math.log10(precision))) if precision > 0 else 3
+                            delta = round(delta_raw, ndigits)
+                        if delta > 0:
+                            log(f"🔴 减仓 {bin_sym} {side} -{delta}张 → 目标{prev_target}张")
+                            binance_close(bin_sym, side, delta)
+                            changed = True
                         changed = True
-                elif current_binance_qty > target_qty:
-                    # 需要减仓
-                    delta = current_binance_qty - target_qty
-                    log(f"🔴 减仓 {bin_sym} {side} -{delta}张 → 目标{target_qty}张")
-                    binance_close(bin_sym, side, delta)
-                    changed = True
             else:
                 # Gate无仓位或平完了
                 if current_binance_qty > 0:
@@ -340,7 +376,7 @@ def sync_positions(gate_positions, binance_positions, state):
             recorded[gkey] = {
                 'qty': gpos['qty'], 'side': side,
                 'entry': gpos['entry'], 'notional': gpos['notional'],
-                'target_binance_qty': target_qty,
+                'target_binance_qty': prev_target,
                 'last_update': datetime.now().strftime('%H:%M:%S'),
                 'last_sync_fail': recorded.get(gkey, {}).get('last_sync_fail', False),
             }
