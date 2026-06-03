@@ -31,7 +31,7 @@ exchange = ccxt.binance({
 
 SYMBOL = 'NEAR/USDT:USDT'
 QTY = 150              # NEAR合约 1张=1 NEAR, 150张≈$404
-LEVERAGE = 25
+LEVERAGE = 10
 
 BASE_DIR = '/root/liucangyang/near'
 STATE_FILE = f'{BASE_DIR}/databases/state_near.json'

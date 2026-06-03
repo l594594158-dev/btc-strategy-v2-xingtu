@@ -32,7 +32,7 @@ exchange = ccxt.binance({
 
 SYMBOL = 'BTC/USDT:USDT'
 QTY = 0.005       # 50张 (Binance最小0.001 BTC)
-LEVERAGE = 20
+LEVERAGE = 10
 
 BASE_DIR = '/root/liucangyang'
 STATE_FILE = f'{BASE_DIR}/databases/state_btc.json'

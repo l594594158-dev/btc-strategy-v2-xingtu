@@ -31,7 +31,7 @@ exchange = ccxt.binance({
 
 SYMBOL = 'XLM/USDT:USDT'
 QTY = 1000             # XLM合约 1张=1 XLM, 1000张≈$220
-LEVERAGE = 25
+LEVERAGE = 10
 
 BASE_DIR = '/root/liucangyang/xlm'
 STATE_FILE = f'{BASE_DIR}/databases/state_xlm.json'
