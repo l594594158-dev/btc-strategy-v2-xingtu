@@ -11,4 +11,3 @@ logs/
 Thumbs.db
 __pycache__/
 api_config.py
-position_sync/state.json
