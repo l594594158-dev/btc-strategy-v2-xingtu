@@ -25,7 +25,7 @@ BINANCE_SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF
 
 # ========== 配置 ==========
 POLL_INTERVAL = 1          # 扫描间隔(秒)
-COPY_RATIO = 0.50          # 跟单比例: 50%
+COPY_RATIO = 1.0           # 跟单比例: 100%
 BASE_DIR = "/root/liucangyang/position_sync"
 STATE_FILE = f"{BASE_DIR}/state.json"
 WORK_LOG = f"{BASE_DIR}/logs/work_log.txt"
