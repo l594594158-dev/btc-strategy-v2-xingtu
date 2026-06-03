@@ -163,17 +163,6 @@ def binance_open(symbol, side, target_qty):
         if qty <= 0:
             return False
 
-        # 最小名义价值检查: 不够则扩展张数
-        try:
-            market = binance.market(symbol)
-            min_cost = market.get('limits', {}).get('cost', {}).get('min', 5) or 5
-        except:
-            min_cost = 5
-        ticker = binance.fetch_ticker(symbol)
-        price = ticker.get('last', 0)
-        if price > 0 and qty * price < min_cost:
-            qty = math.ceil(min_cost / price)
-
         ps = 'LONG' if side == 'LONG' else 'SHORT'
         order_side = 'buy' if side == 'LONG' else 'sell'
 
@@ -252,32 +241,21 @@ def sync_positions(gate_positions, binance_positions, state):
             prev = recorded.get(gkey, {})
             prev_qty = prev.get('qty', 0) if initialized else gpos['qty']
 
-            # 目标名义价值 = Gate名义价值 × 10%
-            target_notional = gpos['notional'] * COPY_RATIO
-            
-            # 币安合约参数
+            # 目标张数 = Gate名义价值 × 跟单比例 ÷ 币安当前价
             try:
                 ticker = binance.fetch_ticker(bin_sym)
                 binance_price = ticker.get('last', 0)
             except:
-                binance_price = 0
+                binance_price = 1
             try:
                 market = binance.market(bin_sym)
-                bc_size = market.get('contractSize', 1) or 1
                 min_amount = market.get('limits', {}).get('amount', {}).get('min', 1) or 1
                 precision = market.get('precision', {}).get('amount', 4) or 4
             except:
-                bc_size = 1
                 min_amount = 1
                 precision = 4
             
-            bc_notional = bc_size * binance_price if binance_price > 0 else 1
-            
-            # 目标张数 = 目标名义价值 ÷ (币安最新价 × 合约面值)
-            if bc_notional > 0:
-                target_qty_raw = target_notional / bc_notional
-            else:
-                target_qty_raw = 0
+            target_qty_raw = (gpos['notional'] * COPY_RATIO) / binance_price if binance_price > 0 else 0
             
             # 按币安精度取整
             precision = market.get('precision', {}).get('amount', 4) or 4
