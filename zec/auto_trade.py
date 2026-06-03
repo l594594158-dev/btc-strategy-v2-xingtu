@@ -194,7 +194,6 @@ def check_signal(kl_1h, kl_4h):
     idx_4h = 0
     for i in range(len(t_4h)):
         if t_4h[i] + 14400000 <= t_signal: idx_4h = i
-        else: break
     h4 = [k['h'] for k in kl_4h]
     l4 = [k['l'] for k in kl_4h]
     c4 = [k['c'] for k in kl_4h]
@@ -216,6 +215,7 @@ def check_signal(kl_1h, kl_4h):
     return None
 
 # ========== 仓位管理 ==========
+def manage_positions(state):
     try:
         ticker = exchange.fetch_ticker(SYMBOL)
         price = ticker['last']
@@ -257,6 +257,7 @@ def check_signal(kl_1h, kl_4h):
         surviving.append(pos)
     state['shortpos'] = surviving
 
+    save_state(state)
     return True
 
 def close_position(side, pos, price, reason):
@@ -468,18 +469,22 @@ def main():
                 time.sleep(1)
                 continue
 
-            # 同K线冷却: 用lv-1闭K时间
+            # 同K线防重开/平仓冷却: 以最近闭K线时间为准
             current_kl = int(kl_1h[-2]['t'])
-            if state['lastexitkl_time'] >= current_kl:
+            last_entry_cool = int(state.get('lastentrykl_time', 0))
+            last_exit_cool = int(state.get('lastexitkl_time', 0))
+            if last_exit_cool >= current_kl:
                 time.sleep(1)
                 continue
-            # 同K线只开一次
-            if state['lastentrykl_time'] >= current_kl:
+            if last_entry_cool >= current_kl:
                 time.sleep(1)
                 continue
 
             ticker = exchange.fetch_ticker(SYMBOL)
             live_price = ticker['last']
+
+            # TP/SL仓位管理
+            manage_positions(state)
 
             signal = check_signal(kl_1h, kl_4h)
 
@@ -498,7 +503,7 @@ def main():
 
         elapsed = time.time() - start
         if elapsed < 60:
-            time.sleep(60 - elapsed)
+            time.sleep(1)
 
 if __name__ == '__main__':
     main()

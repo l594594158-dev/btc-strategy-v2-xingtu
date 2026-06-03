@@ -67,37 +67,18 @@ def get_exchange_positions(sym):
 
 def clean_orphan_orders(sym, has_long, has_short):
     """
-    清理幽灵挂单: 挂单的 positionSide 在交易所没有对应持仓 → 撤销
-    Binance: direction=SELL+positionSide=LONG=平多, direction=BUY+positionSide=SHORT=平空
+    清理幽灵挂单:
+    - 无持仓 → 用 fapiPrivateDeleteAllOpenOrders 全撤 (含条件委托)
+    - 有持仓 → 保留挂单 (策略管理)
     """
     try:
-        orders = exchange.fetch_open_orders(sym)
-        cancelled = 0
-        for o in orders:
-            info = o.get('info', {})
-            ps = info.get('positionSide', '')
-            amt = float(info.get('origQty', 0) or 0)
-            if amt == 0:
-                continue
-            
-            # 判断此挂单对应的持仓方向
-            if ps == 'LONG' and not has_long:
-                try:
-                    exchange.cancel_order(o['id'], sym)
-                    cancelled += 1
-                except:
-                    pass
-            elif ps == 'SHORT' and not has_short:
-                try:
-                    exchange.cancel_order(o['id'], sym)
-                    cancelled += 1
-                except:
-                    pass
-        if cancelled > 0:
-            log(f"[{sym}] 清理幽灵挂单 {cancelled} 条")
-        return cancelled
+        if not has_long and not has_short:
+            exchange.fapiPrivateDeleteAllOpenOrders(params={'symbol': sym.replace('/USDT:USDT', 'USDT')})
+            log(f"[{sym}] 无持仓, 全撤挂单(含条件委托)")
+            return 1
     except:
-        return 0
+        pass
+    return 0
 
 def main():
     for name, cfg in STRATEGIES.items():

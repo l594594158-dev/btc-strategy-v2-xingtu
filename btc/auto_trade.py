@@ -281,6 +281,7 @@ def manage_positions(state):
         surviving.append(pos)
     state['shortpos'] = surviving
 
+    save_state(state)
     return True
 
 def close_position(side, pos, price, reason):
@@ -492,6 +493,9 @@ def main():
             if state['lastentrykl_time'] == now_kl:
                 time.sleep(1)
                 continue
+
+            # TP/SL仓位管理
+            manage_positions(state)
 
             # 信号判断
             signal = check_signal(kl_1h, kl_4h)
