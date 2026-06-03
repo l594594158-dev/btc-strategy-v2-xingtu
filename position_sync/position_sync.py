@@ -12,6 +12,7 @@ import ccxt
 import time
 import json
 import os
+import math
 from datetime import datetime
 
 # ========== 监控账户 (Gate) ==========
@@ -24,7 +25,7 @@ BINANCE_SECRET = "cdw4Owv1y7llmXZqwHXSTW0pSDEI68EEP0FCMa09bi5r24YenCV4n6vnRzjQpF
 
 # ========== 配置 ==========
 POLL_INTERVAL = 1          # 扫描间隔(秒)
-COPY_RATIO = 0.10          # 跟单比例: 10%
+COPY_RATIO = 0.50          # 跟单比例: 50%
 BASE_DIR = "/root/liucangyang/position_sync"
 STATE_FILE = f"{BASE_DIR}/state.json"
 WORK_LOG = f"{BASE_DIR}/logs/work_log.txt"
@@ -184,11 +185,11 @@ def binance_open(symbol, side, target_qty):
 
 
 def binance_close(symbol, side, qty):
-    """币安宁仓 - 反向下单（不带reduceOnly）"""
+    """币安宁仓"""
     try:
         ps = 'LONG' if side == 'LONG' else 'SHORT'
         close_side = 'sell' if side == 'LONG' else 'buy'
-        qty = int(qty)
+        qty = float(qty)
         if qty <= 0:
             return False
 
@@ -266,23 +267,24 @@ def sync_positions(gate_positions, binance_positions, state):
             else:
                 target_qty_raw = 0
             
-            # 按币安精度取整，不做强制最小值
+            # 按币安精度取整
             precision = market.get('precision', {}).get('amount', 4) or 4
-            if precision >= 1:
-                target_qty = int(target_qty_raw + 0.5)
+            if isinstance(precision, float) or precision < 1:
+                # 小数精度(如BTC=0.001): 取到对应小数位
+                ndigits = abs(int(math.log10(precision))) if precision > 0 else 3
+                target_qty = round(target_qty_raw, ndigits)
             else:
-                target_qty = round(target_qty_raw, precision)
+                target_qty = int(target_qty_raw + 0.5)
             
-            # 小于最小开仓数量则跳过
-            if target_qty < min_amount and target_qty > 0:
+            # 小于最小开仓数量则设为0跳过
+            if target_qty > 0 and target_qty < min_amount:
                 target_qty = 0
-                target_qty = max(min_amount, target_qty) if target_qty_raw > 0 else 0
 
-            # 获取币安当前该方向持仓
+            # 获取币安当前该方向持仓（float，支持小数张数）
             bpos = binance_positions.get(bin_sym)
-            current_binance_qty = 0
+            current_binance_qty = 0.0
             if bpos and bpos['side'] == side:
-                current_binance_qty = int(bpos['qty'])
+                current_binance_qty = float(bpos['qty'])
 
             if not initialized:
                 # 初始化阶段：只记录快照
@@ -352,8 +354,8 @@ def sync_positions(gate_positions, binance_positions, state):
             if bin_sym:
                 bpos = binance_positions.get(bin_sym)
                 if bpos and bpos['side'] == side:
-                    log(f"🔴 全平 {bin_sym} {side} {int(bpos['qty'])}张 (Gate仓位消失)")
-                    binance_close(bin_sym, side, int(bpos['qty']))
+                    log(f"🔴 全平 {bin_sym} {side} {bpos['qty']}张 (Gate仓位消失)")
+                    binance_close(bin_sym, side, bpos['qty'])
                     changed = True
             del recorded[gkey]
             changed = True
@@ -374,6 +376,13 @@ def main():
     log(f"跟单比例: {COPY_RATIO*100}%")
     log(f"扫描间隔: {POLL_INTERVAL}s")
     log("=" * 50)
+
+    # 预加载market信息
+    try:
+        binance.load_markets()
+        log(f"📋 币安市场信息已加载")
+    except:
+        pass
 
     state = load_state()
     if 'gate_positions' not in state:
