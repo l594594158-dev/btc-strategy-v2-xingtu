@@ -12019,3 +12019,1719 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
     raise exact[string](message)
 ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675681408&recvWindow=10000&signature=eca9ec2d2956df053a7cb8b104954e054f0c893bb943d8abaaccd4a930af2790
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675742236&recvWindow=10000&signature=eb3ab6e9f355dd64b84c678659e8e396e2e415d979ec3f7526bd6abd5a8bf0d7
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675801988&recvWindow=10000&signature=22831453df57abcdc3faa83b2a4872f99572cdb61c348e43d5d1b539432aeb79
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675861608&recvWindow=10000&signature=111229c961a7cd8742ef52ab22cdf665ba566badc3459d96e0de741814453b10
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675922214&recvWindow=10000&signature=0ac84b463838e6168db5f544f52ddeddbfbd51f2f04ebc7fb3485e61c8db0245
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780675981819&recvWindow=10000&signature=df90b43ecdd17f8daad23ab1a1ce5fc2ae119444f5c5d3278a22a976a5653db3
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676041422&recvWindow=10000&signature=4987dbb6fa861bcf4d54817add7ea72be96f8105ee30c9163084849ce0c48950
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676102044&recvWindow=10000&signature=a67e8c86b4da7b9024e6634f730686527df399a7002cdcae41c6d33f370e5cba
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676161647&recvWindow=10000&signature=8008d5af977d4483e270d35db3b619772b4a0c9376faa66ab181e50687a544ac
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676222259&recvWindow=10000&signature=2261a52f2feb8a3a3e6715f26e70c32f08a04ccf802b9245175373b0bcf1022b
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676281862&recvWindow=10000&signature=71046cc1b325ecd5abb828e0999df207ab7ebc2c75ae4867b86056501e9c3d23
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676341468&recvWindow=10000&signature=7841e9cd6c6fc8e811d453bf6882617c29f44d32c9a41a44241a6380a65c976d
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676402088&recvWindow=10000&signature=b6705037a1e122d6b50fd50bf7bc0a8d5a872a81ecbfd70b19fbdf322da75080
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676461834&recvWindow=10000&signature=f6eb87c7fa8a2f0ecc6b1eb434075f2139cfa6cbc052fe0645f19b34acf38983
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676521447&recvWindow=10000&signature=b08a1dab8004366badd72db4d17ef6c6959ed14f72b1e4cbaae70f8b9e570411
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676582102&recvWindow=10000&signature=552678da5f5a58be38bec4d5721ad679361a20aee2465533c8666df45d961a06
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676641748&recvWindow=10000&signature=0a6a1cb0708d980a693e9845a73efaab8f57c00028edb0bbabfeaa7235e5aa22
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676701376&recvWindow=10000&signature=1d229f8c37574774fb84763b9ae68d4ad007fbad4a4d70edcbd40c27a7354357
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676762137&recvWindow=10000&signature=3dde41a89e60a8470e782a3c97e1331de53254049deb7f87137202ba70be88e5
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676821743&recvWindow=10000&signature=1416090f0f1f806935e9fc53dcc7affbe30e0a57029190703fcc7ed2979a45c2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676882344&recvWindow=10000&signature=ab779adb5712564babe2893c538e51056e0ed13ad2c543937874f59805fadbae
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780676941940&recvWindow=10000&signature=1b1c82837670c2f2641c81d73d58d06e95a145d709110197cb624940b204ca8d
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677001587&recvWindow=10000&signature=296e63588a0fdad907bd59b6ec7984a1275ee11323053ebe1fafe217e23e3bdb
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677062191&recvWindow=10000&signature=05fab4c6e1971b5f29f2db6f551e9889be5ede61b89cb02ed1c70d9a769c15ae
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677121797&recvWindow=10000&signature=4418bc35ee94d8b5e3c1f2aab9d7e473065a331f0610fede4be1a7855370ee05
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677181601&recvWindow=10000&signature=c1ebe0d5a173d10922a17e396b679a79953e268be8ca2c4dad467229abef34bc
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677242273&recvWindow=10000&signature=7e2baf8656ee7b4070691765603462dd3a5e4afec334d81be26a5c921daae5d6
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677301926&recvWindow=10000&signature=6c7b258c125a9ad6fe5ea6268c8858825dc30a33b43602d6cbc3912bad916b7a
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677361553&recvWindow=10000&signature=838edec045ba15dedc1d84ba7c28fc627fab6acdf8ecf3a1b08c727e2588c5b4
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677422162&recvWindow=10000&signature=43b748255f6557a6c03404addd708edbe0c0c57a321228475e98631760e58de9
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677481776&recvWindow=10000&signature=55ac8335215a2aa2c8ebf1fd76f5ea87d026aa5b6a3afb35b2179c35c0021ecd
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677541543&recvWindow=10000&signature=0a3761a3373f56513ddcd9fd45cca49d76f282e19e00278c035fee1e522a5a32
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677602172&recvWindow=10000&signature=aac8d72cbfd0d39146ccc13d75920ed8aa9a42b3bc648cee3c31e4a12cc81f84
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677661795&recvWindow=10000&signature=4337af4824d3a0c32c5ccef74409c8ff116f802ced764ab7c80641a694a378e3
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677721407&recvWindow=10000&signature=658bad98d9e394aba88001f3c49b5240a6701310a3518cb3187aa1c86f546b9d
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677782016&recvWindow=10000&signature=0cac752c0bf7cd9d8d5a0a6fe9f79400de16c80ef0c8e3dc4d1a4773ab0e6362
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677841639&recvWindow=10000&signature=5aab84206ac74a4333e6b8999a40ddb02993037bfff4cac4da942255ab1cab4b
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677902606&recvWindow=10000&signature=31053cc591928d8bb86b21468549309ec97821f5fc9639bcf27a1a9f7c5155cb
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780677961427&recvWindow=10000&signature=813b7b54d4d4b4b55fdaf9cfe5ff77eaa779970958acca76472f4f86f431f76a
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780678022031&recvWindow=10000&signature=a9b50b1d0fe46234106418033a97fbb146d56a5703d438b13dde02d3e170c577
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780678081639&recvWindow=10000&signature=9d7ae2d36407b6d6f243c8981088ebaad0c29bcbb8f03e58fbbd62779bc6d159
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780678142233&recvWindow=10000&signature=6f3c86e19cba9e0562df14aca04de072ad8adc7a1ecb109e63c01bdbdcfeab9a
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780678201861&recvWindow=10000&signature=33cacdbb967f774e81004b6fec0e62c3170276ecc0bb759bf3870c11caa6f36f
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 691, in fetch
+    response.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error:  for url: https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1780678261481&recvWindow=10000&signature=4ae1ff4f902cc25d631cad72b30714eb68577e531661e1cdf38fac552f54b3f2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/zidongjiaoyi/watchdog.py", line 89, in <module>
+    main()
+  File "/root/zidongjiaoyi/watchdog.py", line 29, in main
+    exchange.load_markets()
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 1823, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 2943, in fetch_currencies
+    promises = [self.sapiGetCapitalConfigGetall(params)]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11656, in request
+    response = self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5334, in fetch2
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5322, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 707, in fetch
+    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/binance.py", line 11623, in handle_errors
+    self.throw_exactly_matched_exception(self.get_exceptions_by_url(url, 'exact'), error, feedback)
+  File "/usr/local/lib/python3.12/dist-packages/ccxt/base/exchange.py", line 5740, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: binance {"code":-2008,"msg":"Invalid Api-Key ID."}

@@ -4,7 +4,7 @@ LLM客户端: bot信号触发 → 调DeepSeek API → 六步综合分析 → 返
 """
 import json, os, time, requests
 
-API_KEY = 'sk-903…090f'
+API_KEY = 'sk-90362f979d1344d29b2baed227cb090f'
 API_URL = 'https://api.deepseek.com/v1/chat/completions'
 MODEL = 'deepseek-chat'
 TIMEOUT = 30
@@ -131,7 +131,7 @@ OI价值: ${enrich.get('oi_value',0)/1e6:.1f}M
                     {'role': 'user', 'content': user_msg},
                 ],
                 'temperature': 0.1,
-                'max_tokens': 200,
+                'max_tokens': 300,
             },
             timeout=TIMEOUT,
         )

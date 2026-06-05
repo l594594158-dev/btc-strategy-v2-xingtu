@@ -809,6 +809,7 @@ def main():
                 ps = pos.get('info', {}).get('positionSide', '')
                 if ps.upper() != direction:
                     log(f'方向反转: {ps}->{direction}')
+                    executor._clear_trail_state()
                     executor.cancel_all_sl_tp()
                     executor.close_position(ps.upper())
 
